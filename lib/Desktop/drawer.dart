@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../Home/homepage.dart';
+import '../subscriptionpage/subscriptionpage.dart';
 
 class DrawerItems extends StatelessWidget {
   final loggedIn = true;
@@ -61,6 +62,14 @@ class DrawerItems extends StatelessWidget {
             // ...
             // Then close the drawer
             Navigator.pop(context);
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) {
+                  return SubscriptionPage();
+                },
+              ),
+            );
           },
         ),
         loggedIn
