@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'cards.dart';
+import 'drawer.dart';
 
 class MyDesktop extends StatefulWidget {
   @override
@@ -12,17 +13,18 @@ class _MyDesktopState extends State<MyDesktop> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.blue,
         centerTitle: true,
         title: Text(
           'Show World',
           style: TextStyle(
-            color: Colors.black,
+            color: Colors.white,
           ),
         ),
-        actions: <Widget>[
-          FlatButton(onPressed: () {}, child: Icon(Icons.menu)),
-        ],
+      ),
+      drawer: Drawer(
+        elevation: 5,
+        child: DrawerItems(),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -69,15 +71,13 @@ class _MyDesktopState extends State<MyDesktop> {
               ),
             ),
             // data region
-            Center(
-              child: Column(
-                children: <Widget>[
-                  //Artists
-                  ArtistCard(),
-                  //Directors
-                  DirectorCard(),
-                ],
-              ),
+            Column(
+              children: <Widget>[
+                //Artists
+                ArtistCard(),
+                //Directors
+                DirectorCard(),
+              ],
             ),
           ],
         ),
