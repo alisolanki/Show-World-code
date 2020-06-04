@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'cards.dart';
-import 'data.dart';
 
 class MyDesktop extends StatefulWidget {
   @override
