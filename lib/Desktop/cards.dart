@@ -32,38 +32,67 @@ class ArtistCard extends StatelessWidget {
               child: Column(
                 children: ArtistData().artistData.map(
                   (index) {
-                    return Column(
-                      children: <Widget>[
-                        Text(
-                          'Name: ' + index.name,
-                          style: TextStyle(
-                            fontSize: 15,
-                            fontWeight: FontWeight.bold,
+                    return Padding(
+                      padding: EdgeInsets.all(10),
+                      child: Card(
+                        elevation: 5,
+                        child: Padding(
+                          padding: EdgeInsets.all(10),
+                          child: Column(
+                            children: <Widget>[
+                              Row(
+                                children: <Widget>[
+                                  Text(
+                                    'Name: ',
+                                    style: TextStyle(
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  Text(index.name)
+                                ],
+                              ),
+                              Row(
+                                children: <Widget>[
+                                  Text(
+                                    'Address: ',
+                                    style: TextStyle(
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  Text(index.address)
+                                ],
+                              ),
+                              Row(
+                                children: <Widget>[
+                                  Text(
+                                    'Phone: ',
+                                    style: TextStyle(
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  Text(index.phoneNumber)
+                                ],
+                              ),
+                              Row(
+                                children: <Widget>[
+                                  Text(
+                                    'Email: ',
+                                    style: TextStyle(
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  Text(index.email)
+                                ],
+                              ),
+                              Padding(padding: EdgeInsets.all(10)),
+                            ],
                           ),
                         ),
-                        Text(
-                          'Address: ' + index.address,
-                          style: TextStyle(
-                            fontSize: 15,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        Text(
-                          'Phone Number: ' + index.phoneNumber,
-                          style: TextStyle(
-                            fontSize: 15,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        Text(
-                          'Email: ' + index.email,
-                          style: TextStyle(
-                            fontSize: 15,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        Padding(padding: EdgeInsets.all(10)),
-                      ],
+                      ),
                     );
                   },
                 ).toList(),
@@ -112,38 +141,67 @@ class DirectorCard extends StatelessWidget {
               child: Column(
                 children: DirectorData().directorData.map(
                   (index) {
-                    return Column(
-                      children: <Widget>[
-                        Text(
-                          'Name: ' + index.name,
-                          style: TextStyle(
-                            fontSize: 15,
-                            fontWeight: FontWeight.bold,
+                    return Padding(
+                      padding: EdgeInsets.all(10),
+                      child: Card(
+                        elevation: 5,
+                        child: Padding(
+                          padding: EdgeInsets.all(10),
+                          child: Column(
+                            children: <Widget>[
+                              Row(
+                                children: <Widget>[
+                                  Text(
+                                    'Name: ',
+                                    style: TextStyle(
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  Text(index.name)
+                                ],
+                              ),
+                              Row(
+                                children: <Widget>[
+                                  Text(
+                                    'Address: ',
+                                    style: TextStyle(
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  Text(index.address)
+                                ],
+                              ),
+                              Row(
+                                children: <Widget>[
+                                  Text(
+                                    'Phone: ',
+                                    style: TextStyle(
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  Text(index.phoneNumber)
+                                ],
+                              ),
+                              Row(
+                                children: <Widget>[
+                                  Text(
+                                    'Email: ',
+                                    style: TextStyle(
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  Text(index.email)
+                                ],
+                              ),
+                              Padding(padding: EdgeInsets.all(10)),
+                            ],
                           ),
                         ),
-                        Text(
-                          'Address: ' + index.address,
-                          style: TextStyle(
-                            fontSize: 15,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        Text(
-                          'Phone Number: ' + index.phoneNumber,
-                          style: TextStyle(
-                            fontSize: 15,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        Text(
-                          'Email: ' + index.email,
-                          style: TextStyle(
-                            fontSize: 15,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        Padding(padding: EdgeInsets.all(10)),
-                      ],
+                      ),
                     );
                   },
                 ).toList(),

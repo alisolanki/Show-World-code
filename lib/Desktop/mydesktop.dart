@@ -3,12 +3,7 @@ import 'package:flutter/material.dart';
 import 'cards.dart';
 import 'drawer.dart';
 
-class MyDesktop extends StatefulWidget {
-  @override
-  _MyDesktopState createState() => _MyDesktopState();
-}
-
-class _MyDesktopState extends State<MyDesktop> {
+class MyDesktop extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,43 +25,24 @@ class _MyDesktopState extends State<MyDesktop> {
         child: Column(
           children: <Widget>[
             //SearchTab
-            Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10.0),
-                //color: Colors.purple.shade100,
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey,
-                    blurRadius: 5.0,
-                    offset: Offset(0, 3),
-                  )
-                ],
-              ),
-              margin: EdgeInsets.all(10.0),
-              //padding: EdgeInsets.only(left: 20.0),
-              height: 100.0,
+            Card(
+              elevation: 5,
               child: Container(
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                padding: EdgeInsets.only(left: 20),
-                child: Row(
-                  children: <Widget>[
-                    Expanded(
-                      child: TextField(
-                        cursorColor: Colors.black38,
-                        decoration: InputDecoration(hintText: 'Search'),
+                padding: EdgeInsets.all(10),
+                child: TextField(
+                  style: TextStyle(color: Colors.blue),
+                  decoration: InputDecoration(
+                    suffixIcon: Container(
+                      child: IconButton(
+                        icon: Icon(Icons.search),
+                        onPressed: () {},
                       ),
                     ),
-                    FlatButton(
-                      onPressed: () {},
-                      child: Icon(
-                        Icons.search,
-                        color: Colors.blueGrey,
-                      ),
+                    hintText: "Search",
+                    hintStyle: TextStyle(
+                      color: Colors.grey[400],
                     ),
-                  ],
+                  ),
                 ),
               ),
             ),
