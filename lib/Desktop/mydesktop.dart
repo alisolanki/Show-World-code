@@ -1,6 +1,6 @@
+import 'package:LoginPage/Desktop/datatiles.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'cards.dart';
 import 'drawer.dart';
 
 class MyDesktop extends StatelessWidget {
@@ -21,42 +21,41 @@ class MyDesktop extends StatelessWidget {
         elevation: 5,
         child: DrawerItems(),
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: <Widget>[
-            //SearchTab
-            Card(
-              elevation: 5,
-              child: Container(
-                padding: EdgeInsets.all(10),
-                child: TextField(
-                  style: TextStyle(color: Colors.blue),
-                  decoration: InputDecoration(
-                    suffixIcon: Container(
-                      child: IconButton(
-                        icon: Icon(Icons.search),
-                        onPressed: () {},
-                      ),
+      body: Column(
+        children: <Widget>[
+          //SearchTab
+          Card(
+            elevation: 5,
+            child: Container(
+              padding: EdgeInsets.all(10),
+              child: TextField(
+                style: TextStyle(color: Colors.blue),
+                decoration: InputDecoration(
+                  suffixIcon: Container(
+                    child: IconButton(
+                      icon: Icon(Icons.search),
+                      onPressed: () {},
                     ),
-                    hintText: "Search",
-                    hintStyle: TextStyle(
-                      color: Colors.grey[400],
-                    ),
+                  ),
+                  hintText: "Search",
+                  hintStyle: TextStyle(
+                    color: Colors.grey[400],
                   ),
                 ),
               ),
             ),
-            // data region
-            Column(
-              children: <Widget>[
-                //Artists
-                ArtistCard(),
-                //Directors
-                DirectorCard(),
-              ],
+          ),
+          // data region
+          Expanded(
+            child: ListView.builder(
+              padding: EdgeInsets.all(10),
+              itemCount: 8,
+              itemBuilder: (ctx, index) {
+                return DataTile();
+              },
             ),
-          ],
-        ),
+          )
+        ],
       ),
     );
   }
