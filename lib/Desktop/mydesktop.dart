@@ -1,8 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'artistdata.dart';
-
-ArtistData dataText = ArtistData();
+import 'cards.dart';
+import 'data.dart';
 
 class MyDesktop extends StatefulWidget {
   @override
@@ -27,226 +26,63 @@ class _MyDesktopState extends State<MyDesktop> {
         ],
       ),
       body: SingleChildScrollView(
-        child: Container(
-          child: Column(
-            children: <Widget>[
-              //SearchTab
-              Container(
+        child: Column(
+          children: <Widget>[
+            //SearchTab
+            Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10.0),
+                //color: Colors.purple.shade100,
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey,
+                    blurRadius: 5.0,
+                    offset: Offset(0, 3),
+                  )
+                ],
+              ),
+              margin: EdgeInsets.all(10.0),
+              //padding: EdgeInsets.only(left: 20.0),
+              height: 100.0,
+              child: Container(
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10.0),
-//              color: Colors.purple.shade100,
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey,
-                      blurRadius: 5.0,
-                      offset: Offset(0, 3),
-                    )
-                  ],
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(10),
                 ),
-                margin: EdgeInsets.all(10.0),
-//            padding: EdgeInsets.only(left: 20.0),
-                height: 100.0,
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  padding: EdgeInsets.only(left: 20),
-                  child: Row(
-                    children: <Widget>[
-                      Expanded(
-                        child: TextField(
-                          cursorColor: Colors.black38,
-                          decoration: InputDecoration(hintText: 'Search'),
-                        ),
-                      ),
-                      FlatButton(
-                        onPressed: () {},
-                        child: Icon(
-                          Icons.search,
-                          color: Colors.blueGrey,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              // data region
-              Center(
-                child: Column(
+                padding: EdgeInsets.only(left: 20),
+                child: Row(
                   children: <Widget>[
-                    //data for artists
                     Expanded(
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: Colors.teal.shade100,
-                          borderRadius: BorderRadius.circular(10),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.grey,
-                              blurRadius: 10.0,
-                              offset: Offset(0, 3),
-                            )
-                          ],
-                        ),
-                        margin: EdgeInsets.fromLTRB(10, 10, 10, 0),
-                        padding: EdgeInsets.only(top: 10),
-                        child: Column(
-                          children: <Widget>[
-                            Text(
-                              'Artists',
-                              style: TextStyle(
-                                fontSize: 20,
-                                color: Colors.teal,
-                              ),
-                            ),
-                            Expanded(
-                              child: Container(
-                                child: Center(
-                                  child: Column(
-                                    children: ArtistData().artistData.map(
-                                      (index) {
-                                        return Column(
-                                          children: <Widget>[
-                                            Text(
-                                              'Name: ' + index.name,
-                                              style: TextStyle(
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.bold,
-                                              ),
-                                            ),
-                                            Text(
-                                              'Address: ' + index.address,
-                                              style: TextStyle(
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.bold,
-                                              ),
-                                            ),
-                                            Text(
-                                              'Phone Number: ' +
-                                                  index.phoneNumber,
-                                              style: TextStyle(
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.bold,
-                                              ),
-                                            ),
-                                            Text(
-                                              'Email: ' + index.email,
-                                              style: TextStyle(
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.bold,
-                                              ),
-                                            ),
-                                            Padding(
-                                                padding: EdgeInsets.all(10)),
-                                          ],
-                                        );
-                                      },
-                                    ).toList(),
-                                  ),
-                                ),
-                                margin: EdgeInsets.all(10.0),
-                                decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.circular(10.0),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
+                      child: TextField(
+                        cursorColor: Colors.black38,
+                        decoration: InputDecoration(hintText: 'Search'),
                       ),
                     ),
-                    //Directors
-                    Expanded(
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: Colors.blue.shade100,
-                          borderRadius: BorderRadius.circular(10),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.grey,
-                              blurRadius: 10.0,
-                              offset: Offset(0, 3),
-                            )
-                          ],
-                        ),
-                        margin: EdgeInsets.fromLTRB(10, 10, 10, 10),
-                        padding: EdgeInsets.only(top: 10),
-                        child: Column(
-                          children: <Widget>[
-                            Text(
-                              'Directors',
-                              style: TextStyle(
-                                fontSize: 20,
-                                color: Colors.blueAccent,
-                              ),
-                            ),
-                            Expanded(
-                              child: Container(
-                                child: Center(
-                                  child: DisplayData(),
-                                ),
-                                margin: EdgeInsets.all(10.0),
-                                decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.circular(10.0),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
+                    FlatButton(
+                      onPressed: () {},
+                      child: Icon(
+                        Icons.search,
+                        color: Colors.blueGrey,
                       ),
                     ),
                   ],
                 ),
               ),
-            ],
-          ),
+            ),
+            // data region
+            Center(
+              child: Column(
+                children: <Widget>[
+                  //Artists
+                  ArtistCard(),
+                  //Directors
+                  DirectorCard(),
+                ],
+              ),
+            ),
+          ],
         ),
       ),
-    );
-  }
-}
-
-class DisplayData extends StatelessWidget {
-  const DisplayData({
-    Key key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: <Widget>[
-        Text(
-          'Name : ' + dataText.printDataName(),
-          style: TextStyle(
-            fontSize: 15,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        Text(
-          'Address : ' + dataText.printAddress(),
-          style: TextStyle(
-            fontSize: 15,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        Text(
-          'Phone Number : ' + dataText.printPhoneNumber(),
-          style: TextStyle(
-            fontSize: 15,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        Text(
-          'Email : ' + dataText.printEmail(),
-          style: TextStyle(
-            fontSize: 15,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-      ],
     );
   }
 }
