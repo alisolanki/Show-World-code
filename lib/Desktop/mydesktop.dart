@@ -8,18 +8,10 @@ class MyDesktop extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.blue,
         centerTitle: true,
         title: Text(
           'Show World',
-          style: TextStyle(
-            color: Colors.white,
-          ),
         ),
-      ),
-      drawer: Drawer(
-        elevation: 5,
-        child: DrawerItems(),
       ),
       body: Column(
         children: <Widget>[

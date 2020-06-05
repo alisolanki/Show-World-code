@@ -1,3 +1,4 @@
+import 'package:LoginPage/Desktop/mydesktop.dart';
 import 'package:flutter/material.dart';
 import '../Home/homepage.dart';
 import '../subscriptionpage/subscriptionpage.dart';
@@ -52,6 +53,14 @@ class DrawerItems extends StatelessWidget {
             // ...
             // Then close the drawer
             Navigator.pop(context);
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) {
+                  return MyDesktop();
+                },
+              ),
+            );
           },
         ),
         ListTile(
@@ -92,6 +101,16 @@ class DrawerItems extends StatelessWidget {
             // ...
             // Then close the drawer
             Navigator.pop(context);
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) {
+                  return AboutDialog(
+                    
+                  );
+                },
+              ),
+            );
           },
         ),
       ],

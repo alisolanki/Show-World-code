@@ -54,7 +54,7 @@ class _CouponsState extends State<Coupons> {
                 height: 10.0,
               ),
               RaisedButton(
-                onPressed: null,
+                onPressed: (){},
                 color: Colors.blueGrey.shade400,
                 child: Text(
                   'PROCEED',

@@ -1,5 +1,5 @@
+import 'package:LoginPage/Home/homepage.dart';
 import 'package:flutter/material.dart';
-import '../Desktop/mydesktop.dart';
 import '../Animation/FadeAnimation.dart';
 
 class LoginButton extends StatelessWidget {
@@ -17,7 +17,7 @@ class LoginButton extends StatelessWidget {
               context,
               MaterialPageRoute(
                 builder: (context) {
-                  return MyDesktop();
+                  return HomePage();
                 },
               ),
             );
