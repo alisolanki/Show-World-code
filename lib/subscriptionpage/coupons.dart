@@ -2,12 +2,19 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class Coupons extends StatefulWidget {
+  final String _duration;
+  final int _price;
+  Coupons(this._duration, this._price);
   @override
-  _CouponsState createState() => _CouponsState();
+  _CouponsState createState() => _CouponsState(_duration, _price);
 }
 
 class _CouponsState extends State<Coupons> {
   bool _tick = false;
+  final String _duration;
+  final int _price;
+
+  _CouponsState(this._duration, this._price);
 
   @override
   Widget build(BuildContext context) {
@@ -30,13 +37,13 @@ class _CouponsState extends State<Coupons> {
                 height: 10.0,
               ),
               Text(
-                '36 Months',
+                '$_duration',
                 style: TextStyle(
                   color: Colors.white,
                 ),
               ),
               Text(
-                'INR 2400 + GST',
+                'INR $_price + GST',
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 20,

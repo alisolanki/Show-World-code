@@ -41,9 +41,9 @@ class SubscriptionPage extends StatelessWidget {
               SizedBox(
                 height: 10.0,
               ),
-              Coupons(),
-              Coupons(),
-              Coupons(),
+              Coupons("36 Months", 5000),
+              Coupons("12 Months", 1500),
+              Coupons("6 Months", 1000),
             ],
           ),
         ),
