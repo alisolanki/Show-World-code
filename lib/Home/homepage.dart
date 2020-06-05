@@ -22,14 +22,14 @@ class HomePage extends StatelessWidget {
         child: DrawerItems(),
       ),
       body: SingleChildScrollView(
-        child: Container(
+        child: Center(
           child: Column(
             children: <Widget>[
-              AdvertisementCard(),
+              AdvertisementCardTop(),
               DirectoryCard(),
               ListCard(),
               BuyCard(),
-              AdvertisementCard(),
+              AdvertisementCardBottom(),
             ],
           ),
         ),

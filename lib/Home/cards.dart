@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 class DirectoryCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    double width = MediaQuery.of(context).size.width;
+    final double width = MediaQuery.of(context).size.width;
 
     return Padding(
       padding: EdgeInsets.all(10),
       child: Container(
-        width: width * 0.7,
+        width: width * 0.9,
         height: 60,
         decoration: BoxDecoration(
             gradient: LinearGradient(
@@ -20,7 +20,7 @@ class DirectoryCard extends StatelessWidget {
             boxShadow: [
               BoxShadow(
                 color: Colors.black,
-                blurRadius: 5.0,
+                blurRadius: 2.0,
               ),
             ]),
         child: FlatButton(
@@ -59,7 +59,7 @@ class ListCard extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.all(10),
       child: Container(
-        width: width * 0.7,
+        width: width * 0.9,
         height: 60,
         decoration: BoxDecoration(
             gradient: LinearGradient(
@@ -71,7 +71,7 @@ class ListCard extends StatelessWidget {
             boxShadow: [
               BoxShadow(
                 color: Colors.black,
-                blurRadius: 5.0,
+                blurRadius: 2.0,
               ),
             ]),
         child: FlatButton(
@@ -110,7 +110,7 @@ class BuyCard extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.all(10),
       child: Container(
-        width: width * 0.7,
+        width: width * 0.9,
         height: 60,
         decoration: BoxDecoration(
             gradient: LinearGradient(
@@ -122,7 +122,7 @@ class BuyCard extends StatelessWidget {
             boxShadow: [
               BoxShadow(
                 color: Colors.black,
-                blurRadius: 5.0,
+                blurRadius: 2.0,
               ),
             ]),
         child: FlatButton(
