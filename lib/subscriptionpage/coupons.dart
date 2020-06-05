@@ -1,11 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-bool tick = false;
+class Coupons extends StatefulWidget {
+  @override
+  _CouponsState createState() => _CouponsState();
+}
 
-class Cupons extends StatelessWidget {
-  Cupons({this.checkboxTick});
-  final Function checkboxTick;
+class _CouponsState extends State<Coupons> {
+  bool _tick = false;
+
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -57,10 +60,11 @@ class Cupons extends StatelessWidget {
                   Checkbox(
                       tristate: false,
                       activeColor: Colors.transparent,
-                      value: tick,
-                      onChanged: (bool checkTick) {
-                        checkboxTick();
-                        tick = checkTick;
+                      value: _tick,
+                      onChanged: (bool _changedTick) {
+                        setState(() {
+                          _tick = _changedTick;
+                        });
                       }),
                   Text(
                     'Enable Auto Debit',

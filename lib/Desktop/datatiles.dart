@@ -38,25 +38,71 @@ class _DataTileState extends State<DataTile> {
                   //details
                   Card(
                     color: Colors.blue[50],
-                    child: Row(
-                      mainAxisSize: MainAxisSize.max,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: <Widget>[
                         Padding(
                           padding: const EdgeInsets.all(10.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
+                          child: Row(
                             children: <Widget>[
-                              Text(
-                                "Address:",
-                                style: TextStyle(fontWeight: FontWeight.w500),
+                              Expanded(
+                                flex: 1,
+                                child: Text(
+                                  "Address:",
+                                  textAlign: TextAlign.start,
+                                  style: TextStyle(fontWeight: FontWeight.w500),
+                                ),
                               ),
-                              Text(
-                                "Phone Number:",
-                                style: TextStyle(fontWeight: FontWeight.w500),
+                              Expanded(
+                                flex: 3,
+                                child: Text(
+                                  "Hulle hulla re hullle hulle",
+                                  textAlign: TextAlign.left,
+                                ),
                               ),
-                              Text(
-                                "Email:",
-                                style: TextStyle(fontWeight: FontWeight.w500),
+                            ],
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: Row(
+                            children: <Widget>[
+                              Expanded(
+                                flex: 1,
+                                child: Text(
+                                  "Phone number:",
+                                  textAlign: TextAlign.left,
+                                  style: TextStyle(fontWeight: FontWeight.w500),
+                                ),
+                              ),
+                              Expanded(
+                                flex: 3,
+                                child: Text(
+                                  "9821153135",
+                                  textAlign: TextAlign.left,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: Row(
+                            children: <Widget>[
+                              Expanded(
+                                flex: 1,
+                                child: Text(
+                                  "Email:",
+                                  textAlign: TextAlign.left,
+                                  style: TextStyle(fontWeight: FontWeight.w500),
+                                ),
+                              ),
+                              Expanded(
+                                flex: 3,
+                                child: Text(
+                                  "email@gmail.com",
+                                  textAlign: TextAlign.left,
+                                ),
                               ),
                             ],
                           ),

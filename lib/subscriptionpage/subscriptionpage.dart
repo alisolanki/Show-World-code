@@ -1,12 +1,7 @@
 import 'package:flutter/material.dart';
-import 'cupons.dart';
+import 'coupons.dart';
 
-class SubscriptionPage extends StatefulWidget {
-  @override
-  _SubscriptionPageState createState() => _SubscriptionPageState();
-}
-
-class _SubscriptionPageState extends State<SubscriptionPage> {
+class SubscriptionPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,12 +15,15 @@ class _SubscriptionPageState extends State<SubscriptionPage> {
           margin: EdgeInsets.all(10.0),
           child: Column(
             children: <Widget>[
-              Text(
-                'Choose Subscription Plan',
-                style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 30,
-                  fontWeight: FontWeight.w300,
+              Center(
+                child: Text(
+                  'Choose Subscription Plan',
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 30,
+                    fontWeight: FontWeight.w300,
+                  ),
+                  textAlign: TextAlign.center,
                 ),
               ),
               SizedBox(
@@ -43,21 +41,9 @@ class _SubscriptionPageState extends State<SubscriptionPage> {
               SizedBox(
                 height: 10.0,
               ),
-              Cupons(
-                checkboxTick: () {
-                  setState(() {});
-                },
-              ),
-              Cupons(
-                checkboxTick: () {
-                  setState(() {});
-                },
-              ),
-              Cupons(
-                checkboxTick: () {
-                  setState(() {});
-                },
-              ),
+              Coupons(),
+              Coupons(),
+              Coupons(),
             ],
           ),
         ),
