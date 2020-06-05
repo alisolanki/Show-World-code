@@ -1,7 +1,7 @@
 import 'package:LoginPage/Desktop/drawer.dart';
 import 'package:flutter/material.dart';
 import 'advtCard.dart';
-import 'fourCards.dart';
+import 'cards.dart';
 
 class HomePage extends StatelessWidget {
   @override
@@ -26,10 +26,9 @@ class HomePage extends StatelessWidget {
           child: Column(
             children: <Widget>[
               AdvertisementCard(),
-              FourCards(),
-              FourCards(),
-              FourCards(),
-              FourCards(),
+              DirectoryCard(),
+              ListCard(),
+              BuyCard(),
               AdvertisementCard(),
             ],
           ),
