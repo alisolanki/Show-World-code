@@ -1,54 +1,64 @@
 import 'package:flutter/material.dart';
+import '../Desktop/mydesktop.dart';
+import '../subscriptionpage/subscriptionpage.dart';
+import '../listpage/listpage.dart';
 
 class DirectoryCard extends StatelessWidget {
-  final double _width;
-  final double _height;
-  DirectoryCard(this._height,this._width);
+//  final double _width;
+//  final double _height;
+//  DirectoryCard(this._height,this._width);
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.all(10),
-      child: Flexible(
-        child: Container(
-          width: _width * 0.9,
-          height: _height * 0.13,
-          decoration: BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.bottomCenter,
-                end: Alignment.topCenter,
-                colors: [Colors.purple[900], Colors.purple[800]],
-              ),
-              borderRadius: BorderRadius.all(Radius.circular(5)),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black,
-                  blurRadius: 2.0,
-                ),
-              ]),
-          child: FlatButton(
-            splashColor: Colors.blueAccent[100],
-            child: Row(
-              children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Icon(
-                    Icons.description,
-                    color: Colors.white,
-                  ),
-                ),
-                Text(
-                  "Access Directory",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 15,
-                  ),
-                  textAlign: TextAlign.left,
-                ),
-              ],
+      child: Container(
+//          width: _width * 0.9,
+//          height: _height * 0.13,
+        decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.bottomCenter,
+              end: Alignment.topCenter,
+              colors: [Colors.purple[900], Colors.purple[800]],
             ),
-            onPressed: () {},
+            borderRadius: BorderRadius.all(Radius.circular(5)),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black,
+                blurRadius: 2.0,
+              ),
+            ]),
+        child: FlatButton(
+          splashColor: Colors.blueAccent[100],
+          child: Row(
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Icon(
+                  Icons.description,
+                  color: Colors.white,
+                ),
+              ),
+              Text(
+                "Access Directory",
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 15,
+                ),
+                textAlign: TextAlign.left,
+              ),
+            ],
           ),
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) {
+                  return MyDesktop();
+                },
+              ),
+            );
+          },
         ),
       ),
     );
@@ -56,16 +66,13 @@ class DirectoryCard extends StatelessWidget {
 }
 
 class ListCard extends StatelessWidget {
-  final double _width;
-  final double _height;
-  ListCard(this._height,this._width);
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.all(10),
       child: Container(
-        width: _width * 0.9,
-        height: _height * 0.13,
+//        width: _width * 0.9,
+//        height: _height * 0.13,
         decoration: BoxDecoration(
             gradient: LinearGradient(
               begin: Alignment.bottomCenter,
@@ -100,6 +107,64 @@ class ListCard extends StatelessWidget {
               ),
             ],
           ),
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) {
+                  return ListPage();
+                },
+              ),
+            );
+          },
+        ),
+      ),
+    );
+  }
+}
+
+class UnListCard extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.all(10),
+      child: Container(
+//        width: _width * 0.9,
+//        height: _height * 0.13,
+        decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.bottomCenter,
+              end: Alignment.topCenter,
+              colors: [Colors.indigo[900], Colors.indigo[800]],
+            ),
+            borderRadius: BorderRadius.all(Radius.circular(5)),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black,
+                blurRadius: 2.0,
+              ),
+            ]),
+        child: FlatButton(
+          splashColor: Colors.blueAccent[100],
+          child: Row(
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Icon(
+                  Icons.input,
+                  color: Colors.white,
+                ),
+              ),
+              Text(
+                "Remove Yourself",
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 15,
+                ),
+                textAlign: TextAlign.left,
+              ),
+            ],
+          ),
           onPressed: () {},
         ),
       ),
@@ -108,16 +173,16 @@ class ListCard extends StatelessWidget {
 }
 
 class BuyCard extends StatelessWidget {
-  final double _width;
-  final double _height;
-  BuyCard(this._height,this._width);
+//  final double _width;
+//  final double _height;
+//  BuyCard(this._height,this._width);
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.all(10),
       child: Container(
-        width: _width * 0.9,
-        height: _height * 0.13,
+//        width: _width * 0.9,
+//        height: _height * 0.13,
         decoration: BoxDecoration(
             gradient: LinearGradient(
               begin: Alignment.bottomCenter,
@@ -152,7 +217,16 @@ class BuyCard extends StatelessWidget {
               ),
             ],
           ),
-          onPressed: () {},
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) {
+                  return SubscriptionPage();
+                },
+              ),
+            );
+          },
         ),
       ),
     );
