@@ -1,6 +1,8 @@
 import 'package:LoginPage/Desktop/mydesktop.dart';
 import 'package:flutter/material.dart';
 import '../Home/homepage.dart';
+import './userdropdown.dart';
+import '../Account/account_home.dart';
 import '../subscriptionpage/subscriptionpage.dart';
 
 class DrawerItems extends StatelessWidget {
@@ -13,7 +15,17 @@ class DrawerItems extends StatelessWidget {
       children: <Widget>[
         loggedIn
             ? UserAccountsDrawerHeader(
-                onDetailsPressed: () {},
+                onDetailsPressed: () {
+                  Navigator.pop(context);
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return AccountHomePage();
+                      },
+                    ),
+                  );
+                },
                 currentAccountPicture: CircleAvatar(
                   child: Text("P"),
                 ),
@@ -104,9 +116,7 @@ class DrawerItems extends StatelessWidget {
               context,
               MaterialPageRoute(
                 builder: (context) {
-                  return AboutDialog(
-                    
-                  );
+                  return AboutDialog();
                 },
               ),
             );
