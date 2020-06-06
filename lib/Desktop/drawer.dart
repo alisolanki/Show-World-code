@@ -5,6 +5,7 @@ import './userdropdown.dart';
 import '../Account/account_home.dart';
 import '../subscriptionpage/subscriptionpage.dart';
 import '../LoginPage/loginPage.dart';
+import '../Account/account_home.dart';
 
 class DrawerItems extends StatelessWidget {
   final loggedIn = true;
@@ -48,6 +49,27 @@ class DrawerItems extends StatelessWidget {
                   color: Colors.blue,
                 ),
               ),
+        Visibility(
+          visible: loggedIn,
+          child: ListTile(
+            leading: Icon(Icons.account_circle),
+            title: Text('My Profile'),
+            onTap: () {
+              // Update the state of the app
+              // ...
+              // Then close the drawer
+              Navigator.pop(context);
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) {
+                    return AccountHomePage();
+                  },
+                ),
+              );
+            },
+          ),
+        ),
         ListTile(
           leading: Icon(Icons.home),
           title: Text('Home'),
@@ -123,23 +145,26 @@ class DrawerItems extends StatelessWidget {
             );
           },
         ),
-        ListTile(
-          leading: Icon(Icons.exit_to_app),
-          title: Text('Log Out'),
-          onTap: () {
-            // Update the state of the app
-            // ...
-            // Then close the drawer
-            Navigator.pop(context);
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) {
-                  return LoginPage();
-                },
-              ),
-            );
-          },
+        Visibility(
+          visible: loggedIn,
+          child: ListTile(
+            leading: Icon(Icons.exit_to_app),
+            title: Text('Log Out'),
+            onTap: () {
+              // Update the state of the app
+              // ...
+              // Then close the drawer
+              Navigator.pop(context);
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) {
+                    return LoginPage();
+                  },
+                ),
+              );
+            },
+          ),
         ),
       ],
     );
