@@ -1,4 +1,4 @@
-import 'package:LoginPage/LoginPage/signupButton.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class AccountHomePage extends StatelessWidget {
@@ -69,17 +69,26 @@ class AccountHomePage extends StatelessWidget {
                   ),
                 ),
                 //Profile Picture
-                MaterialButton(
-                  shape: RoundedRectangleBorder(
-                    borderRadius:
-                        BorderRadius.all(Radius.circular(_width * 0.3)),
-                    side: BorderSide(width: 0),
+                SizedBox(
+                  width: _width * 0.35,
+                  height: _width * 0.35,
+                  child: FloatingActionButton(
+                    shape: CircleBorder(
+                      //TODO:remove the border once checked the border is just for verification
+                      side: BorderSide(
+                        color: Colors.black,
+                        width: 5,
+                        style: BorderStyle.solid,
+                      ),
+                    ),
+                    highlightElevation: 10.0,
+                    hoverElevation: 10.0,
+                    child: CircleAvatar(
+                      radius: _width,
+                      child: Text("P"),
+                    ),
+                    onPressed: () {},
                   ),
-                  child: CircleAvatar(
-                    radius: _width * 0.15,
-                    child: Text("P"),
-                  ),
-                  onPressed: () {},
                 ),
               ],
             ),
