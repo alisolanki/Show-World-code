@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../Desktop/mydesktop.dart';
+import '../Home/homepage.dart';
 import '../Animation/FadeAnimation.dart';
 
 class SignupButton extends StatelessWidget {
@@ -17,7 +17,7 @@ class SignupButton extends StatelessWidget {
               context,
               MaterialPageRoute(
                 builder: (context) {
-                  return MyDesktop();
+                  return HomePage();
                 },
               ),
             );

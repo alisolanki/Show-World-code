@@ -6,8 +6,6 @@ import 'cards.dart';
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final double _height = MediaQuery.of(context).size.height;
-    final double _width = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.blue,
@@ -24,16 +22,26 @@ class HomePage extends StatelessWidget {
         child: DrawerItems(),
       ),
       body: Center(
-        child: SingleChildScrollView(
-          child: Column(
-            children: <Widget>[
-              AdvertisementCardTop(_width),
-              DirectoryCard(_height, _width),
-              ListCard(_height, _width),
-              BuyCard(_height, _width),
-              AdvertisementCardBottom(_width),
-            ],
-          ),
+        child: Column(
+          children: <Widget>[
+            Expanded(
+              flex: 2,
+              child: AdvertisementCardTop(),
+            ),
+            Expanded(
+              child: DirectoryCard(),
+            ),
+            Expanded(
+              child: ListCard(),
+            ),
+            Expanded(
+              child: BuyCard(),
+            ),
+            Expanded(
+              flex: 2,
+              child: AdvertisementCardBottom(),
+            ),
+          ],
         ),
       ),
     );

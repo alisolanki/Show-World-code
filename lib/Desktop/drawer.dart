@@ -4,6 +4,7 @@ import '../Home/homepage.dart';
 import './userdropdown.dart';
 import '../Account/account_home.dart';
 import '../subscriptionpage/subscriptionpage.dart';
+import '../LoginPage/loginPage.dart';
 
 class DrawerItems extends StatelessWidget {
   final loggedIn = true;
@@ -117,6 +118,24 @@ class DrawerItems extends StatelessWidget {
               MaterialPageRoute(
                 builder: (context) {
                   return AboutDialog();
+                },
+              ),
+            );
+          },
+        ),
+        ListTile(
+          leading: Icon(Icons.exit_to_app),
+          title: Text('Log Out'),
+          onTap: () {
+            // Update the state of the app
+            // ...
+            // Then close the drawer
+            Navigator.pop(context);
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) {
+                  return LoginPage();
                 },
               ),
             );
