@@ -139,7 +139,16 @@ class DrawerItems extends StatelessWidget {
               context,
               MaterialPageRoute(
                 builder: (context) {
-                  return AboutDialog();
+                  return AboutDialog(
+                    applicationName: 'Show World',
+                    applicationVersion: '1.0.0',
+                    applicationIcon: Icon(Icons.language),
+                    children: <Widget>[
+                      Image.asset(
+                        'assets/earth.png',
+                      ),
+                    ],
+                  );
                 },
               ),
             );
