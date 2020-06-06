@@ -1,3 +1,4 @@
+import 'package:LoginPage/LoginPage/signupButton.dart';
 import 'package:flutter/material.dart';
 
 class AccountHomePage extends StatelessWidget {
@@ -11,54 +12,77 @@ class AccountHomePage extends StatelessWidget {
           'My Account',
         ),
       ),
-      body: Container(
-        child: Padding(
-          padding: const EdgeInsets.all(10.0),
-          child: Column(
-            children: <Widget>[
-              Center(
-                child: CircleAvatar(
-                  radius: _width * 0.15,
-                  child: Text("P"),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Row(
-                  children: <Widget>[
-                    Text(
-                      "Name: ",
-                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-                      textAlign: TextAlign.left,
+      body: SingleChildScrollView(
+        child: Container(
+          child: Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: Stack(
+              alignment: AlignmentDirectional.topCenter,
+              children: [
+                Container(
+                  margin: EdgeInsets.only(top: _width * 0.15),
+                  child: Card(
+                    elevation: 5,
+                    child: Container(
+                      margin: EdgeInsets.only(top: _width * 0.2),
+                      child: Column(
+                        children: <Widget>[
+                          Padding(
+                            padding: const EdgeInsets.all(10.0),
+                            child: Row(
+                              children: <Widget>[
+                                Text(
+                                  "Name: ",
+                                  style: TextStyle(fontWeight: FontWeight.bold),
+                                  textAlign: TextAlign.left,
+                                ),
+                              ],
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(10.0),
+                            child: Row(
+                              children: <Widget>[
+                                Text(
+                                  "Phone Number: ",
+                                  style: TextStyle(fontWeight: FontWeight.bold),
+                                  textAlign: TextAlign.left,
+                                ),
+                              ],
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(10.0),
+                            child: Row(
+                              children: <Widget>[
+                                Text(
+                                  "Email: ",
+                                  style: TextStyle(fontWeight: FontWeight.bold),
+                                  textAlign: TextAlign.left,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
-                  ],
+                  ),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Row(
-                  children: <Widget>[
-                    Text(
-                      "Phone Number: ",
-                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-                      textAlign: TextAlign.left,
-                    ),
-                  ],
+                //Profile Picture
+                MaterialButton(
+                  shape: RoundedRectangleBorder(
+                    borderRadius:
+                        BorderRadius.all(Radius.circular(_width * 0.3)),
+                    side: BorderSide(width: 0),
+                  ),
+                  child: CircleAvatar(
+                    radius: _width * 0.15,
+                    child: Text("P"),
+                  ),
+                  onPressed: () {},
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Row(
-                  children: <Widget>[
-                    Text(
-                      "Email: ",
-                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-                      textAlign: TextAlign.left,
-                    ),
-                  ],
-                ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

@@ -1,3 +1,4 @@
+import 'package:LoginPage/Account/account_home.dart';
 import 'package:LoginPage/Desktop/drawer.dart';
 import 'package:flutter/material.dart';
 import 'advtCard.dart';
@@ -6,6 +7,7 @@ import 'cards.dart';
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final double _width = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.blue,
