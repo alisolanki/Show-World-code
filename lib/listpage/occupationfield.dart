@@ -6,70 +6,38 @@ class OccupationField extends StatefulWidget {
   _OccupationFieldState createState() => _OccupationFieldState();
 }
 
-class _OccupationFieldState extends State<OccupationField> {
-  List<String> _suggestedString = [];
-  TextEditingController _textFieldController = TextEditingController();
-  List<String> _listOfStrings = [
-    'Director',
-    'Artist',
-    'Actor',
-    'Producer',
-  ];
-  _onChanged(String value) {
-    setState(() {
-      _suggestedString = _listOfStrings
-          .where((string) => string.toLowerCase().contains(value.toLowerCase()))
-          .toList();
-    });
-  }
+List<String> categories = ['Occupation', 'Director', 'Artist', 'Producer'];
 
+class _OccupationFieldState extends State<OccupationField> {
+  String _dropdownValue = categories[0];
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        TextField(
-          enableInteractiveSelection: true,
-          showCursor: true,
-          keyboardAppearance: Brightness.dark,
-          controller: _textFieldController,
-          onTap: () {
-            setState(() {
-              showOptions = !showOptions;
-            });
-          },
-          autocorrect: true,
-          enableSuggestions: true,
-          cursorColor: Colors.black38,
-          cursorRadius: Radius.circular(10.0),
-          decoration: InputDecoration(
-            focusColor: Colors.black12,
-            hintText: 'Occupation',
-            hintStyle: TextStyle(
-              color: Colors.grey,
-            ),
-          ),
-          onChanged: _onChanged,
+    return Container(
+      alignment: Alignment.centerLeft,
+      child: DropdownButton<String>(
+        hint: Text("Occupation"),
+        icon: Icon(Icons.arrow_downward),
+        iconSize: 24,
+        elevation: 16,
+        underline: Container(
+          height: 2,
+          color: Colors.blue,
         ),
-        showOptions
-            ? Padding(
-                padding: EdgeInsets.symmetric(horizontal: 25.0),
-                child: Card(
-                  color: Colors.yellow[100],
-                  shadowColor: Colors.grey,
-                  child: Column(
-                    children: _suggestedString.map((string) {
-                      return ListTile(
-                        onTap: () {
-                          setState(() {});
-                        },
-                        title: Text(string),
-                      );
-                    }).toList(),
-                  ),
-                ),
-              )
-            : SizedBox(),
-      ],
+        value: _dropdownValue,
+        items: categories.map<DropdownMenuItem<String>>(
+          (String value) {
+            return DropdownMenuItem<String>(
+              value: value,
+              child: Text(value),
+            );
+          },
+        ).toList(),
+        onChanged: (String newValue) {
+          setState(() {
+            _dropdownValue = newValue;
+          });
+        },
+      ),
     );
   }
 }

@@ -92,6 +92,21 @@ class _InputFieldsState extends State<InputFields> {
           SizedBox(
             height: 10.0,
           ),
+          Row(
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Icon(
+                  Icons.work,
+                  color: Colors.grey,
+                ),
+              ),
+              OccupationField(),
+            ],
+          ),
+          SizedBox(
+            height: 10.0,
+          ),
           TextField(
             showCursor: true,
             onTap: () {
@@ -144,28 +159,27 @@ class _InputFieldsState extends State<InputFields> {
           SizedBox(
             height: 10.0,
           ),
-          OccupationField(),
-          SizedBox(
-            height: 10.0,
-          ),
-          TextField(
-            showCursor: true,
-            onTap: () {
-              hideOptionMenu();
-            },
-            autocorrect: false,
-            cursorColor: Colors.black38,
-            keyboardType: TextInputType.numberWithOptions(decimal: false),
-            cursorRadius: Radius.circular(10.0),
-            decoration: InputDecoration(
-              focusColor: Colors.black12,
-              hintText: 'Duration',
-              suffixText: 'years',
-              suffixStyle: TextStyle(
-                color: Colors.black,
-              ),
-              hintStyle: TextStyle(
-                color: Colors.grey,
+          Container(
+            child: TextField(
+              showCursor: true,
+              onTap: () {
+                hideOptionMenu();
+              },
+              autocorrect: false,
+              cursorColor: Colors.black38,
+              keyboardType: TextInputType.numberWithOptions(decimal: false),
+              cursorRadius: Radius.circular(10.0),
+              decoration: InputDecoration(
+                prefixIcon: Icon(Icons.access_time),
+                focusColor: Colors.black12,
+                hintText: 'Duration',
+                suffixText: 'years',
+                suffixStyle: TextStyle(
+                  color: Colors.black,
+                ),
+                hintStyle: TextStyle(
+                  color: Colors.grey,
+                ),
               ),
             ),
           ),
