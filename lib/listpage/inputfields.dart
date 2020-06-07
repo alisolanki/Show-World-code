@@ -1,6 +1,8 @@
 import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'occupationfield.dart';
+import 'constants.dart';
 
 class InputFields extends StatefulWidget {
   @override
@@ -8,6 +10,12 @@ class InputFields extends StatefulWidget {
 }
 
 class _InputFieldsState extends State<InputFields> {
+  void hideOptionMenu() {
+    setState(() {
+      showOptions = false;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -27,6 +35,9 @@ class _InputFieldsState extends State<InputFields> {
       child: Column(
         children: <Widget>[
           TextField(
+            onTap: () {
+              hideOptionMenu();
+            },
             showCursor: true,
             autocorrect: false,
             cursorColor: Colors.black38,
@@ -44,6 +55,9 @@ class _InputFieldsState extends State<InputFields> {
             height: 10.0,
           ),
           TextField(
+            onTap: () {
+              hideOptionMenu();
+            },
             showCursor: true,
             autocorrect: false,
             cursorColor: Colors.black38,
@@ -61,6 +75,9 @@ class _InputFieldsState extends State<InputFields> {
             height: 10.0,
           ),
           TextField(
+            onTap: () {
+              hideOptionMenu();
+            },
             showCursor: true,
             autocorrect: false,
             maxLines: 3,
@@ -80,6 +97,9 @@ class _InputFieldsState extends State<InputFields> {
           ),
           TextField(
             showCursor: true,
+            onTap: () {
+              hideOptionMenu();
+            },
             autocorrect: false,
             keyboardType: TextInputType.phone,
             cursorColor: Colors.black38,
@@ -106,11 +126,18 @@ class _InputFieldsState extends State<InputFields> {
           ),
           TextField(
             showCursor: true,
+            onTap: () {
+              hideOptionMenu();
+            },
             autocorrect: false,
+            keyboardType: TextInputType.emailAddress,
             cursorColor: Colors.black38,
             cursorRadius: Radius.circular(10.0),
             decoration: InputDecoration(
-              prefixIcon: Icon(Icons.email),
+              prefixIcon: Icon(
+                Icons.email,
+                color: Colors.grey,
+              ),
               focusColor: Colors.black12,
               focusedBorder: InputBorder.none,
               hintText: 'Email',
@@ -122,15 +149,27 @@ class _InputFieldsState extends State<InputFields> {
           SizedBox(
             height: 10.0,
           ),
+          OccupationField(),
+          SizedBox(
+            height: 10.0,
+          ),
           TextField(
             showCursor: true,
+            onTap: () {
+              hideOptionMenu();
+            },
             autocorrect: false,
             cursorColor: Colors.black38,
+            keyboardType: TextInputType.numberWithOptions(decimal: false),
             cursorRadius: Radius.circular(10.0),
             decoration: InputDecoration(
               focusColor: Colors.black12,
               focusedBorder: InputBorder.none,
-              hintText: 'Occupation',
+              hintText: 'Duration',
+              suffixText: 'years',
+              suffixStyle: TextStyle(
+                color: Colors.black,
+              ),
               hintStyle: TextStyle(
                 color: Colors.grey,
               ),

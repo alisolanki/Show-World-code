@@ -1,1 +1,1 @@
-bool listed = false;
+bool showOptions = false;

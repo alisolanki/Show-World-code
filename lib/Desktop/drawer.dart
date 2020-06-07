@@ -1,11 +1,8 @@
 import 'package:LoginPage/Desktop/mydesktop.dart';
 import 'package:flutter/material.dart';
-import '../Home/homepage.dart';
-import './userdropdown.dart';
 import '../Account/account_home.dart';
 import '../subscriptionpage/subscriptionpage.dart';
 import '../LoginPage/loginPage.dart';
-import '../Account/account_home.dart';
 
 class DrawerItems extends StatelessWidget {
   final loggedIn = true;
