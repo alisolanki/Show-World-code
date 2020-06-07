@@ -117,12 +117,20 @@ class DrawerItems extends StatelessWidget {
             ? Container()
             : ListTile(
                 leading: Icon(Icons.account_circle),
-                title: Text('Log In'),
+                title: Text('LogIn | SignUp'),
                 onTap: () {
                   // Update the state of the app
                   // ...
                   // Then close the drawer
                   Navigator.pop(context);
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return LoginPage();
+                      },
+                    ),
+                  );
                 },
               ),
         ListTile(
