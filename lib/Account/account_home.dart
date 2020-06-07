@@ -156,14 +156,6 @@ class AccountHomePage extends StatelessWidget {
                     width: _width * 0.35,
                     height: _width * 0.35,
                     child: FloatingActionButton(
-                      shape: CircleBorder(
-                        //TODO:remove the border once checked the border is just for verification
-                        side: BorderSide(
-                          color: Colors.black,
-                          width: 5,
-                          style: BorderStyle.solid,
-                        ),
-                      ),
                       highlightElevation: 10.0,
                       hoverElevation: 10.0,
                       child: CircleAvatar(

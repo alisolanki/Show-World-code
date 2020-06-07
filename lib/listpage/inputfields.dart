@@ -44,7 +44,6 @@ class _InputFieldsState extends State<InputFields> {
             cursorRadius: Radius.circular(10.0),
             decoration: InputDecoration(
               focusColor: Colors.black12,
-              focusedBorder: InputBorder.none,
               hintText: 'First Name',
               hintStyle: TextStyle(
                 color: Colors.grey,
@@ -64,7 +63,6 @@ class _InputFieldsState extends State<InputFields> {
             cursorRadius: Radius.circular(10.0),
             decoration: InputDecoration(
               focusColor: Colors.black12,
-              focusedBorder: InputBorder.none,
               hintText: 'Last Name',
               hintStyle: TextStyle(
                 color: Colors.grey,
@@ -85,7 +83,6 @@ class _InputFieldsState extends State<InputFields> {
             cursorRadius: Radius.circular(10.0),
             decoration: InputDecoration(
               focusColor: Colors.black12,
-              focusedBorder: InputBorder.none,
               hintText: 'Address',
               hintStyle: TextStyle(
                 color: Colors.grey,
@@ -107,7 +104,6 @@ class _InputFieldsState extends State<InputFields> {
             maxLength: 10,
             decoration: InputDecoration(
               focusColor: Colors.black12,
-              focusedBorder: InputBorder.none,
               counterText: '',
               prefixText: "+91 ",
               prefixStyle: TextStyle(color: Colors.black),
@@ -139,7 +135,6 @@ class _InputFieldsState extends State<InputFields> {
                 color: Colors.grey,
               ),
               focusColor: Colors.black12,
-              focusedBorder: InputBorder.none,
               hintText: 'Email',
               hintStyle: TextStyle(
                 color: Colors.grey,
@@ -164,7 +159,6 @@ class _InputFieldsState extends State<InputFields> {
             cursorRadius: Radius.circular(10.0),
             decoration: InputDecoration(
               focusColor: Colors.black12,
-              focusedBorder: InputBorder.none,
               hintText: 'Duration',
               suffixText: 'years',
               suffixStyle: TextStyle(

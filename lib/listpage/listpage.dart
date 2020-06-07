@@ -26,7 +26,8 @@ class ListPage extends StatelessWidget {
                   softWrap: true,
                   style: TextStyle(
                     fontSize: 30.0,
-                    fontWeight: FontWeight.w500,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.blue[900],
                   ),
                 ),
               ),

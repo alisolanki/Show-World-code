@@ -43,7 +43,6 @@ class _OccupationFieldState extends State<OccupationField> {
           cursorRadius: Radius.circular(10.0),
           decoration: InputDecoration(
             focusColor: Colors.black12,
-            focusedBorder: InputBorder.none,
             hintText: 'Occupation',
             hintStyle: TextStyle(
               color: Colors.grey,
