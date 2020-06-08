@@ -1,3 +1,4 @@
+import 'package:LoginPage/Desktop/categorypage.dart';
 import 'package:LoginPage/Desktop/mydesktop.dart';
 import 'package:flutter/material.dart';
 import '../Account/account_home.dart';
@@ -89,7 +90,7 @@ class DrawerItems extends StatelessWidget {
               context,
               MaterialPageRoute(
                 builder: (context) {
-                  return MyDesktop();
+                  return CategoryPage();
                 },
               ),
             );
