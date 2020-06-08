@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 import '../Account/account_home.dart';
 import '../subscriptionpage/subscriptionpage.dart';
 import '../LoginPage/loginPage.dart';
+import '../listpage/constants.dart';
 
 class DrawerItems extends StatelessWidget {
-  final loggedIn = true;
   @override
   Widget build(BuildContext context) {
     return ListView(

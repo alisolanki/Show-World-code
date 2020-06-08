@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import './verificationFields.dart';
@@ -16,7 +17,8 @@ class _LoginPageState extends State<LoginPage> {
   // bool _rememberPassword = false;
 
   void _togglePage(bool _switchme) {
-    setState(() {
+    setState(
+      () {
         _pageLogin = _switchme;
       },
     );
@@ -115,9 +117,21 @@ class _LoginPageState extends State<LoginPage> {
                             ),
                           ),
                           SizedBox(
-                            height: 10,
+                            height: 20,
                           ),
-                          LoginButton(),
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              LoginButton(),
+                              SizedBox(
+                                height: 10.0,
+                                width: 20.0,
+                              ),
+                              GuestButton(),
+                            ],
+                          ),
+
                           // FadeAnimation(
                           //   0.5,
                           //   Row(

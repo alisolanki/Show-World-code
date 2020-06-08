@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../Home/homepage.dart';
 import '../Animation/FadeAnimation.dart';
+import '../listpage/constants.dart';
 
 class SignupButton extends StatelessWidget {
   @override
@@ -13,6 +14,7 @@ class SignupButton extends StatelessWidget {
         child: RaisedButton(
           padding: EdgeInsets.all(0),
           onPressed: () {
+            loggedIn = true;
             Navigator.push(
               context,
               MaterialPageRoute(
