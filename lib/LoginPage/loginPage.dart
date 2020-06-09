@@ -6,6 +6,7 @@ import './loginButton.dart';
 import './signupPage.dart';
 import './loginDecoration.dart';
 import '../Animation/FadeAnimation.dart';
+import '../Login2/forgotpassword.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -112,7 +113,16 @@ class _LoginPageState extends State<LoginPage> {
                                     color: Color.fromRGBO(143, 148, 251, 1),
                                   ),
                                 ),
-                                onPressed: () => {},
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) {
+                                        return ForgotPasswordPage();
+                                      },
+                                    ),
+                                  );
+                                },
                               ),
                             ),
                           ),
