@@ -1,3 +1,5 @@
+import 'package:LoginPage/Home/homepage.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/scheduler.dart' show timeDilation;
 import 'package:flutter/material.dart';
 import 'package:flutter_login/flutter_login.dart';
@@ -41,7 +43,7 @@ class LoginScreen extends StatelessWidget {
 
     return FlutterLogin(
       title: Constants.appName,
-      logo: 'assets/images/ecorp.png',
+      logo: '/assets/logo.png',
       logoTag: Constants.logoTag,
       titleTag: Constants.titleTag,
       // messages: LoginMessages(
@@ -134,6 +136,23 @@ class LoginScreen extends StatelessWidget {
       //     // shape: ContinuousRectangleBorder(borderRadius: BorderRadius.circular(55.0)),
       //   ),
       // ),
+      theme: LoginTheme(
+          pageColorDark: Colors.black87,
+          pageColorLight: Colors.yellow[200],
+          titleStyle: TextStyle(
+            fontWeight: FontWeight.w400,
+            color: Colors.white,
+          ),
+          buttonTheme: LoginButtonTheme(
+            backgroundColor: Colors.lightGreen[200],
+            splashColor: Colors.red[300],
+            highlightColor: Colors.orange[100],
+          ),
+          cardTheme: CardTheme(
+            color: Colors.yellow[100],
+            elevation: 6.0,
+            shadowColor: Colors.purpleAccent,
+          )),
       emailValidator: (value) {
         if (!value.contains('@') || !value.endsWith('.com')) {
           return "Email must contain '@' and end with '.com'";
@@ -160,7 +179,7 @@ class LoginScreen extends StatelessWidget {
       },
       onSubmitAnimationCompleted: () {
         Navigator.of(context).pushReplacement(FadePageRoute(
-          builder: (context) => DashboardScreen(),
+          builder: (context) => HomePage(),
         ));
       },
       onRecoverPassword: (name) {
@@ -169,7 +188,7 @@ class LoginScreen extends StatelessWidget {
         return _recoverPassword(name);
         // Show new password dialog
       },
-      showDebugButtons: true,
+//      showDebugButtons: true,
     );
   }
 }

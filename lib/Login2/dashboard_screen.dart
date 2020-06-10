@@ -325,7 +325,7 @@ class _DashboardScreenState extends State<DashboardScreen>
                     ),
                   ],
                 ),
-                !kReleaseMode? _buildDebugButtons():Container(),
+                !kReleaseMode ? _buildDebugButtons() : Container(),
               ],
             ),
           ),

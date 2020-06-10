@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-
+import 'Login2/forgotpassword.dart';
 import 'LoginPage/loginPage.dart';
 
 void main() {
   runApp(
     MaterialApp(
-      debugShowCheckedModeBanner: false,      
+      debugShowCheckedModeBanner: false,
       home: HomePage(),
     ),
   );
@@ -14,6 +14,6 @@ void main() {
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return LoginPage();
+    return ForgotPasswordPage();
   }
 }

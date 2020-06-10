@@ -8,11 +8,13 @@ class ForgotPasswordPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Login Demo',
       theme: ThemeData(
+//        backgroundColor: Colors.blue[100],
         // brightness: Brightness.dark,
-        primarySwatch: Colors.deepPurple,
-        accentColor: Colors.orange,
+        primarySwatch: Colors.blueGrey,
+        accentColor: Colors.grey,
         cursorColor: Colors.orange,
         // fontFamily: 'SourceSansPro',
         textTheme: TextTheme(

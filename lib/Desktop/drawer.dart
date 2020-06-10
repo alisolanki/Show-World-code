@@ -1,5 +1,6 @@
 import 'package:LoginPage/Desktop/categorypage.dart';
 import 'package:LoginPage/Desktop/mydesktop.dart';
+import 'package:LoginPage/Login2/forgotpassword.dart';
 import 'package:flutter/material.dart';
 import '../Account/account_home.dart';
 import '../subscriptionpage/subscriptionpage.dart';
@@ -128,7 +129,7 @@ class DrawerItems extends StatelessWidget {
                     context,
                     MaterialPageRoute(
                       builder: (context) {
-                        return LoginPage();
+                        return ForgotPasswordPage();
                       },
                     ),
                   );
@@ -173,9 +174,7 @@ class DrawerItems extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) {
-                    return LoginPage();
-                  },
+                  builder: (context) => ForgotPasswordPage(),
                 ),
               );
             },

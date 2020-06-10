@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
 import './verificationFields.dart';
 import './loginButton.dart';
 import './signupPage.dart';
