@@ -1,5 +1,5 @@
+import 'package:LoginPage/Login2/login_screen.dart';
 import 'package:flutter/material.dart';
-import 'Login2/forgotpassword.dart';
 import 'LoginPage/loginPage.dart';
 
 void main() {
@@ -14,6 +14,6 @@ void main() {
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return ForgotPasswordPage();
+    return LoginScreen();
   }
 }

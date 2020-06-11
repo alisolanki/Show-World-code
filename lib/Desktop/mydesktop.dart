@@ -1,3 +1,4 @@
+import 'package:LoginPage/Desktop/data.dart';
 import 'package:LoginPage/Desktop/datatiles.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -41,9 +42,10 @@ class MyDesktop extends StatelessWidget {
           Expanded(
             child: ListView.builder(
               padding: EdgeInsets.all(10),
-              itemCount: 8,
+              itemCount: ArtistData().artistData.length,
               itemBuilder: (ctx, index) {
-                return DataTile();
+                var dataitr = ArtistData().artistData[index];
+                return DataTile(name: dataitr.name, category: dataitr.category, address: dataitr.address, email:dataitr.email, phonenumber:dataitr.phonenumber);
               },
             ),
           )

@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
 
 class DataTile extends StatefulWidget {
+  final String name, category, address, phonenumber, email;
+  DataTile({this.name, this.category, this.address, this.phonenumber, this.email});
+
   @override
-  _DataTileState createState() => _DataTileState();
+  _DataTileState createState() => _DataTileState(this.name, this.category, this.address, this.phonenumber, this.email);
 }
 
 class _DataTileState extends State<DataTile> {
+  final String name, category, address, phonenumber, email;
+  _DataTileState(this.name, this.category, this.address, this.phonenumber, this.email);
+
   bool _showdetails = false;
   @override
   Widget build(BuildContext context) {
@@ -15,13 +21,13 @@ class _DataTileState extends State<DataTile> {
           color: Colors.blue[800],
           child: ListTile(
             title: Text(
-              "Name",
+              "$name",
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 color: Colors.white,
               ),
             ),
-            subtitle: Text("Categories", style: TextStyle(color: Colors.white)),
+            subtitle: Text("$category", style: TextStyle(color: Colors.white)),
             trailing: Icon(
                 _showdetails ? Icons.arrow_drop_up : Icons.arrow_drop_down),
             dense: true,
@@ -56,7 +62,7 @@ class _DataTileState extends State<DataTile> {
                               Expanded(
                                 flex: 3,
                                 child: Text(
-                                  "Hulle hulla re hullle hulle",
+                                  "$address",
                                   textAlign: TextAlign.left,
                                 ),
                               ),
@@ -78,7 +84,7 @@ class _DataTileState extends State<DataTile> {
                               Expanded(
                                 flex: 3,
                                 child: Text(
-                                  "9821153135",
+                                  "$phonenumber",
                                   textAlign: TextAlign.left,
                                 ),
                               ),
@@ -100,7 +106,7 @@ class _DataTileState extends State<DataTile> {
                               Expanded(
                                 flex: 3,
                                 child: Text(
-                                  "email@gmail.com",
+                                  "$email",
                                   textAlign: TextAlign.left,
                                 ),
                               ),

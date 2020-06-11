@@ -1,12 +1,13 @@
-import 'package:LoginPage/Home/homepage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/scheduler.dart' show timeDilation;
 import 'package:flutter/material.dart';
 import 'package:flutter_login/flutter_login.dart';
-import 'constants.dart';
-import 'custom_route.dart';
-import 'dashboard_screen.dart';
-import 'users.dart';
+import 'package:flutter/services.dart';
+
+import 'package:LoginPage/Home/homepage.dart';
+import './constants.dart';
+import './custom_route.dart';
+import './users.dart';
 
 class LoginScreen extends StatelessWidget {
   static const routeName = '/auth';
@@ -40,6 +41,10 @@ class LoginScreen extends StatelessWidget {
       bottom: Radius.circular(10.0),
       top: Radius.circular(20.0),
     );
+
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+    ]);
 
     return FlutterLogin(
       title: Constants.appName,
@@ -137,22 +142,28 @@ class LoginScreen extends StatelessWidget {
       //   ),
       // ),
       theme: LoginTheme(
-          pageColorDark: Colors.purple,
-          pageColorLight: Colors.blue,
-          titleStyle: TextStyle(
-            fontWeight: FontWeight.w400,
-            color: Colors.white,
-          ),
-          buttonTheme: LoginButtonTheme(
-            backgroundColor: Colors.blue[900],
-            splashColor: Colors.blueAccent[700],
-            highlightColor: Colors.blueAccent[100],
-          ),
-          cardTheme: CardTheme(
-            color: Colors.blue[50],
-            elevation: 6.0,
-            shadowColor: Colors.purple,
-          )),
+        pageColorDark: Colors.purple,
+        pageColorLight: Colors.blue,
+        titleStyle: TextStyle(
+          fontWeight: FontWeight.w400,
+          color: Colors.white,
+        ),
+        buttonTheme: LoginButtonTheme(
+          backgroundColor: Colors.blue[900],
+          splashColor: Colors.blueAccent[700],
+          highlightColor: Colors.blueAccent[100],
+        ),
+        cardTheme: CardTheme(
+          color: Colors.blue[50],
+          elevation: 6.0,
+          shadowColor: Colors.purple,
+        ),
+      ),
+      messages: LoginMessages(
+        usernameHint: "Email or Phone Number",
+        recoverPasswordDescription:
+            "We will send you an email or OTP password on the registered number.",
+      ),
       emailValidator: (value) {
         if (!value.contains('@') || !value.endsWith('.com')) {
           return "Email must contain '@' and end with '.com'";
@@ -178,9 +189,11 @@ class LoginScreen extends StatelessWidget {
         return _loginUser(loginData);
       },
       onSubmitAnimationCompleted: () {
-        Navigator.of(context).pushReplacement(FadePageRoute(
-          builder: (context) => HomePage(),
-        ));
+        Navigator.of(context).pushReplacement(
+          FadePageRoute(
+            builder: (context) => HomePage(),
+          ),
+        );
       },
       onRecoverPassword: (name) {
         print('Recover password info');
@@ -188,7 +201,7 @@ class LoginScreen extends StatelessWidget {
         return _recoverPassword(name);
         // Show new password dialog
       },
-//      showDebugButtons: true,
+      //showDebugButtons: true,
     );
   }
 }
