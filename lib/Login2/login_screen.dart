@@ -137,21 +137,21 @@ class LoginScreen extends StatelessWidget {
       //   ),
       // ),
       theme: LoginTheme(
-          pageColorDark: Colors.black87,
-          pageColorLight: Colors.yellow[200],
+          pageColorDark: Colors.purple,
+          pageColorLight: Colors.blue,
           titleStyle: TextStyle(
             fontWeight: FontWeight.w400,
             color: Colors.white,
           ),
           buttonTheme: LoginButtonTheme(
-            backgroundColor: Colors.lightGreen[200],
-            splashColor: Colors.red[300],
-            highlightColor: Colors.orange[100],
+            backgroundColor: Colors.blue[900],
+            splashColor: Colors.blueAccent[700],
+            highlightColor: Colors.blueAccent[100],
           ),
           cardTheme: CardTheme(
-            color: Colors.yellow[100],
+            color: Colors.blue[50],
             elevation: 6.0,
-            shadowColor: Colors.purpleAccent,
+            shadowColor: Colors.purple,
           )),
       emailValidator: (value) {
         if (!value.contains('@') || !value.endsWith('.com')) {

@@ -42,14 +42,14 @@ class _LoginPageState extends State<LoginPage> {
                       highlightColor: Colors.transparent,
                       splashColor: Colors.transparent,
                       color: _pageLogin
-                          ? Color.fromRGBO(143, 148, 251, 1)
+                          ? Colors.blue
                           : Colors.transparent,
                       child: Text(
                         "Login",
                         style: TextStyle(
                           color: _pageLogin
                               ? Colors.white
-                              : Color.fromRGBO(143, 148, 251, 1),
+                              : Colors.blue,
                         ),
                       ),
                       onPressed: () {
@@ -61,12 +61,12 @@ class _LoginPageState extends State<LoginPage> {
                       splashColor: Colors.transparent,
                       color: _pageLogin
                           ? Colors.transparent
-                          : Color.fromRGBO(143, 148, 251, 1),
+                          : Colors.blue,
                       child: Text(
                         "SignUp",
                         style: TextStyle(
                           color: _pageLogin
-                              ? Color.fromRGBO(143, 148, 251, 1)
+                              ? Colors.blue
                               : Colors.white,
                         ),
                       ),
@@ -109,7 +109,7 @@ class _LoginPageState extends State<LoginPage> {
                                 child: Text(
                                   "Forgot Password?",
                                   style: TextStyle(
-                                    color: Color.fromRGBO(143, 148, 251, 1),
+                                    color: Colors.blue,
                                   ),
                                 ),
                                 onPressed: () {

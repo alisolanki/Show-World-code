@@ -25,7 +25,7 @@ class _SignupPageState extends State<SignupPage> {
                   borderRadius: BorderRadius.circular(10),
                   boxShadow: [
                     BoxShadow(
-                      color: Color.fromRGBO(143, 148, 251, .2),
+                      color: Colors.blue,
                       blurRadius: 20.0,
                       offset: Offset(0, 10),
                     )
@@ -47,7 +47,7 @@ class _SignupPageState extends State<SignupPage> {
                           TextField(
                             cursorColor: Colors.purpleAccent,
                             style: TextStyle(
-                                color: Color.fromRGBO(143, 148, 251, 1)),
+                                color: Colors.blue),
                             decoration: InputDecoration(
                               border: InputBorder.none,
                               hintText: "First Name",
@@ -57,7 +57,7 @@ class _SignupPageState extends State<SignupPage> {
                           TextField(
                             cursorColor: Colors.purpleAccent,
                             style: TextStyle(
-                                color: Color.fromRGBO(143, 148, 251, 1)),
+                                color: Colors.blue),
                             decoration: InputDecoration(
                               border: InputBorder.none,
                               hintText: "Last Name",
@@ -68,7 +68,7 @@ class _SignupPageState extends State<SignupPage> {
                             keyboardType: TextInputType.emailAddress,
                             cursorColor: Colors.purpleAccent,
                             style: TextStyle(
-                                color: Color.fromRGBO(143, 148, 251, 1)),
+                                color: Colors.blue),
                             decoration: InputDecoration(
                               border: InputBorder.none,
                               hintText: "Email address",
@@ -79,7 +79,7 @@ class _SignupPageState extends State<SignupPage> {
                             keyboardType: TextInputType.phone,
                             cursorColor: Colors.purpleAccent,
                             style: TextStyle(
-                                color: Color.fromRGBO(143, 148, 251, 1)),
+                                color: Colors.blue),
                             decoration: InputDecoration(
                               border: InputBorder.none,
                               hintText: "Phone Number",

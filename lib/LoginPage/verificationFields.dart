@@ -15,7 +15,7 @@ class VerificationFields extends StatelessWidget {
           borderRadius: BorderRadius.circular(10),
           boxShadow: [
             BoxShadow(
-              color: Color.fromRGBO(143, 148, 251, .2),
+              color: Colors.blue,
               blurRadius: 20.0,
               offset: Offset(0, 10),
             )
@@ -34,7 +34,7 @@ class VerificationFields extends StatelessWidget {
               ),
               child: TextField(
                 cursorColor: Colors.purpleAccent,
-                style: TextStyle(color: Color.fromRGBO(143, 148, 251, 1)),
+                style: TextStyle(color: Colors.blue),
                 decoration: InputDecoration(
                   border: InputBorder.none,
                   hintText: "Email or Phone number",
