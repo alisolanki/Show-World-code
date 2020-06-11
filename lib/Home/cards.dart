@@ -1,3 +1,4 @@
+import 'package:LoginPage/Desktop/categorypage.dart';
 import 'package:flutter/material.dart';
 import '../Desktop/mydesktop.dart';
 import '../subscriptionpage/subscriptionpage.dart';
@@ -54,7 +55,7 @@ class DirectoryCard extends StatelessWidget {
               context,
               MaterialPageRoute(
                 builder: (context) {
-                  return MyDesktop();
+                  return CategoryPage();
                 },
               ),
             );
