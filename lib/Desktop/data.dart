@@ -1,5 +1,18 @@
 import 'data_format.dart';
 
+class CategoryData {
+  List<CategoryTemplate> categorydata = [
+    CategoryTemplate(
+      category: 'Artist',
+      subcategory: ['Male Artists', 'Female Artists'],
+    ),
+    CategoryTemplate(
+      category: 'Director',
+      subcategory: ['Male Directors', 'Female Directors'],
+    ),
+  ];
+}
+
 class ArtistData {
   List<DataTemplate> artistData = [
     DataTemplate(

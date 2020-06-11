@@ -1,6 +1,8 @@
 import 'package:LoginPage/Desktop/categorytiles.dart';
 import 'package:flutter/material.dart';
 
+import 'data.dart';
+
 class CategoryPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -39,9 +41,10 @@ class CategoryPage extends StatelessWidget {
           Expanded(
             child: ListView.builder(
               padding: EdgeInsets.all(10),
-              itemCount: 8,
+              itemCount: CategoryData().categorydata.length,
               itemBuilder: (ctx, index) {
-                return CategoryTile();
+                var dataitr = CategoryData().categorydata[index];
+                return CategoryTile(category: dataitr.category, subcategory: dataitr.subcategory);
               },
             ),
           )
