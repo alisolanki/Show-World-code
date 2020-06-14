@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../Desktop/mydesktop.dart';
+import '../Desktop/categorypage.dart';
 
 class ListButton extends StatelessWidget {
   @override
@@ -15,7 +16,8 @@ class ListButton extends StatelessWidget {
         ),
         color: Colors.blue[900],
         child: Padding(
-          padding: EdgeInsets.symmetric(vertical: 10, horizontal: (_width * 0.1)),
+          padding:
+              EdgeInsets.symmetric(vertical: 10, horizontal: (_width * 0.1)),
           child: Text(
             'Register',
             textAlign: TextAlign.center,
@@ -32,7 +34,7 @@ class ListButton extends StatelessWidget {
             context,
             MaterialPageRoute(
               builder: (context) {
-                return MyDesktop();
+                return CategoryPage();
               },
             ),
           );

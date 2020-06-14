@@ -6,17 +6,20 @@ class OccupationField extends StatefulWidget {
   _OccupationFieldState createState() => _OccupationFieldState();
 }
 
-List<String> categories = ['Occupation', 'Director', 'Artist', 'Producer'];
+List<String> categories = ['Director', 'Artist', 'Producer'];
 
 class _OccupationFieldState extends State<OccupationField> {
-  String _dropdownValue = categories[0];
+  String _dropdownValue;
   @override
   Widget build(BuildContext context) {
     return Container(
       alignment: Alignment.centerLeft,
       child: DropdownButton<String>(
         hint: Text("Occupation"),
-        icon: Icon(Icons.arrow_downward),
+        icon: Icon(
+          Icons.arrow_downward,
+          color: Colors.grey,
+        ),
         iconSize: 24,
         elevation: 16,
         underline: Container(
