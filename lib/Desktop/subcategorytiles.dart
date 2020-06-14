@@ -1,12 +1,12 @@
+import 'package:LoginPage/Desktop/datatiles.dart';
 import 'package:LoginPage/Desktop/subcategorypage.dart';
 import 'package:flutter/material.dart';
 
 import './mydesktop.dart';
 
-class CategoryTile extends StatelessWidget {
-  final String category;
-  final List<String> subcategory;
-  CategoryTile({this.category, this.subcategory});
+class SubCategoryTile extends StatelessWidget {
+  final String category, subcategory;
+  SubCategoryTile({this.category, this.subcategory});
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -15,7 +15,7 @@ class CategoryTile extends StatelessWidget {
         title: Padding(
           padding: const EdgeInsets.symmetric(vertical: 20.0),
           child: Text(
-            "$category",
+            "$subcategory",
             style: TextStyle(
               fontWeight: FontWeight.bold,
               color: Colors.white,
@@ -30,7 +30,7 @@ class CategoryTile extends StatelessWidget {
             context,
             MaterialPageRoute(
               builder: (context) {
-                return SubCategoryPage(category: category,subcategory: subcategory);
+                return MyDesktop(category:category, subcategory: subcategory);
               },
             ),
           );
