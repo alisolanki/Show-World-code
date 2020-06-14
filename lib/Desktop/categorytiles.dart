@@ -1,8 +1,6 @@
 import 'package:LoginPage/Desktop/subcategorypage.dart';
 import 'package:flutter/material.dart';
 
-import './mydesktop.dart';
-
 class CategoryTile extends StatelessWidget {
   final String category;
   final List<String> subcategory;
@@ -10,7 +8,7 @@ class CategoryTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: Colors.blue[800],
+      color: Colors.blue[900],
       child: ListTile(
         title: Padding(
           padding: const EdgeInsets.symmetric(vertical: 20.0),

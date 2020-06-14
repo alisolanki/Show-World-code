@@ -1,6 +1,6 @@
-import 'package:LoginPage/Login2/login_screen.dart';
 import 'package:flutter/material.dart';
-import 'LoginPage/loginPage.dart';
+
+import './Login2/login_screen.dart';
 
 void main() {
   runApp(

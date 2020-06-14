@@ -1,8 +1,8 @@
-import 'package:LoginPage/Desktop/data.dart';
-import 'package:LoginPage/Desktop/datatiles.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'drawer.dart';
+
+import './data.dart';
+import './datatiles.dart';
 
 class MyDesktop extends StatelessWidget {
   final String subcategory, category;
@@ -41,31 +41,27 @@ class MyDesktop extends StatelessWidget {
             ),
           ),
           // data region
-          //artist
-          category == 'Artist'?
           Expanded(
             child: ListView.builder(
               padding: EdgeInsets.all(10),
-              itemCount: ArtistData().artistData['$subcategory'].length,
+              itemCount: Data()
+                  .data
+                  .where((element) => (element.category == '$category' &&
+                      element.subcategory == '$subcategory'))
+                  .length,
               itemBuilder: (ctx, index) {
-                var dataitr = ArtistData().artistData['$subcategory'][index];
-                return DataTile(name: dataitr.name, category: dataitr.category, subcategory:dataitr.subcategory, address: dataitr.address, email:dataitr.email, phonenumber:dataitr.phonenumber);
+                var dataitr = Data().data.where((element) => element.category == '$category' &&
+                      element.subcategory == '$subcategory').elementAt(index);
+                return DataTile(
+                    name: dataitr.name,
+                    category: dataitr.category,
+                    subcategory: dataitr.subcategory,
+                    address: dataitr.address,
+                    email: dataitr.email,
+                    phonenumber: dataitr.phonenumber);
               },
             ),
           )
-          :
-          //director
-          Expanded(
-            child: ListView.builder(
-              padding: EdgeInsets.all(10),
-              itemCount: DirectorData().directorData['$subcategory'].length,
-              itemBuilder: (ctx, index) {
-                var dataitr = DirectorData().directorData['$subcategory'][index];
-                return DataTile(name: dataitr.name, category: dataitr.category, subcategory:dataitr.subcategory, address: dataitr.address, email:dataitr.email, phonenumber:dataitr.phonenumber);
-              },
-            ),
-          )
-          //keep adding for other categories as well if...else if 
         ],
       ),
     );

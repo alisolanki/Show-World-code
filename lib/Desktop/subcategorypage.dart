@@ -33,7 +33,7 @@ class SubCategoryPage extends StatelessWidget {
                       onPressed: () {},
                     ),
                   ),
-                  hintText: "Search",
+                  hintText: "Search Sub-Category",
                   hintStyle: TextStyle(
                     color: Colors.grey[400],
                   ),

@@ -18,7 +18,7 @@ class _DataTileState extends State<DataTile> {
     return Column(
       children: <Widget>[
         Card(
-          color: Colors.blue[800],
+          color: Colors.blue[700],
           child: ListTile(
             title: Text(
               "$name",
