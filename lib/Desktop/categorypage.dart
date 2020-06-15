@@ -1,3 +1,4 @@
+import 'package:LoginPage/Desktop/data_format.dart';
 import 'package:flutter/material.dart';
 
 import '../Desktop/categorytiles.dart';
@@ -11,10 +12,12 @@ class CategoryPage extends StatefulWidget {
 
 class _CategoryPageState extends State<CategoryPage> {
   bool _pagecategory = true;
+  List _filteredpeople = CategoryData().categorydata;
 
   void _togglePage(bool _switchme) {
     setState(
       () {
+        _pagecategory ? _filteredpeople = Data().data : _filteredpeople = CategoryData().categorydata;
         _pagecategory = _switchme;
       },
     );
@@ -45,11 +48,28 @@ class _CategoryPageState extends State<CategoryPage> {
                       onPressed: () {},
                     ),
                   ),
-                  hintText: "Search",
+                  hintText: _pagecategory ? "Search Category" : "Search People",
                   hintStyle: TextStyle(
                     color: Colors.grey[400],
                   ),
                 ),
+                onChanged: (text) {
+                  setState(() {
+                    _pagecategory
+                        ? _filteredpeople = _filteredpeople.where(
+                            (u) => u.category
+                                .toLowerCase()
+                                .contains(text.toLowerCase()))
+                        : _filteredpeople = _filteredpeople.where(
+                            (u) => (u.name
+                                .toLowerCase()
+                                .contains(text.toLowerCase()) || u.phonenumber
+                                .toLowerCase()
+                                .contains(text.toLowerCase()) || u.address
+                                .toLowerCase()
+                                .contains(text.toLowerCase())));
+                  });
+                },
               ),
             ),
           ),
@@ -94,9 +114,9 @@ class _CategoryPageState extends State<CategoryPage> {
             child: _pagecategory
                 ? ListView.builder(
                     padding: EdgeInsets.all(10),
-                    itemCount: CategoryData().categorydata.length,
+                    itemCount: _filteredpeople.length,
                     itemBuilder: (ctx, index) {
-                      var dataitr = CategoryData().categorydata[index];
+                      var dataitr = _filteredpeople[index];
                       return CategoryTile(
                           category: dataitr.category,
                           subcategory: dataitr.subcategory);
@@ -104,9 +124,9 @@ class _CategoryPageState extends State<CategoryPage> {
                   )
                 : ListView.builder(
                     padding: EdgeInsets.all(10),
-                    itemCount: Data().data.length,
+                    itemCount: _filteredpeople.length,
                     itemBuilder: (ctx, index) {
-                      var dataitr = Data().data[index];
+                      var dataitr = _filteredpeople[index];
                       return DataTile(
                           name: dataitr.name,
                           category: dataitr.category,

@@ -1,11 +1,9 @@
-import 'package:LoginPage/Desktop/categorypage.dart';
-import 'package:LoginPage/Desktop/mydesktop.dart';
-import 'package:LoginPage/Login2/forgotpassword.dart';
-import 'package:LoginPage/Login2/login_screen.dart';
 import 'package:flutter/material.dart';
+
+import './categorypage.dart';
+import '../Login2/login_screen.dart';
 import '../Account/account_home.dart';
 import '../subscriptionpage/subscriptionpage.dart';
-import '../LoginPage/loginPage.dart';
 import '../listpage/constants.dart';
 
 class DrawerItems extends StatelessWidget {
@@ -150,10 +148,10 @@ class DrawerItems extends StatelessWidget {
                   return AboutDialog(
                     applicationName: 'Show World',
                     applicationVersion: '1.0.0',
-                    applicationIcon: Icon(Icons.language),
+                    applicationIcon: Icon(Icons.camera),
                     children: <Widget>[
                       Image.asset(
-                        'assets/earth.png',
+                        'assets/logo.png',
                       ),
                     ],
                   );
