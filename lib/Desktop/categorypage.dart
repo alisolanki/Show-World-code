@@ -1,4 +1,3 @@
-import 'package:LoginPage/Desktop/data_format.dart';
 import 'package:flutter/material.dart';
 
 import '../Desktop/categorytiles.dart';
@@ -56,18 +55,18 @@ class _CategoryPageState extends State<CategoryPage> {
                 onChanged: (text) {
                   setState(() {
                     _pagecategory
-                        ? _filteredpeople = _filteredpeople.where(
+                        ? _filteredpeople = CategoryData().categorydata.where(
                             (u) => u.category
                                 .toLowerCase()
-                                .contains(text.toLowerCase()))
-                        : _filteredpeople = _filteredpeople.where(
+                                .contains(text.toLowerCase())).toList()
+                        : _filteredpeople = Data().data.where(
                             (u) => (u.name
                                 .toLowerCase()
                                 .contains(text.toLowerCase()) || u.phonenumber
                                 .toLowerCase()
                                 .contains(text.toLowerCase()) || u.address
                                 .toLowerCase()
-                                .contains(text.toLowerCase())));
+                                .contains(text.toLowerCase()))).toList();
                   });
                 },
               ),
