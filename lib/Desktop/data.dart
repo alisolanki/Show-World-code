@@ -3,10 +3,12 @@ import 'data_format.dart';
 class CategoryData {
   List<CategoryTemplate> categorydata = [
     CategoryTemplate(
+      id: 1,
       category: 'Artist',
       subcategory: ['Male Artist', 'Female Artist'],
     ),
     CategoryTemplate(
+      id: 2,
       category: 'Director',
       subcategory: ['Male Director', 'Female Director'],
     ),
@@ -17,6 +19,7 @@ class Data {
   List<DataTemplate> data = [
     //Artist
     DataTemplate(
+      id: 1,
       name: 'Ali',
       category: 'Artist',
       subcategory: 'Male Artist',
@@ -25,6 +28,7 @@ class Data {
       email: 'alisolanki@gmail.com',
     ),
     DataTemplate(
+      id: 2,
       name: 'Manan',
       category: 'Artist',
       subcategory: 'Male Artist',
@@ -33,6 +37,7 @@ class Data {
       email: 'manan@gmail.com',
     ),
     DataTemplate(
+      id: 3,
       name: 'Ali',
       category: 'Artist',
       subcategory: 'Male Artist',
@@ -41,6 +46,7 @@ class Data {
       email: 'alisolanki@gmail.com',
     ),
     DataTemplate(
+      id: 4,
       name: 'Nishita',
       category: 'Artist',
       subcategory: 'Female Artist',
@@ -49,6 +55,7 @@ class Data {
       email: 'nishit@gmail.com',
     ),
     DataTemplate(
+      id: 5,
       name: 'Ali',
       category: 'Artist',
       subcategory: 'Male Artist',
@@ -57,6 +64,7 @@ class Data {
       email: 'alisolanki@gmail.com',
     ),
     DataTemplate(
+      id: 6,
       name: 'Manan',
       category: 'Artist',
       subcategory: 'Male Artist',
@@ -65,6 +73,7 @@ class Data {
       email: 'manan@gmail.com',
     ),
     DataTemplate(
+      id: 7,
       name: 'Ali',
       category: 'Artist',
       subcategory: 'Male Artist',
@@ -73,6 +82,7 @@ class Data {
       email: 'alisolanki@gmail.com',
     ),
     DataTemplate(
+      id: 8,
       name: 'Nishita',
       category: 'Artist',
       subcategory: 'Female Artist',
@@ -82,6 +92,7 @@ class Data {
     ),
     //Director
     DataTemplate(
+      id: 9,
       name: 'Ali',
       category: 'Artist',
       subcategory: 'Male Artist',
@@ -90,6 +101,7 @@ class Data {
       email: 'alisolanki@gmail.com',
     ),
     DataTemplate(
+      id: 10,
       name: 'Manan',
       category: 'Artist',
       subcategory: 'Male Artist',
@@ -98,6 +110,7 @@ class Data {
       email: 'manan@gmail.com',
     ),
     DataTemplate(
+      id: 11,
       name: 'Ali',
       category: 'Artist',
       subcategory: 'Male Artist',
@@ -106,6 +119,7 @@ class Data {
       email: 'alisolanki@gmail.com',
     ),
     DataTemplate(
+      id: 12,
       name: 'Nishita',
       category: 'Director',
       subcategory: 'Female Director',
@@ -114,6 +128,7 @@ class Data {
       email: 'nishit@gmail.com',
     ),
     DataTemplate(
+      id: 13,
       name: 'Ali',
       category: 'Director',
       subcategory: 'Male Director',
@@ -122,6 +137,7 @@ class Data {
       email: 'alisolanki@gmail.com',
     ),
     DataTemplate(
+      id: 14,
       name: 'Manan',
       category: 'Director',
       subcategory: 'Male Director',
@@ -130,6 +146,7 @@ class Data {
       email: 'manan@gmail.com',
     ),
     DataTemplate(
+      id: 15,
       name: 'Ali',
       category: 'Director',
       subcategory: 'Male Director',
@@ -138,6 +155,7 @@ class Data {
       email: 'alisolanki@gmail.com',
     ),
     DataTemplate(
+      id: 16,
       name: 'Nishita',
       category: 'Director',
       subcategory: 'Female Director',

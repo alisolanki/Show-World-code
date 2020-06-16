@@ -1,8 +1,8 @@
-import 'package:LoginPage/Account/account_home.dart';
-import 'package:LoginPage/Desktop/drawer.dart';
 import 'package:flutter/material.dart';
-import 'advtCard.dart';
-import 'cards.dart';
+
+import '../Desktop/drawer.dart';
+import './advtCard.dart';
+import './cards.dart';
 
 class HomePage extends StatelessWidget {
   @override

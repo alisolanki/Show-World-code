@@ -16,7 +16,9 @@ class _CategoryPageState extends State<CategoryPage> {
   void _togglePage(bool _switchme) {
     setState(
       () {
-        _pagecategory ? _filteredpeople = Data().data : _filteredpeople = CategoryData().categorydata;
+        _pagecategory
+            ? _filteredpeople = Data().data
+            : _filteredpeople = CategoryData().categorydata;
         _pagecategory = _switchme;
       },
     );
@@ -55,18 +57,24 @@ class _CategoryPageState extends State<CategoryPage> {
                 onChanged: (text) {
                   setState(() {
                     _pagecategory
-                        ? _filteredpeople = CategoryData().categorydata.where(
-                            (u) => u.category
+                        ? _filteredpeople = CategoryData()
+                            .categorydata
+                            .where((u) => u.category
                                 .toLowerCase()
-                                .contains(text.toLowerCase())).toList()
-                        : _filteredpeople = Data().data.where(
-                            (u) => (u.name
-                                .toLowerCase()
-                                .contains(text.toLowerCase()) || u.phonenumber
-                                .toLowerCase()
-                                .contains(text.toLowerCase()) || u.address
-                                .toLowerCase()
-                                .contains(text.toLowerCase()))).toList();
+                                .contains(text.toLowerCase()))
+                            .toList()
+                        : _filteredpeople = Data()
+                            .data
+                            .where((u) => (u.name
+                                    .toLowerCase()
+                                    .contains(text.toLowerCase()) ||
+                                u.phonenumber
+                                    .toLowerCase()
+                                    .contains(text.toLowerCase()) ||
+                                u.address
+                                    .toLowerCase()
+                                    .contains(text.toLowerCase())))
+                            .toList();
                   });
                 },
               ),
@@ -116,9 +124,12 @@ class _CategoryPageState extends State<CategoryPage> {
                     itemCount: _filteredpeople.length,
                     itemBuilder: (ctx, index) {
                       var dataitr = _filteredpeople[index];
-                      return CategoryTile(
+                      return Container(
+                        key: ValueKey(_filteredpeople[index].id),
+                        child: CategoryTile(
                           category: dataitr.category,
-                          subcategory: dataitr.subcategory);
+                          subcategory: dataitr.subcategory),
+                      );
                     },
                   )
                 : ListView.builder(
@@ -126,13 +137,16 @@ class _CategoryPageState extends State<CategoryPage> {
                     itemCount: _filteredpeople.length,
                     itemBuilder: (ctx, index) {
                       var dataitr = _filteredpeople[index];
-                      return DataTile(
-                          name: dataitr.name,
-                          category: dataitr.category,
-                          subcategory: dataitr.subcategory,
-                          address: dataitr.address,
-                          email: dataitr.email,
-                          phonenumber: dataitr.phonenumber);
+                      return Container(
+                        key: ValueKey(_filteredpeople[index].id),
+                        child: DataTile(
+                            name: dataitr.name,
+                            category: dataitr.category,
+                            subcategory: dataitr.subcategory,
+                            address: dataitr.address,
+                            email: dataitr.email,
+                            phonenumber: dataitr.phonenumber),
+                      );
                     },
                   ),
           )
