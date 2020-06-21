@@ -3,12 +3,12 @@ import 'data_format.dart';
 class CategoryData {
   List<CategoryTemplate> categorydata = [
     CategoryTemplate(
-      id: 1,
+      id: 0,
       category: 'Artist',
       subcategory: ['Male Artist', 'Female Artist'],
     ),
     CategoryTemplate(
-      id: 2,
+      id: 1,
       category: 'Director',
       subcategory: ['Male Director', 'Female Director'],
     ),
@@ -24,7 +24,7 @@ class Data {
       category: 'Artist',
       subcategory: 'Male Artist',
       address: 'Andheri',
-      phonenumber: '+91766382909202',
+      phonenumber: '+918850283086',
       email: 'alisolanki@gmail.com',
     ),
     DataTemplate(
@@ -33,7 +33,7 @@ class Data {
       category: 'Artist',
       subcategory: 'Male Artist',
       address: 'Ghatkopar',
-      phonenumber: '+91766382909202',
+      phonenumber: '+911234567888',
       email: 'manan@gmail.com',
     ),
     DataTemplate(
@@ -42,7 +42,7 @@ class Data {
       category: 'Artist',
       subcategory: 'Male Artist',
       address: 'Andheri',
-      phonenumber: '+91766382909202',
+      phonenumber: '+917663829090',
       email: 'alisolanki@gmail.com',
     ),
     DataTemplate(

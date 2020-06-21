@@ -47,12 +47,12 @@ class MyDesktop extends StatelessWidget{
               padding: EdgeInsets.all(10),
               itemCount: Data()
                   .data
-                  .where((element) => (element.category == 'Artist' &&
-                      element.subcategory == 'Male Artist'))
+                  .where((element) => (element.category == category &&
+                      element.subcategory == subcategory))
                   .length,
               itemBuilder: (ctx, index) {
-                var dataitr = Data().data.where((element) => element.category == 'Artist' &&
-                      element.subcategory == 'Male Artist').elementAt(index);
+                var dataitr = Data().data.where((element) => element.category == category &&
+                      element.subcategory == subcategory).elementAt(index);
                 return DataTile(
                     name: dataitr.name,
                     category: dataitr.category,

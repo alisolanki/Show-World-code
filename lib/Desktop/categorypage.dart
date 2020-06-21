@@ -128,7 +128,7 @@ class _CategoryPageState extends State<CategoryPage> {
                         key: ValueKey(_filteredpeople[index].id),
                         child: CategoryTile(
                           category: dataitr.category,
-                          subcategory: dataitr.subcategory),
+                          id: dataitr.id),
                       );
                     },
                   )

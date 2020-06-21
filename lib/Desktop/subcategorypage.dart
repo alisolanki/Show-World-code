@@ -1,13 +1,26 @@
-import 'package:LoginPage/Desktop/categorytiles.dart';
 import 'package:LoginPage/Desktop/subcategorytiles.dart';
 import 'package:flutter/material.dart';
 
 import 'data.dart';
 
-class SubCategoryPage extends StatelessWidget {
+class SubCategoryPage extends StatefulWidget {
   final String category;
-  final List<String> subcategory;
-  SubCategoryPage({this.category, this.subcategory});
+  final int id;
+  SubCategoryPage({this.category, this.id});
+
+  @override
+  _SubCategoryPageState createState() => _SubCategoryPageState();
+}
+
+class _SubCategoryPageState extends State<SubCategoryPage> {
+  var _filteredsubcategory;
+  @override
+  void initState() {
+    // TODO: implement initState
+    _filteredsubcategory = CategoryData().categorydata[widget.id].subcategory;
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,6 +51,15 @@ class SubCategoryPage extends StatelessWidget {
                     color: Colors.grey[400],
                   ),
                 ),
+                onChanged: (text){
+                  setState(() {
+                    _filteredsubcategory = CategoryData().categorydata[widget.id].subcategory
+                            .where((u) => u
+                                .toLowerCase()
+                                .contains(text.toLowerCase()))
+                            .toList();
+                  });
+                },
               ),
             ),
           ),
@@ -45,9 +67,9 @@ class SubCategoryPage extends StatelessWidget {
           Expanded(
             child: ListView.builder(
               padding: EdgeInsets.all(10),
-              itemCount: subcategory.length,
+              itemCount: _filteredsubcategory.length,
               itemBuilder: (ctx, index) {
-                return SubCategoryTile(category: category,subcategory: subcategory[index]);
+                return SubCategoryTile(category: widget.category, subcategory: _filteredsubcategory[index]);
               },
             ),
           )

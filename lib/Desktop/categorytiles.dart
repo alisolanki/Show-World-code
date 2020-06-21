@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 
 class CategoryTile extends StatelessWidget {
   final String category;
-  final List<String> subcategory;
-  CategoryTile({this.category, this.subcategory});
+  final int id;
+  CategoryTile({this.category, this.id});
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -28,7 +28,7 @@ class CategoryTile extends StatelessWidget {
             context,
             MaterialPageRoute(
               builder: (context) {
-                return SubCategoryPage(category: category,subcategory: subcategory);
+                return SubCategoryPage(category: category, id: id);
               },
             ),
           );
