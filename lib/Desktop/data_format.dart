@@ -7,6 +7,6 @@ class DataTemplate {
 class CategoryTemplate {
   int id;
   String category;
-  List<String> subcategory;
+  List subcategory;
   CategoryTemplate({this.id, this.category, this.subcategory});
 }

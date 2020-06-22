@@ -1,12 +1,14 @@
-import 'package:LoginPage/Desktop/subcategorytiles.dart';
-import 'package:flutter/material.dart';
-
 import 'data.dart';
 
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../Desktop/subcategorytiles.dart';
+import '../providers/category.dart';
+
 class SubCategoryPage extends StatefulWidget {
-  final String category;
-  final int id;
-  SubCategoryPage({this.category, this.id});
+  final List subcategory;
+  SubCategoryPage({this.subcategory});
 
   @override
   _SubCategoryPageState createState() => _SubCategoryPageState();
@@ -14,15 +16,11 @@ class SubCategoryPage extends StatefulWidget {
 
 class _SubCategoryPageState extends State<SubCategoryPage> {
   var _filteredsubcategory;
-  @override
-  void initState() {
-    // TODO: implement initState
-    _filteredsubcategory = CategoryData().categorydata[widget.id].subcategory;
-    super.initState();
-  }
+  var _isInit = true;
 
   @override
   Widget build(BuildContext context) {
+    _filteredsubcategory = widget.subcategory;
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -53,7 +51,7 @@ class _SubCategoryPageState extends State<SubCategoryPage> {
                 ),
                 onChanged: (text){
                   setState(() {
-                    _filteredsubcategory = CategoryData().categorydata[widget.id].subcategory
+                    _filteredsubcategory = _filteredsubcategory['']
                             .where((u) => u
                                 .toLowerCase()
                                 .contains(text.toLowerCase()))
@@ -69,7 +67,7 @@ class _SubCategoryPageState extends State<SubCategoryPage> {
               padding: EdgeInsets.all(10),
               itemCount: _filteredsubcategory.length,
               itemBuilder: (ctx, index) {
-                return SubCategoryTile(category: widget.category, subcategory: _filteredsubcategory[index]);
+                return SubCategoryTile(subcategory: _filteredsubcategory[index]);
               },
             ),
           )

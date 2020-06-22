@@ -1,8 +1,14 @@
+import 'dart:convert';
+
+import 'package:LoginPage/Desktop/data_format.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
 
 import '../Desktop/categorytiles.dart';
 import 'data.dart';
 import 'datatiles.dart';
+import '../providers/category.dart';
 
 class CategoryPage extends StatefulWidget {
   @override
@@ -11,14 +17,23 @@ class CategoryPage extends StatefulWidget {
 
 class _CategoryPageState extends State<CategoryPage> {
   bool _pagecategory = true;
-  List _filteredpeople = CategoryData().categorydata;
+  List _filteredpeople = Data().data;
+
+  var _isInit = true;
+
+  @override
+  void didChangeDependencies() {
+    if (_isInit) {
+      Provider.of<CategoryProvider>(context).fetchCategoryData();
+    }
+    _isInit = false;
+    super.didChangeDependencies();
+  }
 
   void _togglePage(bool _switchme) {
     setState(
       () {
-        _pagecategory
-            ? _filteredpeople = Data().data
-            : _filteredpeople = CategoryData().categorydata;
+        _filteredpeople = Data().data;
         _pagecategory = _switchme;
       },
     );
@@ -26,6 +41,9 @@ class _CategoryPageState extends State<CategoryPage> {
 
   @override
   Widget build(BuildContext context) {
+    final _categorydata = Provider.of<CategoryProvider>(context);
+    List<CategoryTemplate> _categorylist = _categorydata.categorylist;
+    // print(_categorylist);
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -57,8 +75,7 @@ class _CategoryPageState extends State<CategoryPage> {
                 onChanged: (text) {
                   setState(() {
                     _pagecategory
-                        ? _filteredpeople = CategoryData()
-                            .categorydata
+                        ? _categorylist = _categorylist
                             .where((u) => u.category
                                 .toLowerCase()
                                 .contains(text.toLowerCase()))
@@ -121,14 +138,12 @@ class _CategoryPageState extends State<CategoryPage> {
             child: _pagecategory
                 ? ListView.builder(
                     padding: EdgeInsets.all(10),
-                    itemCount: _filteredpeople.length,
+                    itemCount: _categorylist.length,
                     itemBuilder: (ctx, index) {
-                      var dataitr = _filteredpeople[index];
+                      var dataitr = _categorylist[index];
                       return Container(
-                        key: ValueKey(_filteredpeople[index].id),
-                        child: CategoryTile(
-                          category: dataitr.category,
-                          id: dataitr.id),
+                        key: ValueKey(dataitr.id),
+                        child: CategoryTile(category: dataitr.category, subcategory: dataitr.subcategory),
                       );
                     },
                   )

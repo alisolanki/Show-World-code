@@ -4,9 +4,9 @@ import 'package:flutter/cupertino.dart';
 import './data.dart';
 import './datatiles.dart';
 
-class MyDesktop extends StatelessWidget{
-  final String subcategory, category;
-  MyDesktop({this.category, this.subcategory});
+class MyDesktop extends StatelessWidget {
+  final String subcategory;
+  MyDesktop({this.subcategory});
 
   @override
   Widget build(BuildContext context) {
@@ -47,12 +47,13 @@ class MyDesktop extends StatelessWidget{
               padding: EdgeInsets.all(10),
               itemCount: Data()
                   .data
-                  .where((element) => (element.category == category &&
-                      element.subcategory == subcategory))
+                  .where((element) => (element.subcategory == subcategory))
                   .length,
               itemBuilder: (ctx, index) {
-                var dataitr = Data().data.where((element) => element.category == category &&
-                      element.subcategory == subcategory).elementAt(index);
+                var dataitr = Data()
+                    .data
+                    .where((element) => element.subcategory == subcategory)
+                    .elementAt(index);
                 return DataTile(
                     name: dataitr.name,
                     category: dataitr.category,
