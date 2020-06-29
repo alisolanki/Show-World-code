@@ -1,12 +1,38 @@
+import 'package:LoginPage/providers/data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:provider/provider.dart';
 
 import './data.dart';
 import './datatiles.dart';
+import 'data_format.dart';
 
-class MyDesktop extends StatelessWidget {
+class MyDesktop extends StatefulWidget {
   final String subcategory;
   MyDesktop({this.subcategory});
+
+  @override
+  _MyDesktopState createState() => _MyDesktopState();
+}
+
+class _MyDesktopState extends State<MyDesktop> {
+  var _isInit = true;
+  DataProvider _dataProvider;
+  List<DataTemplate> _filteredpeople;
+  List<DataTemplate> _subcategorypeople;
+
+  @override
+  void didChangeDependencies() {
+    if (_isInit) {
+      _dataProvider = Provider.of<DataProvider>(context);
+      _subcategorypeople = _dataProvider.datalist
+                    .where(
+                        (u) => u.subcategory == widget.subcategory).toList();
+      _filteredpeople = _subcategorypeople;
+    }
+    _isInit = false;
+    super.didChangeDependencies();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,6 +64,18 @@ class MyDesktop extends StatelessWidget {
                     color: Colors.grey[400],
                   ),
                 ),
+                onChanged: (text) => setState(() {
+                  _filteredpeople = _subcategorypeople
+                    .where((u) => (u.name
+                            .toLowerCase()
+                            .contains(text.toLowerCase()) ||
+                        u.phonenumber
+                            .toLowerCase()
+                            .contains(text.toLowerCase()) ||
+                        u.address.toLowerCase().contains(text.toLowerCase())
+                    ))
+                    .toList();
+                }),
               ),
             ),
           ),
@@ -45,15 +83,9 @@ class MyDesktop extends StatelessWidget {
           Expanded(
             child: ListView.builder(
               padding: EdgeInsets.all(10),
-              itemCount: Data()
-                  .data
-                  .where((element) => (element.subcategory == subcategory))
-                  .length,
+              itemCount: _filteredpeople.length,
               itemBuilder: (ctx, index) {
-                var dataitr = Data()
-                    .data
-                    .where((element) => element.subcategory == subcategory)
-                    .elementAt(index);
+                var dataitr = _filteredpeople.elementAt(index);
                 return DataTile(
                     name: dataitr.name,
                     category: dataitr.category,

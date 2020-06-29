@@ -1,4 +1,5 @@
 import 'package:LoginPage/Home/homepage.dart';
+import 'package:LoginPage/providers/data.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -11,8 +12,12 @@ void main() => runApp(MyApp());
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (ctx) => CategoryProvider(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider<DataProvider>(create: (_) => DataProvider()),
+        ChangeNotifierProvider<CategoryProvider>(
+            create: (_) => CategoryProvider()),
+      ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         home: LoginScreen(),

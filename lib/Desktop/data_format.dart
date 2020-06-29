@@ -1,6 +1,6 @@
 class DataTemplate {
   int id;
-  String name, category, subcategory, address, phonenumber, email; 
+  String category, subcategory, name, address, phonenumber, email; 
   DataTemplate({this.id, this.name, this.category, this.subcategory, this.address, this.phonenumber, this.email});
 }
 

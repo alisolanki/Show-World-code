@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:LoginPage/Desktop/data_format.dart';
+import 'package:LoginPage/providers/data.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
@@ -17,15 +18,31 @@ class CategoryPage extends StatefulWidget {
 
 class _CategoryPageState extends State<CategoryPage> {
   bool _pagecategory = true;
-  List _filteredpeople = Data().data;
-
+  DataProvider _dataProvider;
+  List<DataTemplate> _filteredpeople;
+  CategoryProvider _categoryProvider;
+  List<CategoryTemplate> _categorylist;
+  bool _isLoadingCategory = true;
+  bool _isLoadingData = true;
   var _isInit = true;
 
   @override
   void didChangeDependencies() {
     if (_isInit) {
-      Provider.of<CategoryProvider>(context).fetchCategoryData();
+      Provider.of<CategoryProvider>(context).fetchCategoryData().then((_) => {
+        _isLoadingCategory = false,
+      });
+      print("category");
+      Provider.of<DataProvider>(context).fetchData().then((_) => {
+        _isLoadingData = false,
+      });
+      print("data");
     }
+    _categoryProvider = Provider.of<CategoryProvider>(context);
+    _categorylist = _categoryProvider.categorylist;
+    _dataProvider = Provider.of<DataProvider>(context);
+    _filteredpeople = _dataProvider.datalist;
+     print("$_filteredpeople");
     _isInit = false;
     super.didChangeDependencies();
   }
@@ -33,7 +50,6 @@ class _CategoryPageState extends State<CategoryPage> {
   void _togglePage(bool _switchme) {
     setState(
       () {
-        _filteredpeople = Data().data;
         _pagecategory = _switchme;
       },
     );
@@ -41,9 +57,6 @@ class _CategoryPageState extends State<CategoryPage> {
 
   @override
   Widget build(BuildContext context) {
-    final _categorydata = Provider.of<CategoryProvider>(context);
-    List<CategoryTemplate> _categorylist = _categorydata.categorylist;
-    // print(_categorylist);
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -75,13 +88,12 @@ class _CategoryPageState extends State<CategoryPage> {
                 onChanged: (text) {
                   setState(() {
                     _pagecategory
-                        ? _categorylist = _categorylist
+                        ? _categorylist = _categoryProvider.categorylist
                             .where((u) => u.category
                                 .toLowerCase()
                                 .contains(text.toLowerCase()))
                             .toList()
-                        : _filteredpeople = Data()
-                            .data
+                        : _filteredpeople = _dataProvider.datalist
                             .where((u) => (u.name
                                     .toLowerCase()
                                     .contains(text.toLowerCase()) ||
@@ -136,34 +148,44 @@ class _CategoryPageState extends State<CategoryPage> {
           // data region
           Expanded(
             child: _pagecategory
-                ? ListView.builder(
-                    padding: EdgeInsets.all(10),
-                    itemCount: _categorylist.length,
-                    itemBuilder: (ctx, index) {
-                      var dataitr = _categorylist[index];
-                      return Container(
-                        key: ValueKey(dataitr.id),
-                        child: CategoryTile(category: dataitr.category, subcategory: dataitr.subcategory),
-                      );
-                    },
-                  )
-                : ListView.builder(
-                    padding: EdgeInsets.all(10),
-                    itemCount: _filteredpeople.length,
-                    itemBuilder: (ctx, index) {
-                      var dataitr = _filteredpeople[index];
-                      return Container(
-                        key: ValueKey(_filteredpeople[index].id),
-                        child: DataTile(
-                            name: dataitr.name,
-                            category: dataitr.category,
-                            subcategory: dataitr.subcategory,
-                            address: dataitr.address,
-                            email: dataitr.email,
-                            phonenumber: dataitr.phonenumber),
-                      );
-                    },
-                  ),
+                ? _isLoadingCategory
+                    ? Center(
+                        child: CircularProgressIndicator(),
+                      )
+                    : ListView.builder(
+                        padding: EdgeInsets.all(10),
+                        itemCount: _categorylist.length,
+                        itemBuilder: (ctx, index) {
+                          var dataitr = _categorylist[index];
+                          return Container(
+                            key: ValueKey(dataitr.id),
+                            child: CategoryTile(
+                                category: dataitr.category,
+                                subcategory: dataitr.subcategory),
+                          );
+                        },
+                      )
+                : _isLoadingData
+                    ? Center(
+                        child: CircularProgressIndicator(),
+                      )
+                    : ListView.builder(
+                        padding: EdgeInsets.all(10),
+                        itemCount: _filteredpeople.length,
+                        itemBuilder: (ctx, index) {
+                          var dataitr = _filteredpeople[index];
+                          return Container(
+                            key: ValueKey(_filteredpeople[index].id),
+                            child: DataTile(
+                                name: dataitr.name,
+                                category: dataitr.category,
+                                subcategory: dataitr.subcategory,
+                                address: dataitr.address,
+                                email: dataitr.email,
+                                phonenumber: dataitr.phonenumber),
+                          );
+                        },
+                      ),
           )
         ],
       ),

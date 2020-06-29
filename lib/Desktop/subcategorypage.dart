@@ -1,10 +1,6 @@
-import 'data.dart';
-
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 import '../Desktop/subcategorytiles.dart';
-import '../providers/category.dart';
 
 class SubCategoryPage extends StatefulWidget {
   final List subcategory;
@@ -15,12 +11,23 @@ class SubCategoryPage extends StatefulWidget {
 }
 
 class _SubCategoryPageState extends State<SubCategoryPage> {
-  var _filteredsubcategory;
   var _isInit = true;
+  List _subcategory = [];
+  List _filteredsubcategory = [];
+
+  @override
+  void didChangeDependencies() {
+    if (_isInit) {
+      _subcategory = widget.subcategory;
+      _filteredsubcategory = _subcategory;
+    }
+    _isInit = false;
+    super.didChangeDependencies();
+  }
 
   @override
   Widget build(BuildContext context) {
-    _filteredsubcategory = widget.subcategory;
+    print("${_filteredsubcategory.length}");
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -49,14 +56,14 @@ class _SubCategoryPageState extends State<SubCategoryPage> {
                     color: Colors.grey[400],
                   ),
                 ),
-                onChanged: (text){
+                onChanged: (text) {
                   setState(() {
-                    _filteredsubcategory = _filteredsubcategory['']
-                            .where((u) => u
-                                .toLowerCase()
-                                .contains(text.toLowerCase()))
-                            .toList();
+                    _filteredsubcategory = _subcategory
+                        .where(
+                            (u) => u.toLowerCase().contains(text.toLowerCase()))
+                        .toList();
                   });
+                  print("$_filteredsubcategory");
                 },
               ),
             ),
@@ -67,7 +74,12 @@ class _SubCategoryPageState extends State<SubCategoryPage> {
               padding: EdgeInsets.all(10),
               itemCount: _filteredsubcategory.length,
               itemBuilder: (ctx, index) {
-                return SubCategoryTile(subcategory: _filteredsubcategory[index]);
+                print("${_filteredsubcategory.length}");
+                return Container(
+                  key: ValueKey(_filteredsubcategory[index]),
+                  child:
+                      SubCategoryTile(subcategory: _filteredsubcategory[index]),
+                );
               },
             ),
           )
