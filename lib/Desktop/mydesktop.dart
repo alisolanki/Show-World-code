@@ -26,8 +26,8 @@ class _MyDesktopState extends State<MyDesktop> {
     if (_isInit) {
       _dataProvider = Provider.of<DataProvider>(context);
       _subcategorypeople = _dataProvider.datalist
-                    .where(
-                        (u) => u.subcategory == widget.subcategory).toList();
+          .where((u) => u.subcategory == widget.subcategory)
+          .toList();
       _filteredpeople = _subcategorypeople;
     }
     _isInit = false;
@@ -66,12 +66,11 @@ class _MyDesktopState extends State<MyDesktop> {
                 ),
                 onChanged: (text) => setState(() {
                   _filteredpeople = _subcategorypeople
-                    .where((u) => (u.name
-                            .toLowerCase()
-                            .contains(text.toLowerCase()) ||
-                        u.address.toLowerCase().contains(text.toLowerCase())
-                    ))
-                    .toList();
+                      .where((u) => (u.name
+                              .toLowerCase()
+                              .contains(text.toLowerCase())))
+                      .toList();
+                  print(_filteredpeople);
                 }),
               ),
             ),
@@ -83,13 +82,16 @@ class _MyDesktopState extends State<MyDesktop> {
               itemCount: _filteredpeople.length,
               itemBuilder: (ctx, index) {
                 var dataitr = _filteredpeople.elementAt(index);
-                return DataTile(
-                    name: dataitr.name,
-                    category: dataitr.category,
-                    subcategory: dataitr.subcategory,
-                    address: dataitr.address,
-                    email: dataitr.email,
-                    phonenumber: dataitr.phonenumber);
+                return Container(
+                  key: ValueKey(_filteredpeople[index].id),
+                  child: DataTile(
+                      name: dataitr.name,
+                      category: dataitr.category,
+                      subcategory: dataitr.subcategory,
+                      address: dataitr.address,
+                      email: dataitr.email,
+                      phonenumber: dataitr.phonenumber),
+                );
               },
             ),
           )

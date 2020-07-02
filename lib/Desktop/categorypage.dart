@@ -99,7 +99,8 @@ class _CategoryPageState extends State<CategoryPage> {
                                     .contains(text.toLowerCase()) ||
                                 u.address
                                     .toLowerCase()
-                                    .contains(text.toLowerCase())))
+                                    .contains(text.toLowerCase()) || 
+                                u.subcategory.toLowerCase().contains(text.toLowerCase())))
                             .toList();
                   });
                 },
