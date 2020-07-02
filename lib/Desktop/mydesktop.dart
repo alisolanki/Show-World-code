@@ -69,9 +69,6 @@ class _MyDesktopState extends State<MyDesktop> {
                     .where((u) => (u.name
                             .toLowerCase()
                             .contains(text.toLowerCase()) ||
-                        u.phonenumber
-                            .toLowerCase()
-                            .contains(text.toLowerCase()) ||
                         u.address.toLowerCase().contains(text.toLowerCase())
                     ))
                     .toList();

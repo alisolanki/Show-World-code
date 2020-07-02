@@ -1,6 +1,7 @@
 class DataTemplate {
   int id;
-  String category, subcategory, name, address, phonenumber, email; 
+  String category, subcategory, name, address, email;
+  List<dynamic> phonenumber;
   DataTemplate({this.id, this.name, this.category, this.subcategory, this.address, this.phonenumber, this.email});
 }
 

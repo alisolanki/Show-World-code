@@ -97,9 +97,6 @@ class _CategoryPageState extends State<CategoryPage> {
                             .where((u) => (u.name
                                     .toLowerCase()
                                     .contains(text.toLowerCase()) ||
-                                u.phonenumber
-                                    .toLowerCase()
-                                    .contains(text.toLowerCase()) ||
                                 u.address
                                     .toLowerCase()
                                     .contains(text.toLowerCase())))

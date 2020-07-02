@@ -6,18 +6,7 @@ import 'package:http/http.dart' as http;
 import '../Desktop/data_format.dart';
 
 class DataProvider with ChangeNotifier {
-  List<DataTemplate> _data = [
-    // CategoryTemplate(
-    //   id: 0,
-    //   category: 'Artist',
-    //   subcategory: ['Male Artist', 'Female Artist'],
-    // ),
-    // CategoryTemplate(
-    //   id: 1,
-    //   category: 'Director',
-    //   subcategory: ['Male Director', 'Female Director'],
-    // ),
-  ];
+  List<DataTemplate> _data = [];
 
   List<DataTemplate> get datalist {
     return [..._data];
@@ -36,14 +25,15 @@ class DataProvider with ChangeNotifier {
         _subcategorylist.forEach((subcategoryname, names) {
           Map<String, dynamic> name = names;
           name.forEach((nametext, value) {
+            print(value['mob']);
             _loadeddata.add(DataTemplate(
               id: itr,
               category: category,
               subcategory: subcategoryname,
               name: nametext,
               address: value['address'],
-              email: value['email'],
-              phonenumber: value['phonenumber'],
+              email: value['mail'],
+              phonenumber: value['mob'],
             ));
             itr++;
           });

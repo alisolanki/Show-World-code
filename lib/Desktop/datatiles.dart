@@ -1,16 +1,26 @@
 import 'package:flutter/material.dart';
 
 class DataTile extends StatefulWidget {
-  final String name, category, subcategory, address, phonenumber, email;
-  DataTile({this.name, this.category, this.subcategory, this.address, this.phonenumber, this.email});
+  final String name, category, subcategory, address, email;
+  final List<dynamic> phonenumber;
+  DataTile(
+      {this.name,
+      this.category,
+      this.subcategory,
+      this.address,
+      this.phonenumber,
+      this.email});
 
   @override
-  _DataTileState createState() => _DataTileState(this.name, this.category, this.subcategory, this.address, this.phonenumber, this.email);
+  _DataTileState createState() => _DataTileState(this.name, this.category,
+      this.subcategory, this.address, this.phonenumber, this.email);
 }
 
 class _DataTileState extends State<DataTile> {
-  final String name, category, subcategory, address, phonenumber, email;
-  _DataTileState(this.name, this.category, this.subcategory, this.address, this.phonenumber, this.email);
+  final String name, category, subcategory, address, email;
+  final List<dynamic> phonenumber;
+  _DataTileState(this.name, this.category, this.subcategory, this.address,
+      this.phonenumber, this.email);
 
   bool _showdetails = false;
   @override
@@ -27,7 +37,8 @@ class _DataTileState extends State<DataTile> {
                 color: Colors.white,
               ),
             ),
-            subtitle: Text("$category : $subcategory", style: TextStyle(color: Colors.white)),
+            subtitle: Text("$category : $subcategory",
+                style: TextStyle(color: Colors.white)),
             trailing: Icon(
                 _showdetails ? Icons.arrow_drop_up : Icons.arrow_drop_down),
             dense: true,
@@ -82,12 +93,12 @@ class _DataTileState extends State<DataTile> {
                                 ),
                               ),
                               Expanded(
-                                flex: 3,
-                                child: Text(
-                                  "$phonenumber",
-                                  textAlign: TextAlign.left,
+                                  flex: 3,
+                                  child: Text(
+                                    "${phonenumber.map((e) => e.toString())}",
+                                    textAlign: TextAlign.left,
+                                  ),
                                 ),
-                              ),
                             ],
                           ),
                         ),
