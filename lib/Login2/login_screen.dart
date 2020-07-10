@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_login/flutter_login.dart';
 import 'package:flutter/services.dart';
 
-import 'package:LoginPage/Home/homepage.dart';
+import '../Home/homepage.dart';
 import './constants.dart';
 import './custom_route.dart';
 import './users.dart';

@@ -1,13 +1,12 @@
 import 'dart:convert';
 
-import 'package:LoginPage/Desktop/data_format.dart';
-import 'package:LoginPage/providers/data.dart';
+import '../Desktop/data_format.dart';
+import '../providers/data.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 
 import '../Desktop/categorytiles.dart';
-import 'data.dart';
 import 'datatiles.dart';
 import '../providers/category.dart';
 
@@ -24,25 +23,30 @@ class _CategoryPageState extends State<CategoryPage> {
   List<CategoryTemplate> _categorylist;
   bool _isLoadingCategory = true;
   bool _isLoadingData = true;
-  var _isInit = true;
+  bool _isInit = true;
 
   @override
   void didChangeDependencies() {
     if (_isInit) {
-      Provider.of<CategoryProvider>(context).fetchCategoryData().then((_) => {
-        _isLoadingCategory = false,
-      });
-      print("category");
-      Provider.of<DataProvider>(context).fetchData().then((_) => {
-        _isLoadingData = false,
-      });
-      print("data");
+      Provider.of<CategoryProvider>(context)
+          .fetchCategoryData()
+          .then((check) => {
+                setState(() {
+                  _isLoadingCategory = check;
+                }),
+                print(_isLoadingCategory),
+              });
+      Provider.of<DataProvider>(context).fetchData().then((check) => {
+            setState(() {
+              _isLoadingData = check;
+            }),
+            print(_isLoadingCategory),
+          });
     }
     _categoryProvider = Provider.of<CategoryProvider>(context);
     _categorylist = _categoryProvider.categorylist;
     _dataProvider = Provider.of<DataProvider>(context);
     _filteredpeople = _dataProvider.datalist;
-     print("$_filteredpeople");
     _isInit = false;
     super.didChangeDependencies();
   }
@@ -99,8 +103,10 @@ class _CategoryPageState extends State<CategoryPage> {
                                     .contains(text.toLowerCase()) ||
                                 u.address
                                     .toLowerCase()
-                                    .contains(text.toLowerCase()) || 
-                                u.subcategory.toLowerCase().contains(text.toLowerCase())))
+                                    .contains(text.toLowerCase()) ||
+                                u.subcategory
+                                    .toLowerCase()
+                                    .contains(text.toLowerCase())))
                             .toList();
                   });
                 },

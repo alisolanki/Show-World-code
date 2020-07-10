@@ -1,4 +1,4 @@
-import 'package:LoginPage/Home/cards.dart';
+import '../Home/cards.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 

@@ -1,21 +1,14 @@
-import 'package:LoginPage/Desktop/categorypage.dart';
+import '../Desktop/categorypage.dart';
 import 'package:flutter/material.dart';
-import '../Desktop/mydesktop.dart';
 import '../subscriptionpage/subscriptionpage.dart';
 import '../listpage/listpage.dart';
 
 class DirectoryCard extends StatelessWidget {
-//  final double _width;
-//  final double _height;
-//  DirectoryCard(this._height,this._width);
-
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.all(10),
       child: Container(
-//          width: _width * 0.9,
-//          height: _height * 0.13,
         decoration: BoxDecoration(
             gradient: LinearGradient(
               begin: Alignment.bottomCenter,

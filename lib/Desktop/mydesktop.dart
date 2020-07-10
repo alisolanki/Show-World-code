@@ -1,9 +1,8 @@
-import 'package:LoginPage/providers/data.dart';
+import '../providers/data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
 
-import './data.dart';
 import './datatiles.dart';
 import 'data_format.dart';
 
@@ -16,7 +15,7 @@ class MyDesktop extends StatefulWidget {
 }
 
 class _MyDesktopState extends State<MyDesktop> {
-  var _isInit = true;
+  bool _isInit = true;
   DataProvider _dataProvider;
   List<DataTemplate> _filteredpeople;
   List<DataTemplate> _subcategorypeople;
@@ -66,9 +65,8 @@ class _MyDesktopState extends State<MyDesktop> {
                 ),
                 onChanged: (text) => setState(() {
                   _filteredpeople = _subcategorypeople
-                      .where((u) => (u.name
-                              .toLowerCase()
-                              .contains(text.toLowerCase())))
+                      .where((u) =>
+                          (u.name.toLowerCase().contains(text.toLowerCase())))
                       .toList();
                   print(_filteredpeople);
                 }),
