@@ -33,6 +33,8 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    print('uid: ' + _user.uid);
+    _user.getIdToken().then((value) => print('Token: ' + value.token));
     return MultiProvider(
       providers: [
         ChangeNotifierProvider.value(value: DataProvider()),

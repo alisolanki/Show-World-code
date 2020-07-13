@@ -1,8 +1,11 @@
-import '../Home/cards.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../Home/cards.dart';
+import '../auth/auth-api.dart' as auth;
+
 class AccountHomePage extends StatelessWidget {
+  final _user = auth.user;
   @override
   Widget build(BuildContext context) {
     final double _width = MediaQuery.of(context).size.width;
@@ -45,7 +48,7 @@ class AccountHomePage extends StatelessWidget {
                                       textAlign: TextAlign.left,
                                     ),
                                     Text(
-                                      'hiisinsj isdoin',
+                                      '${_user.displayName}',
                                       style: TextStyle(
                                         fontSize: 20,
                                       ),
@@ -69,7 +72,7 @@ class AccountHomePage extends StatelessWidget {
                                           textAlign: TextAlign.left,
                                         ),
                                         Text(
-                                          '+91783990209',
+                                          '${_user.phoneNumber}',
                                           style: TextStyle(
                                             fontSize: 20,
                                           ),
@@ -114,7 +117,7 @@ class AccountHomePage extends StatelessWidget {
                                           textAlign: TextAlign.left,
                                         ),
                                         Text(
-                                          'timepass@gmail.com',
+                                          '${_user.email}',
                                           style: TextStyle(
                                             fontSize: 20.0,
                                           ),
@@ -128,7 +131,7 @@ class AccountHomePage extends StatelessWidget {
                                     Row(
                                       children: <Widget>[
                                         Text(
-                                          "Duration : ",
+                                          "Subscription ends: ",
                                           style: TextStyle(
                                             fontWeight: FontWeight.bold,
                                             fontSize: 20.0,
@@ -136,10 +139,13 @@ class AccountHomePage extends StatelessWidget {
                                           textAlign: TextAlign.left,
                                         ),
                                         Text(
-                                          '2 years',
+                                          //TO-DO
+                                          '${_user.metadata.lastSignInTime.toIso8601String().substring(0, 10)}',
                                           style: TextStyle(
                                             fontSize: 20,
                                           ),
+                                          softWrap: true,
+                                          maxLines: 2,
                                         ),
                                       ],
                                     ),

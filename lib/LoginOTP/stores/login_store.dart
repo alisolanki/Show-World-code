@@ -39,11 +39,15 @@ abstract class LoginStoreBase with Store {
 
   @action
   Future<void> getCodeWithPhoneNumber(
-      BuildContext context, String phoneNumber) async {
+    BuildContext context,
+    String phoneNumber,
+  ) async {
     isLoginLoading = true;
-
+    if (phoneNumber.length == 10) {
+      phoneNumber = '+91' + phoneNumber;
+    }
     await _auth.verifyPhoneNumber(
-        phoneNumber: phoneNumber,
+        phoneNumber: phoneNumber.trim(),
         timeout: const Duration(seconds: 60),
         verificationCompleted: (AuthCredential auth) async {
           await _auth.signInWithCredential(auth).then((AuthResult value) {
@@ -51,14 +55,16 @@ abstract class LoginStoreBase with Store {
               print('Authentication successful');
               onAuthenticationSuccessful(context, value);
             } else {
-              loginScaffoldKey.currentState.showSnackBar(SnackBar(
-                behavior: SnackBarBehavior.floating,
-                backgroundColor: Colors.red,
-                content: Text(
-                  'Invalid code/invalid authentication',
-                  style: TextStyle(color: Colors.white),
+              loginScaffoldKey.currentState.showSnackBar(
+                SnackBar(
+                  behavior: SnackBarBehavior.floating,
+                  backgroundColor: Colors.red,
+                  content: Text(
+                    'Invalid code/invalid authentication',
+                    style: TextStyle(color: Colors.white),
+                  ),
                 ),
-              ));
+              );
             }
           }).catchError((_) {
             loginScaffoldKey.currentState.showSnackBar(
@@ -75,14 +81,16 @@ abstract class LoginStoreBase with Store {
         },
         verificationFailed: (AuthException authException) {
           print('Error message: ' + authException.message);
-          loginScaffoldKey.currentState.showSnackBar(SnackBar(
-            behavior: SnackBarBehavior.floating,
-            backgroundColor: Colors.red,
-            content: Text(
-              'The phone number format is incorrect. Please enter your number in this format. [+][country code][number] eg.+919876543210',
-              style: TextStyle(color: Colors.white),
+          loginScaffoldKey.currentState.showSnackBar(
+            SnackBar(
+              behavior: SnackBarBehavior.floating,
+              backgroundColor: Colors.red,
+              content: Text(
+                'The phone number format is incorrect. Please enter your number in this format. [+][country code][number] eg.+919876543210',
+                style: TextStyle(color: Colors.white),
+              ),
             ),
-          ));
+          );
           isLoginLoading = false;
         },
         codeSent: (String verificationId, [int forceResendingToken]) async {

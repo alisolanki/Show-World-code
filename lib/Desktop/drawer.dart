@@ -1,5 +1,6 @@
 import 'package:ShowWorld/LoginOTP/pages/otp_page.dart';
 import 'package:ShowWorld/LoginOTP/stores/login_store.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import './categorypage.dart';
@@ -7,10 +8,13 @@ import '../Login2/login_screen.dart';
 import '../Account/account_home.dart';
 import '../subscriptionpage/subscriptionpage.dart';
 import '../listpage/constants.dart';
+import '../auth/auth-api.dart' as auth;
 
 class DrawerItems extends StatelessWidget {
+  final _user = auth.user;
   @override
   Widget build(BuildContext context) {
+    print(_user.phoneNumber.toString());
     return ListView(
       // Important: Remove any padding from the ListView.
       padding: EdgeInsets.zero,
@@ -29,10 +33,10 @@ class DrawerItems extends StatelessWidget {
                   );
                 },
                 currentAccountPicture: CircleAvatar(
-                  child: Text("P"),
+                  child: Text("${_user.displayName}"),
                 ),
-                accountName: Text("name"),
-                accountEmail: Text("email@gmail.com"),
+                accountName: Text("${_user.displayName}"),
+                accountEmail: Text("${_user.phoneNumber}"),
               )
             : DrawerHeader(
                 child: Center(

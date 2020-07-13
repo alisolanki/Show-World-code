@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
+
 import '../stores/login_store.dart';
 import '../theme.dart';
 import '../widgets/loader_hud.dart';
@@ -64,15 +65,16 @@ class _LoginPageState extends State<LoginPage> {
                                   ],
                                 ),
                               ),
-                              Spacer(),
                               Container(
                                 margin: const EdgeInsets.all(10),
                                 child: Text(
                                   'Show World Film Directory',
                                   style: TextStyle(
-                                      color: MyColors.primaryColor,
-                                      fontSize: 30,
-                                      fontWeight: FontWeight.w800),
+                                    color: MyColors.primaryColor,
+                                    fontSize: 50,
+                                    fontWeight: FontWeight.w800,
+                                  ),
+                                  textAlign: TextAlign.center,
                                 ),
                               ),
                             ],
