@@ -35,6 +35,7 @@ class CategoryProvider with ChangeNotifier {
         notifyListeners();
         return false;
       } catch (error) {
+        print("Error has occured while fetching category data.");
         throw (error);
       }
     } else {

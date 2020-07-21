@@ -7,17 +7,28 @@ import '../Desktop/data_format.dart';
 import '../auth/auth-api.dart' as auth;
 
 class DataProvider with ChangeNotifier {
+  bool _subscribed = false;
+
   List<DataTemplate> _data = [];
 
   List<DataTemplate> get datalist {
     return [..._data];
   }
 
+  isSubscribed() {
+    _subscribed = true;
+  }
+
+  isNotSubscribed() {
+    _subscribed = false;
+  }
+
   Future<bool> fetchData() async {
-    final urldata = auth.urldata;
+    String urldata;
+    _subscribed ? urldata = auth.urldata : urldata = auth.urldemo;
     if (_data.length == 0) {
       try {
-        print("Fetched data");
+        _subscribed ? print("Fetched data") : print("Fetched demo");
         final _response = await http.get(urldata);
         final _extracteddata =
             jsonDecode(_response.body) as Map<String, dynamic>;
@@ -33,9 +44,9 @@ class DataProvider with ChangeNotifier {
                 category: category,
                 subcategory: subcategoryname,
                 name: nametext,
-                address: value['address'],
-                email: value['mail'],
-                phonenumber: value['mob'],
+                address: _subscribed ? value['address'] : "demo",
+                email: _subscribed ? value['mail'] : "demo",
+                phonenumber: _subscribed ? value['mob'] : ["demo"],
               ));
               itr++;
             });
@@ -45,6 +56,7 @@ class DataProvider with ChangeNotifier {
         notifyListeners();
         return false;
       } catch (error) {
+        print("Error has occured during fetching data/demo");
         throw (error);
       }
     } else {

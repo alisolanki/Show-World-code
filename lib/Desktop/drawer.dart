@@ -14,7 +14,7 @@ class DrawerItems extends StatelessWidget {
   final _user = auth.user;
   @override
   Widget build(BuildContext context) {
-    print(_user.phoneNumber.toString());
+    print(_user.toString());
     return ListView(
       // Important: Remove any padding from the ListView.
       padding: EdgeInsets.zero,

@@ -22,10 +22,14 @@ class _HomePageState extends State<HomePage> {
   @override
   void didChangeDependencies() {
     if (_isInit) {
-      auth.geturls();
-      FirebaseAuth.instance.currentUser().then((value) => setState(() {
-            _user = value;
-          }));
+      setState(() {
+        auth.geturls();
+      });
+      FirebaseAuth.instance.currentUser().then(
+            (value) => setState(() {
+              _user = value;
+            }),
+          );
     }
     _isInit = false;
     super.didChangeDependencies();
@@ -33,8 +37,8 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    print('uid: ' + _user.uid);
-    _user.getIdToken().then((value) => print('Token: ' + value.token));
+    // print('uid: ' + _user.uid);
+    // _user.getIdToken().then((value) => print('Token: ' + value.token));
     return MultiProvider(
       providers: [
         ChangeNotifierProvider.value(value: DataProvider()),
