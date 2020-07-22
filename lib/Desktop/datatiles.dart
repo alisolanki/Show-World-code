@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../subscriptionpage/subscriptionpage.dart';
+
 class DataTile extends StatefulWidget {
   final String name, category, subcategory, address, email;
   final List<dynamic> phonenumber;
@@ -51,6 +53,7 @@ class _DataTileState extends State<DataTile> {
         ),
         _showdetails
             ? detailsCard(
+                context: context,
                 address: address,
                 phonenumber: phonenumber,
                 email: email,
@@ -61,7 +64,11 @@ class _DataTileState extends State<DataTile> {
   }
 }
 
-Widget detailsCard({String address, List<dynamic> phonenumber, String email}) {
+Widget detailsCard(
+    {@required BuildContext context,
+    String address,
+    List<dynamic> phonenumber,
+    String email}) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.stretch,
     children: <Widget>[
@@ -161,7 +168,17 @@ Widget detailsCard({String address, List<dynamic> phonenumber, String email}) {
                         ),
                       ),
                       color: Colors.purple[700],
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.pop(context);
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return SubscriptionPage();
+                            },
+                          ),
+                        );
+                      },
                     ),
                   ),
                 ),
