@@ -50,88 +50,124 @@ class _DataTileState extends State<DataTile> {
           ),
         ),
         _showdetails
-            ? Column(
-                children: <Widget>[
-                  //details
-                  Card(
-                    color: Colors.blue[50],
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: <Widget>[
-                        Padding(
-                          padding: const EdgeInsets.all(10.0),
-                          child: Row(
-                            children: <Widget>[
-                              Expanded(
-                                flex: 1,
-                                child: Text(
-                                  "Address:",
-                                  textAlign: TextAlign.start,
-                                  style: TextStyle(fontWeight: FontWeight.w500),
-                                ),
-                              ),
-                              Expanded(
-                                flex: 3,
-                                child: Text(
-                                  "$address",
-                                  textAlign: TextAlign.left,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(10.0),
-                          child: Row(
-                            children: <Widget>[
-                              Expanded(
-                                flex: 1,
-                                child: Text(
-                                  "Phone number:",
-                                  textAlign: TextAlign.left,
-                                  style: TextStyle(fontWeight: FontWeight.w500),
-                                ),
-                              ),
-                              Expanded(
-                                  flex: 3,
-                                  child: Text(
-                                    "${phonenumber.map((e) => e.toString())}",
-                                    textAlign: TextAlign.left,
-                                  ),
-                                ),
-                            ],
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(10.0),
-                          child: Row(
-                            children: <Widget>[
-                              Expanded(
-                                flex: 1,
-                                child: Text(
-                                  "Email:",
-                                  textAlign: TextAlign.left,
-                                  style: TextStyle(fontWeight: FontWeight.w500),
-                                ),
-                              ),
-                              Expanded(
-                                flex: 3,
-                                child: Text(
-                                  "$email",
-                                  textAlign: TextAlign.left,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(width: 10),
-                ],
+            ? detailsCard(
+                address: address,
+                phonenumber: phonenumber,
+                email: email,
               )
             : SizedBox(width: 10)
       ],
     );
   }
+}
+
+Widget detailsCard({String address, List<dynamic> phonenumber, String email}) {
+  return Column(
+    crossAxisAlignment: CrossAxisAlignment.stretch,
+    children: <Widget>[
+      Card(
+        color: Colors.blue[50],
+        child: address != 'demo' && email != 'demo'
+            ? Column(
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: Row(
+                      children: <Widget>[
+                        Expanded(
+                          flex: 1,
+                          child: Text(
+                            "Address:",
+                            textAlign: TextAlign.start,
+                            style: TextStyle(fontWeight: FontWeight.w500),
+                          ),
+                        ),
+                        Expanded(
+                          flex: 3,
+                          child: Text(
+                            "$address",
+                            textAlign: TextAlign.left,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: Row(
+                      children: <Widget>[
+                        Expanded(
+                          flex: 1,
+                          child: Text(
+                            "Phone number:",
+                            textAlign: TextAlign.left,
+                            style: TextStyle(fontWeight: FontWeight.w500),
+                          ),
+                        ),
+                        Expanded(
+                          flex: 3,
+                          child: Text(
+                            "${phonenumber.map((e) => e.toString())}",
+                            textAlign: TextAlign.left,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: Row(
+                      children: <Widget>[
+                        Expanded(
+                          flex: 1,
+                          child: Text(
+                            "Email:",
+                            textAlign: TextAlign.left,
+                            style: TextStyle(fontWeight: FontWeight.w500),
+                          ),
+                        ),
+                        Expanded(
+                          flex: 3,
+                          child: Text(
+                            "$email",
+                            textAlign: TextAlign.left,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              )
+            : Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(
+                    vertical: 10.0,
+                  ),
+                  child: Center(
+                    child: RaisedButton.icon(
+                      icon: Icon(
+                        Icons.lock,
+                        color: Colors.white,
+                      ),
+                      label: Expanded(
+                        child: Center(
+                          child: Text(
+                            "Subscribe to view Details",
+                            style:
+                                TextStyle(color: Colors.white, fontSize: 20.0),
+                            overflow: TextOverflow.visible,
+                            softWrap: true,
+                          ),
+                        ),
+                      ),
+                      color: Colors.purple[700],
+                      onPressed: () {},
+                    ),
+                  ),
+                ),
+              ),
+      ),
+      SizedBox(width: 10),
+    ],
+  );
 }
