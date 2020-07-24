@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../providers/payment.dart';
 import '../Desktop/drawer.dart';
 import './advtCard.dart';
 import './cards.dart';
@@ -43,6 +44,7 @@ class _HomePageState extends State<HomePage> {
       providers: [
         ChangeNotifierProvider.value(value: DataProvider()),
         ChangeNotifierProvider.value(value: CategoryProvider()),
+        ChangeNotifierProvider.value(value: PaymentProvider()),
         Provider.value(value: LoginStore()),
       ],
       child: MaterialApp(

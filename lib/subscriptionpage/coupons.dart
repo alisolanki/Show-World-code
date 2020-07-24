@@ -1,23 +1,23 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../providers/payment.dart';
 
 class Coupons extends StatefulWidget {
   final String _duration;
-  final int _price;
+  final double _price;
   Coupons(this._duration, this._price);
   @override
-  _CouponsState createState() => _CouponsState(_duration, _price);
+  _CouponsState createState() => _CouponsState();
 }
 
 class _CouponsState extends State<Coupons> {
   bool _tick = false;
-  final String _duration;
-  final int _price;
-
-  _CouponsState(this._duration, this._price);
 
   @override
   Widget build(BuildContext context) {
+    final PaymentProvider _payment = Provider.of<PaymentProvider>(context);
     return Card(
       elevation: 10.0,
       margin: EdgeInsets.all(10.0),
@@ -37,13 +37,13 @@ class _CouponsState extends State<Coupons> {
                 height: 10.0,
               ),
               Text(
-                '$_duration',
+                '${widget._duration}',
                 style: TextStyle(
                   color: Colors.white,
                 ),
               ),
               Text(
-                'INR $_price + GST',
+                'INR ${widget._price} + GST',
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 20,
@@ -54,7 +54,9 @@ class _CouponsState extends State<Coupons> {
                 height: 10.0,
               ),
               RaisedButton(
-                onPressed: (){},
+                onPressed: () {
+                  _payment.makePayment(widget._price);
+                },
                 color: Colors.blueGrey.shade400,
                 child: Text(
                   'PROCEED',

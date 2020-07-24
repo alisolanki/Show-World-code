@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 import '../Desktop/data_format.dart';
@@ -15,23 +16,42 @@ class DataProvider with ChangeNotifier {
     return [..._data];
   }
 
-  isSubscribed() {
-    _subscribed = true;
+  bool get subcription {
+    return _subscribed;
   }
 
-  isNotSubscribed() {
-    _subscribed = false;
+  Future<void> checkSubscription() async {
+    print("Checking Subscription");
+    try {
+      var _response = await http.get(auth.urlallusers);
+      var _extracteddata = jsonDecode(_response.body) as Map<String, dynamic>;
+      if (_extracteddata == null) {
+        return;
+      } else {
+        print("You User id is subscribed");
+        _subscribed = true;
+        notifyListeners();
+      }
+    } catch (error) {
+      print("Not Subscribed");
+      throw (error);
+    }
   }
 
-  Future<bool> fetchData() async {
-    String urldata;
-    _subscribed ? urldata = auth.urldata : urldata = auth.urldemo;
-    if (_data.length == 0) {
+  Future<bool> fetchData({bool force = false}) async {
+    if (_data.length == 0 || force == true) {
+      _data = [];
+      if (force == true) {
+        _subscribed = force;
+      }
+      String urldata;
+      await checkSubscription();
+      _subscribed ? urldata = auth.urldata : urldata = auth.urldemo;
       try {
-        _subscribed ? print("Fetched data") : print("Fetched demo");
-        final _response = await http.get(urldata);
-        final _extracteddata =
-            jsonDecode(_response.body) as Map<String, dynamic>;
+        _subscribed ? print("Fetching data") : print("Fetching demo");
+        var _response = await http.get(urldata);
+        var _extracteddata = jsonDecode(_response.body) as Map<String, dynamic>;
+        print("Extracted Data: $_extracteddata");
         List<DataTemplate> _loadeddata = [];
         int itr = 0;
         _extracteddata.forEach((category, subcategory) {
@@ -40,14 +60,13 @@ class DataProvider with ChangeNotifier {
             Map<String, dynamic> name = names;
             name.forEach((nametext, value) {
               _loadeddata.add(DataTemplate(
-                id: itr,
-                category: category,
-                subcategory: subcategoryname,
-                name: nametext,
-                address: _subscribed ? value['address'] : "demo",
-                email: _subscribed ? value['mail'] : "demo",
-                phonenumber: _subscribed ? value['mob'] : ["demo"],
-              ));
+                  id: itr,
+                  category: category,
+                  subcategory: subcategoryname,
+                  name: nametext,
+                  address: _subscribed ? value['address'] : "demo",
+                  email: _subscribed ? value['mail'] : "demo",
+                  phonenumber: _subscribed ? value['mob'] : ["demo"].toList()));
               itr++;
             });
           });

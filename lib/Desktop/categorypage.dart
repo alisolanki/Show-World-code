@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:fluttertoast/fluttertoast.dart';
+
 import '../Desktop/data_format.dart';
 import '../providers/data.dart';
 import 'package:flutter/material.dart';
@@ -34,13 +36,13 @@ class _CategoryPageState extends State<CategoryPage> {
                 setState(() {
                   _isLoadingCategory = check;
                 }),
-                print(_isLoadingCategory),
+                print("Is loading Category: $_isLoadingCategory"),
               });
       Provider.of<DataProvider>(context).fetchData().then((check) => {
             setState(() {
               _isLoadingData = check;
             }),
-            print(_isLoadingCategory),
+            print("Is loading Data: $_isLoadingData"),
           });
     }
     _categoryProvider = Provider.of<CategoryProvider>(context);
@@ -61,6 +63,17 @@ class _CategoryPageState extends State<CategoryPage> {
 
   @override
   Widget build(BuildContext context) {
+    // Provider.of<DataProvider>(context).subcription
+    //     ? Scaffold.of(context).showSnackBar(
+    //         SnackBar(
+    //           content: Text("Subscribed"),
+    //         ),
+    //       )
+    //     : Scaffold.of(context).showSnackBar(
+    //         SnackBar(
+    //           content: Text("Subscribe to get the full version"),
+    //         ),
+    //       );
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
