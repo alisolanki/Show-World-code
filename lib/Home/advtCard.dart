@@ -11,7 +11,7 @@ class AdvertisementCardTop extends StatelessWidget {
       child: Container(
 //        width: _width * 0.9,
         decoration: BoxDecoration(
-            color: Colors.grey[300],
+            color: Colors.blue,
 //            boxShadow: [
 //              BoxShadow(
 //                  color: Colors.white,
@@ -50,7 +50,7 @@ class AdvertisementCardBottom extends StatelessWidget {
       padding: EdgeInsets.all(10),
       child: Container(
         decoration: BoxDecoration(
-            color: Colors.grey[300],
+            color: Colors.blue,
 //            boxShadow: [
 //              BoxShadow(
 //                  color: Colors.white,

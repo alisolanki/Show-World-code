@@ -59,7 +59,7 @@ class _HomePageState extends State<HomePage> {
               titleSpacing: 1,
               centerTitle: true,
               title: Text(
-                'Show World',
+                'SHOW WORLD',
                 style: TextStyle(
                   fontFamily: "roboto",
                   fontWeight: FontWeight.w600,
