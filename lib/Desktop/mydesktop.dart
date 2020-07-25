@@ -41,6 +41,7 @@ class _MyDesktopState extends State<MyDesktop> {
         title: Text(
           'Show World',
         ),
+        backgroundColor: Color(0xff000000),
       ),
       body: Column(
         children: <Widget>[

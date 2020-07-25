@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -50,21 +51,32 @@ class _HomePageState extends State<HomePage> {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         home: Scaffold(
-          appBar: AppBar(
-            backgroundColor: Colors.blue,
-            centerTitle: true,
-            title: Text(
-              'Show World',
-              style: TextStyle(
-                color: Colors.white,
+          appBar: PreferredSize(
+            preferredSize: Size(double.infinity, 60),
+            child: AppBar(
+              backgroundColor: Colors.white,
+              elevation: 2,
+              titleSpacing: 1,
+              centerTitle: true,
+              title: Text(
+                'Show World',
+                style: TextStyle(
+                  fontFamily: "roboto",
+                  fontWeight: FontWeight.w600,
+                  letterSpacing: 2,
+                  fontSize: 25,
+                  color: Colors.purple[800],
+                ),
               ),
+              iconTheme: IconThemeData(color: Colors.purple[900]),
             ),
           ),
           drawer: Drawer(
             elevation: 5,
             child: DrawerItems(),
           ),
-          body: Center(
+          body: Padding(
+            padding: EdgeInsets.only(top: 8),
             child: Column(
               children: <Widget>[
                 Expanded(

@@ -10,7 +10,21 @@ class AdvertisementCardTop extends StatelessWidget {
       padding: EdgeInsets.all(10),
       child: Container(
 //        width: _width * 0.9,
-        color: Colors.blue[100],
+        decoration: BoxDecoration(
+            color: Colors.grey[300],
+//            boxShadow: [
+//              BoxShadow(
+//                  color: Colors.white,
+//                  blurRadius: 2,
+//                  spreadRadius: 0.5,
+//                  offset: Offset(-1, -1)),
+//              BoxShadow(
+//                  color: Colors.grey[600],
+//                  blurRadius: 2,
+//                  spreadRadius: 0.5,
+//                  offset: Offset(1, 1))
+//            ],
+            borderRadius: BorderRadius.circular(10)),
         child: CarouselSlider(
           items: <Widget>[
             Text("Advertisement T 1"),
@@ -35,8 +49,22 @@ class AdvertisementCardBottom extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.all(10),
       child: Container(
+        decoration: BoxDecoration(
+            color: Colors.grey[300],
+//            boxShadow: [
+//              BoxShadow(
+//                  color: Colors.white,
+//                  blurRadius: 2,
+//                  spreadRadius: 0.5,
+//                  offset: Offset(-1, -1)),
+//              BoxShadow(
+//                  color: Colors.grey[600],
+//                  blurRadius: 2,
+//                  spreadRadius: 0.5,
+//                  offset: Offset(1, 1))
+//            ],
+            borderRadius: BorderRadius.circular(10)),
 //        width: _width * 0.9,
-        color: Colors.blue[100],
         child: CarouselSlider(
           items: <Widget>[
             Text("Advertisement B 1"),

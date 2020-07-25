@@ -20,6 +20,12 @@ class _OtpPageState extends State<OtpPage> {
   int _counter = 30;
 
   @override
+  void dispose() {
+    super.dispose();
+    _timer.cancel();
+  }
+
+  @override
   void initState() {
     _timer = Timer.periodic(const Duration(seconds: 1), (_) {
       setState(() {
