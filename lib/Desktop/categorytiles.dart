@@ -8,21 +8,25 @@ class CategoryTile extends StatelessWidget {
   CategoryTile({this.category, this.subcategory});
   @override
   Widget build(BuildContext context) {
-    return Card(
-      color: Colors.blue[900],
+    return Container(
+      margin: EdgeInsets.fromLTRB(10, 10, 10, 0),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(10),
+        color: Colors.white,
+      ),
       child: ListTile(
         title: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 20.0),
+          padding: const EdgeInsets.symmetric(vertical: 15.0, horizontal: 10),
           child: Text(
             "$category",
             style: TextStyle(
+              fontFamily: "roboto",
               fontWeight: FontWeight.bold,
-              color: Colors.white,
+              color: Color(0xff5499c7),
             ),
           ),
         ),
-        trailing:
-            Icon(Icons.arrow_right),
+        trailing: Icon(Icons.arrow_right),
         dense: true,
         onTap: () {
           Navigator.push(

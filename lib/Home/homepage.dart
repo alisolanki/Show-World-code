@@ -51,6 +51,7 @@ class _HomePageState extends State<HomePage> {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         home: Scaffold(
+          backgroundColor: Colors.white,
           appBar: PreferredSize(
             preferredSize: Size(double.infinity, 60),
             child: AppBar(
@@ -65,10 +66,12 @@ class _HomePageState extends State<HomePage> {
                   fontWeight: FontWeight.w600,
                   letterSpacing: 2,
                   fontSize: 25,
-                  color: Colors.purple[800],
+                  color: Color(0xff1b4f72),
                 ),
               ),
-              iconTheme: IconThemeData(color: Colors.purple[900]),
+              iconTheme: IconThemeData(
+                color: Color(0xff1b4f72),
+              ),
             ),
           ),
           drawer: Drawer(

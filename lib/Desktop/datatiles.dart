@@ -29,18 +29,26 @@ class _DataTileState extends State<DataTile> {
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
-        Card(
-          color: Colors.blue[700],
+        Container(
+          margin: EdgeInsets.fromLTRB(10, 10, 10, 0),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10),
+            color: Colors.white,
+          ),
           child: ListTile(
             title: Text(
               "$name",
               style: TextStyle(
+                fontFamily: "roboto",
                 fontWeight: FontWeight.bold,
-                color: Colors.white,
+                color: Color(0xff5499c7),
               ),
             ),
             subtitle: Text("$category : $subcategory",
-                style: TextStyle(color: Colors.white)),
+                style: TextStyle(
+                  fontFamily: "roboto",
+                  color: Color(0xff5499c7),
+                )),
             trailing: Icon(
                 _showdetails ? Icons.arrow_drop_up : Icons.arrow_drop_down),
             dense: true,
@@ -73,7 +81,8 @@ Widget detailsCard(
     crossAxisAlignment: CrossAxisAlignment.stretch,
     children: <Widget>[
       Card(
-        color: Colors.blue[50],
+        margin: EdgeInsets.symmetric(horizontal: 10),
+        color: Color(0xffa9cce3),
         child: address != 'demo' && email != 'demo'
             ? Column(
                 children: <Widget>[
@@ -167,7 +176,7 @@ Widget detailsCard(
                           ),
                         ),
                       ),
-                      color: Colors.purple[700],
+                      color: Colors.red[700],
                       onPressed: () {
                         Navigator.pop(context);
                         Navigator.push(

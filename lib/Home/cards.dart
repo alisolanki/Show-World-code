@@ -21,7 +21,7 @@ class DirectoryCard extends StatelessWidget {
         );
       },
       child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 10.0),
+        padding: const EdgeInsets.symmetric(vertical: 15.0, horizontal: 10.0),
         decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.all(Radius.circular(5)),
@@ -34,7 +34,7 @@ class DirectoryCard extends StatelessWidget {
                 color: Colors.purple[100],
                 blurRadius: 6,
                 offset: Offset(0, 2),
-                spreadRadius: 3,
+                spreadRadius: 2,
               ),
             ]),
         child: Row(
@@ -54,6 +54,7 @@ class DirectoryCard extends StatelessWidget {
             Text(
               "Access Directory",
               style: TextStyle(
+                  fontFamily: "roboto",
                   color: Colors.purple,
                   fontSize: 20,
                   // fontFamily: "roboto",
@@ -82,7 +83,7 @@ class ListCard extends StatelessWidget {
         );
       },
       child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 20.0),
+        padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 15.0),
         decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.all(Radius.circular(5)),
@@ -109,6 +110,8 @@ class ListCard extends StatelessWidget {
             Text(
               "List Yourself",
               style: TextStyle(
+                fontFamily: "roboto",
+
                 fontWeight: FontWeight.w600,
                 // fontFamily: "roboto",
                 color: Colors.indigo,
@@ -139,7 +142,7 @@ class BuyCard extends StatelessWidget {
         );
       },
       child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 20.0),
+        padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 15.0),
         decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.all(Radius.circular(5)),
@@ -165,6 +168,7 @@ class BuyCard extends StatelessWidget {
             Text(
               "Buy Full Version",
               style: TextStyle(
+                fontFamily: "roboto",
                 fontWeight: FontWeight.w600,
                 // fontFamily: "roboto",
                 color: Colors.blue,
@@ -183,8 +187,7 @@ class UnListCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
-      padding: EdgeInsets.all(10),
+      padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 15.0),
       decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.all(Radius.circular(5)),
@@ -215,6 +218,7 @@ class UnListCard extends StatelessWidget {
             Text(
               "Remove Yourself",
               style: TextStyle(
+                fontFamily: "roboto",
                 color: Colors.indigo[800],
                 fontSize: 20,
               ),
