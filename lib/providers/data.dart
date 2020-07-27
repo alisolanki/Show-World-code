@@ -13,6 +13,7 @@ class DataProvider with ChangeNotifier {
   List<DataTemplate> _data = [];
 
   List<DataTemplate> get datalist {
+    // notifyListeners();
     return [..._data];
   }
 
@@ -51,7 +52,6 @@ class DataProvider with ChangeNotifier {
         _subscribed ? print("Fetching data") : print("Fetching demo");
         var _response = await http.get(urldata);
         var _extracteddata = jsonDecode(_response.body) as Map<String, dynamic>;
-        print("Extracted Data: $_extracteddata");
         List<DataTemplate> _loadeddata = [];
         int itr = 0;
         _extracteddata.forEach((category, subcategory) {
@@ -72,6 +72,7 @@ class DataProvider with ChangeNotifier {
           });
         });
         _data = _loadeddata;
+        print("Data: $_data}");
         notifyListeners();
         return false;
       } catch (error) {

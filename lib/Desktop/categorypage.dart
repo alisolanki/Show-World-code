@@ -6,7 +6,6 @@ import 'package:fluttertoast/fluttertoast.dart';
 import '../Desktop/data_format.dart';
 import '../providers/data.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 
 import '../Desktop/categorytiles.dart';
@@ -30,6 +29,7 @@ class _CategoryPageState extends State<CategoryPage> {
 
   @override
   void didChangeDependencies() {
+    print("_isInit = $_isInit");
     if (_isInit) {
       Provider.of<CategoryProvider>(context)
           .fetchCategoryData()
@@ -48,8 +48,9 @@ class _CategoryPageState extends State<CategoryPage> {
     }
     _categoryProvider = Provider.of<CategoryProvider>(context);
     _categorylist = _categoryProvider.categorylist;
-    _dataProvider = Provider.of<DataProvider>(context);
+    _dataProvider = Provider.of<DataProvider>(context, listen: true);
     _filteredpeople = _dataProvider.datalist;
+    print("_filteredpeople = $_filteredpeople");
     _isInit = false;
     super.didChangeDependencies();
   }
@@ -130,15 +131,23 @@ class _CategoryPageState extends State<CategoryPage> {
                     cursorColor: Color(0xff5499c7),
                     textAlign: TextAlign.justify,
                     style: TextStyle(
-                        color: Color(0xdd1a5276), fontFamily: "roboto"),
+                      color: Color(0xdd1a5276),
+                      fontFamily: "roboto",
+                    ),
                     decoration: InputDecoration(
                       focusColor: Colors.black,
                       enabledBorder: UnderlineInputBorder(
-                          borderSide:
-                              BorderSide(color: Color(0xff5499c7), width: 2)),
+                        borderSide: BorderSide(
+                          color: Color(0xff5499c7),
+                          width: 2,
+                        ),
+                      ),
                       focusedBorder: UnderlineInputBorder(
-                          borderSide:
-                              BorderSide(color: Color(0xff5499c7), width: 2)),
+                        borderSide: BorderSide(
+                          color: Color(0xff5499c7),
+                          width: 2,
+                        ),
+                      ),
                       suffixIcon: Container(
                         child: IconButton(
                           icon: Icon(

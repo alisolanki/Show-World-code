@@ -7,8 +7,12 @@ class SubCategoryTile extends StatelessWidget {
   SubCategoryTile({this.subcategory});
   @override
   Widget build(BuildContext context) {
-    return Card(
-      color: Colors.white,
+    return Container(
+      margin: EdgeInsets.fromLTRB(10, 10, 10, 0),
+      decoration: BoxDecoration(
+        borderRadius: const BorderRadius.all(const Radius.circular(10.0)),
+        color: Colors.white,
+      ),
       child: ListTile(
         title: Padding(
           padding: const EdgeInsets.symmetric(vertical: 20.0),
@@ -17,7 +21,7 @@ class SubCategoryTile extends StatelessWidget {
             style: TextStyle(
               fontFamily: "roboto",
               fontWeight: FontWeight.bold,
-              color: Color(0xff5499c7),
+              color: const Color(0xff5499c7),
             ),
           ),
         ),

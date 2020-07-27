@@ -51,7 +51,7 @@ class _HomePageState extends State<HomePage> {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         home: Scaffold(
-          backgroundColor: Colors.white,
+          backgroundColor: Color(0xffd4e6f1),
           appBar: PreferredSize(
             preferredSize: Size(double.infinity, 60),
             child: AppBar(
@@ -59,17 +59,17 @@ class _HomePageState extends State<HomePage> {
               elevation: 2,
               titleSpacing: 1,
               centerTitle: true,
-              title: Text(
+              title: const Text(
                 'SHOW WORLD',
                 style: TextStyle(
                   fontFamily: "roboto",
                   fontWeight: FontWeight.w600,
-                  letterSpacing: 2,
+                  letterSpacing: 1.5,
                   fontSize: 25,
                   color: Color(0xff1b4f72),
                 ),
               ),
-              iconTheme: IconThemeData(
+              iconTheme: const IconThemeData(
                 color: Color(0xff1b4f72),
               ),
             ),

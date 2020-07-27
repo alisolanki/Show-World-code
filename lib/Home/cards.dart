@@ -57,7 +57,6 @@ class DirectoryCard extends StatelessWidget {
                   fontFamily: "roboto",
                   color: Colors.purple,
                   fontSize: 20,
-                  // fontFamily: "roboto",
                   fontWeight: FontWeight.w600),
             ),
           ],
@@ -111,9 +110,7 @@ class ListCard extends StatelessWidget {
               "List Yourself",
               style: TextStyle(
                 fontFamily: "roboto",
-
                 fontWeight: FontWeight.w600,
-                // fontFamily: "roboto",
                 color: Colors.indigo,
                 fontSize: 20,
               ),
@@ -170,7 +167,6 @@ class BuyCard extends StatelessWidget {
               style: TextStyle(
                 fontFamily: "roboto",
                 fontWeight: FontWeight.w600,
-                // fontFamily: "roboto",
                 color: Colors.blue,
                 fontSize: 20,
               ),

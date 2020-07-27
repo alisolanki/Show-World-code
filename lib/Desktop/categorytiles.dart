@@ -11,18 +11,18 @@ class CategoryTile extends StatelessWidget {
     return Container(
       margin: EdgeInsets.fromLTRB(10, 10, 10, 0),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
+        borderRadius: BorderRadius.circular(10.0),
         color: Colors.white,
       ),
       child: ListTile(
         title: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 15.0, horizontal: 10),
+          padding: const EdgeInsets.symmetric(vertical: 20.0),
           child: Text(
             "$category",
             style: TextStyle(
               fontFamily: "roboto",
               fontWeight: FontWeight.bold,
-              color: Color(0xff5499c7),
+              color: const Color(0xff5499c7),
             ),
           ),
         ),

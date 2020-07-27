@@ -21,8 +21,14 @@ class DataTile extends StatefulWidget {
 class _DataTileState extends State<DataTile> {
   final String name, category, subcategory, address, email;
   final List<dynamic> phonenumber;
-  _DataTileState(this.name, this.category, this.subcategory, this.address,
-      this.phonenumber, this.email);
+  _DataTileState(
+    this.name,
+    this.category,
+    this.subcategory,
+    this.address,
+    this.phonenumber,
+    this.email,
+  );
 
   bool _showdetails = false;
   @override
@@ -32,7 +38,9 @@ class _DataTileState extends State<DataTile> {
         Container(
           margin: EdgeInsets.fromLTRB(10, 10, 10, 0),
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
+            borderRadius: _showdetails
+                ? const BorderRadius.vertical(top: const Radius.circular(10.0))
+                : const BorderRadius.all(const Radius.circular(10.0)),
             color: Colors.white,
           ),
           child: ListTile(
@@ -80,9 +88,12 @@ Widget detailsCard(
   return Column(
     crossAxisAlignment: CrossAxisAlignment.stretch,
     children: <Widget>[
-      Card(
+      Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.vertical(bottom: Radius.circular(10.0)),
+          color: Color(0xffa9cce3),
+        ),
         margin: EdgeInsets.symmetric(horizontal: 10),
-        color: Color(0xffa9cce3),
         child: address != 'demo' && email != 'demo'
             ? Column(
                 children: <Widget>[
