@@ -1,2 +1,2 @@
-bool showOptions = false;
+bool showOptions = true;
 bool loggedIn = true;

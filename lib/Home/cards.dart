@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import '../Desktop/categorypage.dart';
 import 'package:flutter/material.dart';
 import '../subscriptionpage/subscriptionpage.dart';
-import '../listpage/listpage.dart';
+import '../listyourself/listpage.dart';
 
 class DirectoryCard extends StatelessWidget {
   @override

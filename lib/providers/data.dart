@@ -13,6 +13,7 @@ class DataProvider with ChangeNotifier {
   List<DataTemplate> _data = [];
 
   List<DataTemplate> get datalist {
+    print("New Data: $_data _subscribed = $_subscribed");
     return [..._data];
   }
 
@@ -40,7 +41,7 @@ class DataProvider with ChangeNotifier {
 
   Future<bool> fetchData({bool force = false}) async {
     if (_data.length == 0 || force == true) {
-      _data = [];
+      _data.clear();
       if (force == true) {
         _subscribed = force;
       }
@@ -70,8 +71,10 @@ class DataProvider with ChangeNotifier {
             });
           });
         });
-        _data = _loadeddata.toList();
-        print("Data: $_data}");
+        _loadeddata.forEach((element) {
+          _data.add(element);
+        });
+        print("Data: $_data");
         notifyListeners();
         return false;
       } catch (error) {

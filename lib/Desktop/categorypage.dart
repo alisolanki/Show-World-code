@@ -30,6 +30,7 @@ class _CategoryPageState extends State<CategoryPage> {
   @override
   void didChangeDependencies() {
     print("_isInit = $_isInit");
+    print("Is loading Category: $_isLoadingCategory");
     if (_isInit) {
       Provider.of<CategoryProvider>(context)
           .fetchCategoryData()

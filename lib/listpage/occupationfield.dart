@@ -1,19 +1,46 @@
+import 'package:ShowWorld/Desktop/data_format.dart';
 import 'package:flutter/material.dart';
-import 'constants.dart';
+import 'package:provider/provider.dart';
+
+import '../providers/category.dart';
 
 class OccupationField extends StatefulWidget {
   @override
   _OccupationFieldState createState() => _OccupationFieldState();
 }
 
-List<String> categories = ['Director', 'Artist', 'Producer'];
-
 class _OccupationFieldState extends State<OccupationField> {
   String _dropdownValue;
+  CategoryProvider _categoryprovider;
+  List<CategoryTemplate> _categories;
+  List<DropdownMenuItem<String>> _categorydropdown;
+  bool _isInit = true;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    if (_isInit) {
+      setState(() {
+        _categoryprovider = Provider.of<CategoryProvider>(context);
+        _categories = _categoryprovider.categorylist;
+        _categories.forEach((e) {
+          _categorydropdown.add(
+            DropdownMenuItem(
+              child: Text(e.category),
+            ),
+          );
+          print(e.category);
+        });
+      });
+    }
+    _isInit = false;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
       alignment: Alignment.centerLeft,
+      padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: DropdownButton<String>(
         hint: Text("Occupation"),
         icon: Icon(
@@ -27,14 +54,7 @@ class _OccupationFieldState extends State<OccupationField> {
           color: Colors.blue,
         ),
         value: _dropdownValue,
-        items: categories.map<DropdownMenuItem<String>>(
-          (String value) {
-            return DropdownMenuItem<String>(
-              value: value,
-              child: Text(value),
-            );
-          },
-        ).toList(),
+        items: _categorydropdown,
         onChanged: (String newValue) {
           setState(() {
             _dropdownValue = newValue;
