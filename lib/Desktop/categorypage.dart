@@ -49,7 +49,7 @@ class _CategoryPageState extends State<CategoryPage> {
     setState(() {
       _categoryProvider = Provider.of<CategoryProvider>(context);
       _categorylist = _categoryProvider.categorylist;
-      _dataProvider = Provider.of<DataProvider>(context);
+      _dataProvider = Provider.of<DataProvider>(context, listen: true);
       _filteredpeople = _dataProvider.datalist;
     });
     print("_filteredpeople = $_filteredpeople");

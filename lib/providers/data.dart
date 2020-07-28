@@ -16,7 +16,7 @@ class DataProvider with ChangeNotifier {
     return [..._data];
   }
 
-  bool get subcription {
+  bool get subscription {
     return _subscribed;
   }
 
@@ -70,7 +70,7 @@ class DataProvider with ChangeNotifier {
             });
           });
         });
-        _data = _loadeddata;
+        _data = _loadeddata.toList();
         print("Data: $_data}");
         notifyListeners();
         return false;
