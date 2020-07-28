@@ -13,7 +13,6 @@ class DataProvider with ChangeNotifier {
   List<DataTemplate> _data = [];
 
   List<DataTemplate> get datalist {
-    // notifyListeners();
     return [..._data];
   }
 

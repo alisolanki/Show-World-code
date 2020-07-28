@@ -46,10 +46,12 @@ class _CategoryPageState extends State<CategoryPage> {
             print("Is loading Data: $_isLoadingData"),
           });
     }
-    _categoryProvider = Provider.of<CategoryProvider>(context);
-    _categorylist = _categoryProvider.categorylist;
-    _dataProvider = Provider.of<DataProvider>(context, listen: true);
-    _filteredpeople = _dataProvider.datalist;
+    setState(() {
+      _categoryProvider = Provider.of<CategoryProvider>(context);
+      _categorylist = _categoryProvider.categorylist;
+      _dataProvider = Provider.of<DataProvider>(context);
+      _filteredpeople = _dataProvider.datalist;
+    });
     print("_filteredpeople = $_filteredpeople");
     _isInit = false;
     super.didChangeDependencies();
