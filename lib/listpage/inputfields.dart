@@ -101,7 +101,7 @@ class _InputFieldsState extends State<InputFields> {
                   color: Colors.grey,
                 ),
               ),
-              OccupationField(),
+              OccupationField("Occupation"),
             ],
           ),
           SizedBox(

@@ -1,4 +1,5 @@
 import 'package:ShowWorld/listpage/occupationfield.dart';
+import 'package:ShowWorld/listyourself/category_dropdown.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -127,16 +128,10 @@ class _ListPageState extends State<ListPage> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
-                            OccupationField(),
+                            // OccupationField("Duration"),
                           ],
                         ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: <Widget>[
-                            OccupationField(),
-                            OccupationField(),
-                          ],
-                        ),
+                        CategoryFields(),
                       ],
                     ),
                   ),

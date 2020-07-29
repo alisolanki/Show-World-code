@@ -59,14 +59,17 @@ class DataProvider with ChangeNotifier {
           _subcategorylist.forEach((subcategoryname, names) {
             Map<String, dynamic> name = names;
             name.forEach((nametext, value) {
-              _loadeddata.add(DataTemplate(
+              _loadeddata.add(
+                DataTemplate(
                   id: itr,
                   category: category,
                   subcategory: subcategoryname,
                   name: nametext,
                   address: _subscribed ? value['address'] : "demo",
                   email: _subscribed ? value['mail'] : "demo",
-                  phonenumber: _subscribed ? value['mob'] : ["demo"].toList()));
+                  phonenumber: _subscribed ? value['mob'] : ["demo"].toList(),
+                ),
+              );
               itr++;
             });
           });
