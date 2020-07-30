@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-
 import '../Desktop/categorypage.dart';
 import 'package:flutter/material.dart';
 import '../subscriptionpage/subscriptionpage.dart';
@@ -9,7 +8,8 @@ class DirectoryCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FlatButton(
-      highlightColor: Colors.purple[400],
+//      highlightColor: Colors.purple[400],
+      highlightColor: Color(0xffd4e6f1),
       onPressed: () {
         Navigator.push(
           context,
@@ -32,9 +32,9 @@ class DirectoryCard extends StatelessWidget {
             boxShadow: [
               BoxShadow(
                 color: Colors.purple[100],
-                blurRadius: 6,
-                offset: Offset(0, 2),
-                spreadRadius: 2,
+                blurRadius: 2,
+                offset: Offset(1, 3),
+                spreadRadius: 1,
               ),
             ]),
         child: Row(
@@ -70,7 +70,7 @@ class ListCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FlatButton(
-      highlightColor: Colors.indigo[400],
+      highlightColor: Color(0xffd4e6f1),
       onPressed: () {
         Navigator.push(
           context,
@@ -89,9 +89,9 @@ class ListCard extends StatelessWidget {
             boxShadow: [
               BoxShadow(
                 color: Colors.indigo[100],
-                blurRadius: 6,
-                offset: Offset(0, 2),
-                spreadRadius: 3,
+                blurRadius: 2,
+                offset: Offset(1, 3),
+                spreadRadius: 1,
               ),
             ]),
         child: Row(
@@ -127,7 +127,7 @@ class BuyCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FlatButton(
-      highlightColor: Colors.blue[400],
+      highlightColor: Color(0xffd4e6f1),
       onPressed: () {
         Navigator.push(
           context,
@@ -146,8 +146,9 @@ class BuyCard extends StatelessWidget {
             boxShadow: [
               BoxShadow(
                 color: Colors.blue[100],
-                blurRadius: 6,
-                offset: Offset(0, 2),
+                blurRadius: 2,
+                offset: Offset(1, 3),
+                spreadRadius: 1,
               ),
             ]),
         child: Row(
@@ -190,13 +191,13 @@ class UnListCard extends StatelessWidget {
           boxShadow: [
             BoxShadow(
               color: Colors.indigo[800],
-              blurRadius: 6,
-              offset: Offset(0, 2),
-              spreadRadius: 3,
+              blurRadius: 2,
+              offset: Offset(1, 3),
+              spreadRadius: 1,
             ),
           ]),
       child: FlatButton(
-        splashColor: Colors.white,
+        highlightColor: Color(0xffd4e6f1),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
