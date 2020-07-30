@@ -3,6 +3,15 @@ import 'package:ShowWorld/listyourself/category_dropdown.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+UnderlineInputBorder textFieldDecoration = UnderlineInputBorder(
+    borderSide: BorderSide(
+  color: Color(0xff1b4f72),
+));
+UnderlineInputBorder focusedTextFieldDecoration = UnderlineInputBorder(
+    borderSide: BorderSide(
+  color: Colors.blueAccent,
+));
+
 class ListPage extends StatefulWidget {
   @override
   _ListPageState createState() => _ListPageState();
@@ -39,7 +48,7 @@ class _ListPageState extends State<ListPage> {
                 //Title
                 Card(
                   shadowColor: Colors.blue[300],
-                  elevation: 4,
+                  elevation: 1,
                   color: Color(0xdd1a5276),
                   margin: EdgeInsets.symmetric(
                     vertical: 10.0,
@@ -69,7 +78,7 @@ class _ListPageState extends State<ListPage> {
                             ),
                           ),
                           TextSpan(
-                            text: " List Yourself",
+                            text: "    List Yourself",
                           ),
                         ],
                       ),
@@ -80,53 +89,69 @@ class _ListPageState extends State<ListPage> {
                 Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Container(
+                    margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                     padding: const EdgeInsets.symmetric(
-                      horizontal: 10.0,
+                      horizontal: 30.0,
                       vertical: 20.0,
                     ),
                     decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20.0),
-                        color: Colors.white.withOpacity(0.80),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.blue[300],
-                            offset: Offset(0, 2),
-                            spreadRadius: 2,
-                            blurRadius: 3,
-                          )
-                        ]),
+                      borderRadius: BorderRadius.circular(20.0),
+                      color: Colors.white,
+//                        boxShadow: [
+//                          BoxShadow(
+//                            color: Colors.blue[300],
+//                            offset: Offset(0, 2),
+//                            spreadRadius: 0,
+//                            blurRadius: 0,
+//                          )
+//                        ]
+                    ),
                     child: Column(
                       children: <Widget>[
                         TextFormField(
-                          decoration: InputDecoration(labelText: "First Name"),
+                          decoration: InputDecoration(
+                              labelText: "First Name",
+                              focusedBorder: focusedTextFieldDecoration,
+                              enabledBorder: textFieldDecoration),
                           textInputAction: TextInputAction.next,
                           onFieldSubmitted: (_) => FocusScope.of(context)
                               .requestFocus(_lastnamefocusnode),
                         ),
                         TextFormField(
-                          decoration: InputDecoration(labelText: "Last Name"),
+                          decoration: InputDecoration(
+                              labelText: "Last Name",
+                              focusedBorder: focusedTextFieldDecoration,
+                              enabledBorder: textFieldDecoration),
                           textInputAction: TextInputAction.next,
                           focusNode: _lastnamefocusnode,
                         ),
                         TextFormField(
-                          decoration: InputDecoration(labelText: "Address"),
+                          decoration: InputDecoration(
+                              labelText: "Address",
+                              focusedBorder: focusedTextFieldDecoration,
+                              enabledBorder: textFieldDecoration),
                           textInputAction: TextInputAction.next,
                           minLines: null,
                           maxLines: null,
                         ),
                         TextFormField(
-                          decoration:
-                              InputDecoration(labelText: "Phone Number"),
+                          decoration: InputDecoration(
+                              labelText: "Phone Number",
+                              focusedBorder: focusedTextFieldDecoration,
+                              enabledBorder: textFieldDecoration),
                           textInputAction: TextInputAction.next,
                           keyboardType: TextInputType.phone,
                         ),
                         TextFormField(
-                          decoration: InputDecoration(labelText: "Email id"),
+                          decoration: InputDecoration(
+                              labelText: "Email id",
+                              focusedBorder: focusedTextFieldDecoration,
+                              enabledBorder: textFieldDecoration),
                           textInputAction: TextInputAction.next,
                           keyboardType: TextInputType.emailAddress,
                         ),
                         Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: <Widget>[
                             // OccupationField("Duration"),
                           ],

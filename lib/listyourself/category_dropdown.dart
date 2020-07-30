@@ -75,19 +75,21 @@ class _CategoryFieldsState extends State<CategoryFields> {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: <Widget>[
         Container(
+          margin: EdgeInsets.only(right: 12.5),
           alignment: Alignment.centerLeft,
           padding: const EdgeInsets.symmetric(vertical: 8.0),
           child: DropdownButton<String>(
             hint: Text("Category"),
             icon: Icon(
-              Icons.arrow_downward,
+              Icons.arrow_drop_down,
               color: Colors.grey,
             ),
             iconSize: 24,
             elevation: 16,
             underline: Container(
-              height: 2,
-              color: Colors.blue,
+              height: 1,
+              width: 1,
+              color: Color(0xff1b4f72),
             ),
             value: _dropdownCategoryValue,
             items: _categorydropdown,
@@ -101,19 +103,20 @@ class _CategoryFieldsState extends State<CategoryFields> {
           ),
         ),
         Container(
+          margin: EdgeInsets.only(left: 12.5),
           alignment: Alignment.centerLeft,
           padding: const EdgeInsets.symmetric(vertical: 8.0),
           child: DropdownButton<String>(
             hint: Text("Sub Category"),
             icon: Icon(
-              Icons.arrow_downward,
+              Icons.arrow_drop_down,
               color: Colors.grey,
             ),
             iconSize: 24,
             elevation: 16,
             underline: Container(
-              height: 2,
-              color: Colors.blue,
+              height: 1,
+              color: Color(0xff1b4f72),
             ),
             value: _dropdownSubcategoryValue,
             items: _subcategorydropdown[_dropdownCategoryValue],
