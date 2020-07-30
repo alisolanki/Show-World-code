@@ -1,16 +1,19 @@
-import 'package:ShowWorld/listpage/occupationfield.dart';
-import 'package:ShowWorld/listyourself/category_dropdown.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import './category_dropdown.dart';
+import './duration_dropdown.dart';
+
 UnderlineInputBorder textFieldDecoration = UnderlineInputBorder(
-    borderSide: BorderSide(
-  color: Color(0xff1b4f72),
-));
+  borderSide: BorderSide(
+    color: Color(0xff1b4f72),
+  ),
+);
 UnderlineInputBorder focusedTextFieldDecoration = UnderlineInputBorder(
-    borderSide: BorderSide(
-  color: Colors.blueAccent,
-));
+  borderSide: BorderSide(
+    color: Colors.blueAccent,
+  ),
+);
 
 class ListPage extends StatefulWidget {
   @override
@@ -97,14 +100,6 @@ class _ListPageState extends State<ListPage> {
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20.0),
                       color: Colors.white,
-//                        boxShadow: [
-//                          BoxShadow(
-//                            color: Colors.blue[300],
-//                            offset: Offset(0, 2),
-//                            spreadRadius: 0,
-//                            blurRadius: 0,
-//                          )
-//                        ]
                     ),
                     child: Column(
                       children: <Widget>[
@@ -150,12 +145,7 @@ class _ListPageState extends State<ListPage> {
                           textInputAction: TextInputAction.next,
                           keyboardType: TextInputType.emailAddress,
                         ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: <Widget>[
-                            // OccupationField("Duration"),
-                          ],
-                        ),
+                        DurationField(),
                         CategoryFields(),
                       ],
                     ),

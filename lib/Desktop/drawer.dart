@@ -1,13 +1,10 @@
-import 'package:ShowWorld/LoginOTP/pages/otp_page.dart';
 import 'package:ShowWorld/LoginOTP/stores/login_store.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import './categorypage.dart';
 import '../Login2/login_screen.dart';
 import '../Account/account_home.dart';
 import '../subscriptionpage/subscriptionpage.dart';
-import '../listpage/constants.dart';
 import '../auth/auth-api.dart' as auth;
 
 TextStyle drawerfonts =
@@ -15,14 +12,15 @@ TextStyle drawerfonts =
 
 class DrawerItems extends StatelessWidget {
   final _user = auth.user;
+  final _loggedIn = LoginStore().firebaseUser != null;
+
   @override
   Widget build(BuildContext context) {
     print(_user.toString());
     return ListView(
-      // Important: Remove any padding from the ListView.
       padding: EdgeInsets.zero,
       children: <Widget>[
-        loggedIn
+        _loggedIn
             ? UserAccountsDrawerHeader(
                 onDetailsPressed: () {
                   Navigator.pop(context);
@@ -72,7 +70,7 @@ class DrawerItems extends StatelessWidget {
                 ),
               ),
         Visibility(
-          visible: loggedIn,
+          visible: _loggedIn,
           child: ListTile(
             leading: Icon(Icons.account_circle, color: Color(0xff1b4f72)),
             title: Text(
@@ -150,7 +148,7 @@ class DrawerItems extends StatelessWidget {
             );
           },
         ),
-        loggedIn
+        _loggedIn
             ? Container()
             : ListTile(
                 leading: Icon(Icons.account_circle, color: Color(0xff1b4f72)),
@@ -204,7 +202,7 @@ class DrawerItems extends StatelessWidget {
           },
         ),
         Visibility(
-          visible: loggedIn,
+          visible: _loggedIn,
           child: ListTile(
             leading: Icon(Icons.exit_to_app, color: Color(0xff1b4f72)),
             title: Text(

@@ -36,6 +36,7 @@ class _CategoryFieldsState extends State<CategoryFields> {
           key: ValueKey("Category"),
           child: Text(
             e.category,
+            overflow: TextOverflow.fade,
             style: TextStyle(
               color: Color(0xff1b4f72),
             ),
@@ -50,6 +51,7 @@ class _CategoryFieldsState extends State<CategoryFields> {
                 key: ValueKey(subcat),
                 child: Text(
                   subcat,
+                  overflow: TextOverflow.fade,
                   style: TextStyle(
                     color: Color(0xff1b4f72),
                   ),
@@ -71,15 +73,20 @@ class _CategoryFieldsState extends State<CategoryFields> {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+    // var _width = MediaQuery.of(context).size.width;
+    return Wrap(
+      direction: Axis.horizontal,
+      alignment: WrapAlignment.spaceBetween,
       children: <Widget>[
         Container(
           margin: EdgeInsets.only(right: 12.5),
           alignment: Alignment.centerLeft,
           padding: const EdgeInsets.symmetric(vertical: 8.0),
           child: DropdownButton<String>(
-            hint: Text("Category"),
+            hint: Text(
+              "Category",
+              overflow: TextOverflow.fade,
+            ),
             icon: Icon(
               Icons.arrow_drop_down,
               color: Colors.grey,
@@ -103,11 +110,13 @@ class _CategoryFieldsState extends State<CategoryFields> {
           ),
         ),
         Container(
-          margin: EdgeInsets.only(left: 12.5),
           alignment: Alignment.centerLeft,
           padding: const EdgeInsets.symmetric(vertical: 8.0),
           child: DropdownButton<String>(
-            hint: Text("Sub Category"),
+            hint: Text(
+              "Sub Category",
+              overflow: TextOverflow.fade,
+            ),
             icon: Icon(
               Icons.arrow_drop_down,
               color: Colors.grey,

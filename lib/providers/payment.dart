@@ -55,7 +55,7 @@ class PaymentProvider with ChangeNotifier {
     print("Choosing Wallet");
   }
 
-  Future<void> makePayment(double price) {
+  void makePayment(double price) {
     _razorpay.on(Razorpay.EVENT_PAYMENT_SUCCESS, _handlePaymentSuccess);
     _razorpay.on(Razorpay.EVENT_PAYMENT_ERROR, _handlePaymentError);
     _razorpay.on(Razorpay.EVENT_EXTERNAL_WALLET, _handleExternalWallet);

@@ -10,6 +10,7 @@ import './cards.dart';
 import '../LoginOTP/stores/login_store.dart';
 import '../providers/category.dart';
 import '../providers/data.dart';
+import '../providers/prices.dart';
 import '../auth/auth-api.dart' as auth;
 
 class HomePage extends StatefulWidget {
@@ -46,6 +47,7 @@ class _HomePageState extends State<HomePage> {
         ChangeNotifierProvider.value(value: DataProvider()),
         ChangeNotifierProvider.value(value: CategoryProvider()),
         ChangeNotifierProvider.value(value: PaymentProvider()),
+        ChangeNotifierProvider.value(value: PricesProvider()),
         Provider.value(value: LoginStore()),
       ],
       child: MaterialApp(
