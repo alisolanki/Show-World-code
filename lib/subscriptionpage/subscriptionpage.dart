@@ -47,10 +47,12 @@ class _SubscriptionPageState extends State<SubscriptionPage> {
       ),
       body: CustomScrollView(
         slivers: <Widget>[
-          Container(
-            margin: EdgeInsets.all(10.0),
-            child: Column(
-              children: <Widget>[
+          SliverList(
+            delegate: SliverChildListDelegate(
+              [
+                SizedBox(
+                  height: 10.0,
+                ),
                 Center(
                   child: Text(
                     'Choose Subscription Plan',
@@ -74,16 +76,17 @@ class _SubscriptionPageState extends State<SubscriptionPage> {
                   ),
                   textAlign: TextAlign.center,
                 ),
-                SizedBox(
-                  height: 10.0,
-                ),
-                ListView.builder(
-                  itemCount: 3,
-                  itemBuilder: (ctx, i) {
-                    return Coupons("36 Months", 50.0);
-                  },
-                ),
               ],
+            ),
+          ),
+          SliverList(
+            delegate: SliverChildListDelegate(
+              List.generate(
+                3,
+                (i) {
+                  return Coupons("36 Months", 50.0);
+                },
+              ),
             ),
           ),
         ],
