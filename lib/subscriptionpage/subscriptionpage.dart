@@ -1,3 +1,4 @@
+import 'package:ShowWorld/Desktop/data_format.dart';
 import 'package:ShowWorld/providers/prices.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -10,14 +11,23 @@ class SubscriptionPage extends StatefulWidget {
 
 class _SubscriptionPageState extends State<SubscriptionPage> {
   PricesProvider _pricesProvider;
+  List<DurationTemplate> _pricelist;
   bool _isInit = true;
 
   @override
   void didChangeDependencies() {
+    _pricesProvider = Provider.of<PricesProvider>(context);
     if (_isInit) {
-      _pricesProvider = Provider.of<PricesProvider>(context);
+      setState(() {
+        addPriceItems();
+      });
     }
+    _pricelist = _pricesProvider.subscriptionlist;
     super.didChangeDependencies();
+  }
+
+  void addPriceItems() async {
+    await _pricesProvider.fetchPricesData();
   }
 
   @override
@@ -67,14 +77,34 @@ class _SubscriptionPageState extends State<SubscriptionPage> {
                 SizedBox(
                   height: 10.0,
                 ),
-                Text(
-                  '(Get access to 25,000+ listings in 300+ categories across the film and music industry)',
-                  style: TextStyle(
-                    color: Colors.grey[700],
-                    fontSize: 18,
-                    fontWeight: FontWeight.w300,
-                  ),
+                RichText(
                   textAlign: TextAlign.center,
+                  text: TextSpan(
+                    style: TextStyle(
+                      color: Colors.grey[700],
+                      fontSize: 18,
+                      fontWeight: FontWeight.w300,
+                    ),
+                    children: <TextSpan>[
+                      TextSpan(
+                        text: '(Get access to ',
+                      ),
+                      TextSpan(
+                        text: '25,000+ listings',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      TextSpan(
+                        text: ' in ',
+                      ),
+                      TextSpan(
+                        text: '300+ categories',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      TextSpan(
+                        text: ' across the film and music industry)',
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),
@@ -82,9 +112,12 @@ class _SubscriptionPageState extends State<SubscriptionPage> {
           SliverList(
             delegate: SliverChildListDelegate(
               List.generate(
-                3,
+                _pricelist.length,
                 (i) {
-                  return Coupons("36 Months", 50.0);
+                  return Coupons(
+                    "${_pricelist.elementAt(i).months} Months",
+                    _pricelist.elementAt(i).price,
+                  );
                 },
               ),
             ),
