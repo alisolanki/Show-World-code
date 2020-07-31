@@ -64,8 +64,9 @@ class _DurationFieldState extends State<DurationField> {
         iconSize: 24,
         elevation: 16,
         underline: Container(
-          height: 2,
-          color: Colors.blue,
+          height: 1,
+          width: 1,
+          color: Color(0xff1b4f72),
         ),
         value: _dropdownDurationValue,
         items: _durationdropdown,
