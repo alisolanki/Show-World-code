@@ -23,6 +23,10 @@ class _SubscriptionPageState extends State<SubscriptionPage> {
       });
     }
     _pricelist = _pricesProvider.subscriptionlist;
+    setState(() {
+      _isInit = false;
+    });
+
     super.didChangeDependencies();
   }
 
@@ -55,75 +59,77 @@ class _SubscriptionPageState extends State<SubscriptionPage> {
           ),
         ),
       ),
-      body: CustomScrollView(
-        slivers: <Widget>[
-          SliverList(
-            delegate: SliverChildListDelegate(
-              [
-                SizedBox(
-                  height: 10.0,
-                ),
-                Center(
-                  child: Text(
-                    'Choose Subscription Plan',
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 30,
-                      fontWeight: FontWeight.w300,
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
-                ),
-                SizedBox(
-                  height: 10.0,
-                ),
-                RichText(
-                  textAlign: TextAlign.center,
-                  text: TextSpan(
-                    style: TextStyle(
-                      color: Colors.grey[700],
-                      fontSize: 18,
-                      fontWeight: FontWeight.w300,
-                    ),
-                    children: <TextSpan>[
-                      TextSpan(
-                        text: '(Get access to ',
+      body: _pricelist.length == 0
+          ? Center(child: CircularProgressIndicator())
+          : CustomScrollView(
+              slivers: <Widget>[
+                SliverList(
+                  delegate: SliverChildListDelegate(
+                    [
+                      SizedBox(
+                        height: 10.0,
                       ),
-                      TextSpan(
-                        text: '25,000+ listings',
-                        style: TextStyle(fontWeight: FontWeight.bold),
+                      Center(
+                        child: Text(
+                          'Choose Subscription Plan',
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 30,
+                            fontWeight: FontWeight.w300,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
                       ),
-                      TextSpan(
-                        text: ' in ',
+                      SizedBox(
+                        height: 10.0,
                       ),
-                      TextSpan(
-                        text: '300+ categories',
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                      TextSpan(
-                        text: ' across the film and music industry)',
+                      RichText(
+                        textAlign: TextAlign.center,
+                        text: TextSpan(
+                          style: TextStyle(
+                            color: Colors.grey[700],
+                            fontSize: 18,
+                            fontWeight: FontWeight.w300,
+                          ),
+                          children: <TextSpan>[
+                            TextSpan(
+                              text: '(Get access to ',
+                            ),
+                            TextSpan(
+                              text: '25,000+ listings',
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                            TextSpan(
+                              text: ' in ',
+                            ),
+                            TextSpan(
+                              text: '300+ categories',
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                            TextSpan(
+                              text: ' across the film and music industry)',
+                            ),
+                          ],
+                        ),
                       ),
                     ],
                   ),
                 ),
+                SliverList(
+                  delegate: SliverChildListDelegate(
+                    List.generate(
+                      _pricelist.length,
+                      (i) {
+                        return Coupons(
+                          "${_pricelist.elementAt(i).months} Months",
+                          _pricelist.elementAt(i).price,
+                        );
+                      },
+                    ),
+                  ),
+                ),
               ],
             ),
-          ),
-          SliverList(
-            delegate: SliverChildListDelegate(
-              List.generate(
-                _pricelist.length,
-                (i) {
-                  return Coupons(
-                    "${_pricelist.elementAt(i).months} Months",
-                    _pricelist.elementAt(i).price,
-                  );
-                },
-              ),
-            ),
-          ),
-        ],
-      ),
     );
   }
 }

@@ -40,6 +40,7 @@ class _CouponsState extends State<Coupons> {
                 '${widget._duration}',
                 style: TextStyle(
                   color: Colors.white,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
               Text(

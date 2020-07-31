@@ -237,45 +237,55 @@ class _CategoryPageState extends State<CategoryPage> {
               ),
               // data region
               Expanded(
-                child: _pagecategory
-                    ? _isLoadingCategory
-                        ? Center(
-                            child: CircularProgressIndicator(),
-                          )
-                        : ListView.builder(
-                            padding: EdgeInsets.all(10),
-                            itemCount: _categorylist.length,
-                            itemBuilder: (ctx, index) {
-                              var dataitr = _categorylist[index];
-                              return Container(
-                                key: ValueKey(dataitr.id),
-                                child: CategoryTile(
-                                    category: dataitr.category,
-                                    subcategory: dataitr.subcategory),
-                              );
-                            },
-                          )
-                    : _isLoadingData
-                        ? Center(
-                            child: CircularProgressIndicator(),
-                          )
-                        : ListView.builder(
-                            padding: EdgeInsets.all(10),
-                            itemCount: _filteredpeople.length,
-                            itemBuilder: (ctx, index) {
-                              var dataitr = _filteredpeople[index];
-                              return Container(
-                                key: ValueKey(_filteredpeople[index].id),
-                                child: DataTile(
-                                    name: dataitr.name,
-                                    category: dataitr.category,
-                                    subcategory: dataitr.subcategory,
-                                    address: dataitr.address,
-                                    email: dataitr.email,
-                                    phonenumber: dataitr.phonenumber),
-                              );
-                            },
-                          ),
+                child: GestureDetector(
+                  onHorizontalDragUpdate: (details) {
+                    details.delta.dx > 0
+                        ?
+                        //Right Swipe
+                        _togglePage(true)
+                        : //Left Swipe
+                        _togglePage(false);
+                  },
+                  child: _pagecategory
+                      ? _isLoadingCategory
+                          ? Center(
+                              child: CircularProgressIndicator(),
+                            )
+                          : ListView.builder(
+                              padding: EdgeInsets.all(10),
+                              itemCount: _categorylist.length,
+                              itemBuilder: (ctx, index) {
+                                var dataitr = _categorylist[index];
+                                return Container(
+                                  key: ValueKey(dataitr.id),
+                                  child: CategoryTile(
+                                      category: dataitr.category,
+                                      subcategory: dataitr.subcategory),
+                                );
+                              },
+                            )
+                      : _isLoadingData
+                          ? Center(
+                              child: CircularProgressIndicator(),
+                            )
+                          : ListView.builder(
+                              padding: EdgeInsets.all(10),
+                              itemCount: _filteredpeople.length,
+                              itemBuilder: (ctx, index) {
+                                var dataitr = _filteredpeople[index];
+                                return Container(
+                                  key: ValueKey(_filteredpeople[index].id),
+                                  child: DataTile(
+                                      name: dataitr.name,
+                                      category: dataitr.category,
+                                      subcategory: dataitr.subcategory,
+                                      address: dataitr.address,
+                                      email: dataitr.email,
+                                      phonenumber: dataitr.phonenumber),
+                                );
+                              },
+                            ),
+                ),
               )
             ],
           ),
