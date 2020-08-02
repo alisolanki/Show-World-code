@@ -5,6 +5,7 @@ import 'package:mobx/mobx.dart';
 import '../../Home/homepage.dart';
 import '../pages/login_page.dart';
 import '../pages/otp_page.dart';
+import '../../auth/auth-api.dart' as auth;
 
 part 'login_store.g.dart';
 
@@ -136,10 +137,11 @@ abstract class LoginStoreBase with Store {
     isOtpLoading = true;
 
     firebaseUser = result.user;
-
-    Navigator.of(context).pushAndRemoveUntil(
-        MaterialPageRoute(builder: (_) => HomePage()),
-        (Route<dynamic> route) => false);
+    auth.geturls().then(
+          (_) => Navigator.of(context).pushAndRemoveUntil(
+              MaterialPageRoute(builder: (_) => HomePage()),
+              (Route<dynamic> route) => false),
+        );
 
     isLoginLoading = false;
     isOtpLoading = false;

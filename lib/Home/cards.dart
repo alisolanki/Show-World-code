@@ -124,6 +124,9 @@ class ListCard extends StatelessWidget {
 }
 
 class BuyCard extends StatelessWidget {
+  final Map<String, dynamic> _subscriptionData;
+  BuyCard(this._subscriptionData);
+
   @override
   Widget build(BuildContext context) {
     return FlatButton(
@@ -164,12 +167,14 @@ class BuyCard extends StatelessWidget {
               ),
             ),
             Text(
-              "Buy Full Version",
+              _subscriptionData.length == 0
+                  ? "Buy Full Version"
+                  : "Subscription ends on: ${_subscriptionData['timestamp']}",
               style: TextStyle(
                 fontFamily: "roboto",
                 fontWeight: FontWeight.w600,
                 color: Colors.blue,
-                fontSize: 20,
+                fontSize: _subscriptionData.length == 0 ? 20 : 15,
               ),
               textAlign: TextAlign.left,
             ),

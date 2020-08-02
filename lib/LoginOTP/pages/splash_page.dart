@@ -4,6 +4,7 @@ import '../../Home/homepage.dart';
 import '../pages/login_page.dart';
 import '../stores/login_store.dart';
 import '../theme.dart';
+import '../../auth/auth-api.dart' as auth;
 
 class SplashPage extends StatefulWidget {
   const SplashPage({Key key}) : super(key: key);
@@ -19,9 +20,11 @@ class _SplashPageState extends State<SplashPage> {
         .isAlreadyAuthenticated()
         .then((result) {
       if (result) {
-        Navigator.of(context).pushAndRemoveUntil(
-            MaterialPageRoute(builder: (_) => HomePage()),
-            (Route<dynamic> route) => false);
+        auth.geturls().then(
+              (_) => Navigator.of(context).pushAndRemoveUntil(
+                  MaterialPageRoute(builder: (_) => HomePage()),
+                  (Route<dynamic> route) => false),
+            );
       } else {
         Navigator.of(context).pushAndRemoveUntil(
             MaterialPageRoute(builder: (_) => const LoginPage()),

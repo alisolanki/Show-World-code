@@ -1,7 +1,10 @@
+import 'dart:convert';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:http/http.dart' as http;
 
 import '../providers/payment.dart';
 import '../Desktop/drawer.dart';
@@ -19,23 +22,21 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  bool _isInit = true;
-  FirebaseUser _user;
+  Map<String, dynamic> _extracteddata = {};
 
   @override
-  void didChangeDependencies() {
-    if (_isInit) {
-      setState(() {
-        auth.geturls();
-      });
-      FirebaseAuth.instance.currentUser().then(
-            (value) => setState(() {
-              _user = value;
-            }),
-          );
-    }
-    _isInit = false;
-    super.didChangeDependencies();
+  void initState() {
+    setState(() {
+      getSubscriptionStatus();
+    });
+    super.initState();
+  }
+
+  void getSubscriptionStatus() async {
+    print(auth.urlallusers);
+    var _response = await http.get(auth.urlallusers);
+    _extracteddata = jsonDecode(_response.body);
+    print("extract: $_extracteddata");
   }
 
   @override
@@ -95,7 +96,7 @@ class _HomePageState extends State<HomePage> {
                   child: ListCard(),
                 ),
                 Expanded(
-                  child: BuyCard(),
+                  child: BuyCard(_extracteddata),
                 ),
                 Expanded(
                   flex: 2,

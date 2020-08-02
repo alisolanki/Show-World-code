@@ -39,7 +39,7 @@ class DrawerItems extends StatelessWidget {
               child: Image.asset("assets/user.png"),
             ),
             accountName: Text(
-              "${_user.displayName}",
+              "My Account",
               style: TextStyle(
                   color: Color(0xff1b4f72),
                   fontWeight: FontWeight.bold,
