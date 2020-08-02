@@ -1,8 +1,12 @@
+import 'package:ShowWorld/models/listed_data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import './category_dropdown.dart';
 import './duration_dropdown.dart';
+
+final durationKey = new GlobalKey<DurationFieldState>();
+final categoryKey = new GlobalKey<CategoryFieldsState>();
 
 UnderlineInputBorder textFieldDecoration = UnderlineInputBorder(
   borderSide: BorderSide(
@@ -22,6 +26,47 @@ class ListPage extends StatefulWidget {
 
 class _ListPageState extends State<ListPage> {
   final _lastnamefocusnode = FocusNode();
+  final _addressfocusnode = FocusNode();
+  final _phonenumberfocusnode = FocusNode();
+  final _emailfocusnode = FocusNode();
+  final _form = GlobalKey<FormState>();
+  String _firstname, _lastname;
+
+  var _listeddata = ListedDataModel(
+    fullname: "",
+    address: "",
+    mob: "",
+    mail: "",
+    time: DateTime.now(),
+    category: "",
+    subcategory: "",
+  );
+
+  @override
+  void dispose() {
+    _lastnamefocusnode.dispose();
+    _addressfocusnode.dispose();
+    _phonenumberfocusnode.dispose();
+    _emailfocusnode.dispose();
+    super.dispose();
+  }
+
+  void _saveForm() {
+    _form.currentState.save();
+    _listeddata = ListedDataModel(
+      fullname: "$_firstname $_lastname",
+      address: _listeddata.address,
+      mob: _listeddata.mob,
+      mail: _listeddata.mail,
+      time: durationKey.currentState.dropdownDurationvalue,
+      category: categoryKey.currentState.selectedCategory,
+      subcategory: categoryKey.currentState.selectedSubCategory,
+    );
+    print(
+      "time: ${_listeddata.time.toIso8601String()} category:${_listeddata.category} subcategory:${_listeddata.subcategory}",
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     var _width = MediaQuery.of(context).size.width;
@@ -45,7 +90,7 @@ class _ListPageState extends State<ListPage> {
           margin: EdgeInsets.only(top: 20.0),
           alignment: Alignment.topCenter,
           child: Form(
-            key: ValueKey("listyourself"),
+            key: _form,
             child: ListView(
               children: <Widget>[
                 //Title
@@ -88,6 +133,24 @@ class _ListPageState extends State<ListPage> {
                     ),
                   ),
                 ),
+                //Disclaimer
+                Column(
+                  children: <Widget>[
+                    Text(
+                      "*Your data will be recorded in a separate category. ",
+                      style: TextStyle(
+                        fontFamily: 'roboto',
+                        color: Colors.black87,
+                        fontSize: 15,
+                      ),
+                    ),
+                    Text(
+                      "Eg. Artist (Listed)",
+                      style: TextStyle(
+                          color: Colors.black, fontWeight: FontWeight.bold),
+                    ),
+                  ],
+                ),
                 //Form Fields
                 Padding(
                   padding: const EdgeInsets.all(16.0),
@@ -111,6 +174,7 @@ class _ListPageState extends State<ListPage> {
                           textInputAction: TextInputAction.next,
                           onFieldSubmitted: (_) => FocusScope.of(context)
                               .requestFocus(_lastnamefocusnode),
+                          onSaved: (newValue) => _firstname = newValue,
                         ),
                         TextFormField(
                           decoration: InputDecoration(
@@ -119,6 +183,9 @@ class _ListPageState extends State<ListPage> {
                               enabledBorder: textFieldDecoration),
                           textInputAction: TextInputAction.next,
                           focusNode: _lastnamefocusnode,
+                          onFieldSubmitted: (_) => FocusScope.of(context)
+                              .requestFocus(_addressfocusnode),
+                          onSaved: (newValue) => _lastname = newValue,
                         ),
                         TextFormField(
                           decoration: InputDecoration(
@@ -128,6 +195,18 @@ class _ListPageState extends State<ListPage> {
                           textInputAction: TextInputAction.next,
                           minLines: null,
                           maxLines: null,
+                          focusNode: _addressfocusnode,
+                          onFieldSubmitted: (_) => FocusScope.of(context)
+                              .requestFocus(_phonenumberfocusnode),
+                          onSaved: (newValue) => _listeddata = ListedDataModel(
+                            fullname: _listeddata.fullname,
+                            address: newValue,
+                            mob: _listeddata.mob,
+                            mail: _listeddata.mail,
+                            time: _listeddata.time,
+                            category: _listeddata.category,
+                            subcategory: _listeddata.subcategory,
+                          ),
                         ),
                         TextFormField(
                           decoration: InputDecoration(
@@ -136,6 +215,18 @@ class _ListPageState extends State<ListPage> {
                               enabledBorder: textFieldDecoration),
                           textInputAction: TextInputAction.next,
                           keyboardType: TextInputType.phone,
+                          focusNode: _phonenumberfocusnode,
+                          onFieldSubmitted: (_) => FocusScope.of(context)
+                              .requestFocus(_emailfocusnode),
+                          onSaved: (newValue) => _listeddata = ListedDataModel(
+                            fullname: _listeddata.fullname,
+                            address: _listeddata.address,
+                            mob: newValue,
+                            mail: _listeddata.mail,
+                            time: _listeddata.time,
+                            category: _listeddata.category,
+                            subcategory: _listeddata.subcategory,
+                          ),
                         ),
                         TextFormField(
                           decoration: InputDecoration(
@@ -144,9 +235,19 @@ class _ListPageState extends State<ListPage> {
                               enabledBorder: textFieldDecoration),
                           textInputAction: TextInputAction.next,
                           keyboardType: TextInputType.emailAddress,
+                          focusNode: _emailfocusnode,
+                          onSaved: (newValue) => _listeddata = ListedDataModel(
+                            fullname: _listeddata.fullname,
+                            address: newValue,
+                            mob: _listeddata.mob,
+                            mail: newValue,
+                            time: _listeddata.time,
+                            category: _listeddata.category,
+                            subcategory: _listeddata.subcategory,
+                          ),
                         ),
-                        DurationField(),
-                        CategoryFields(),
+                        DurationField(key: durationKey),
+                        CategoryFields(key: categoryKey),
                       ],
                     ),
                   ),
@@ -175,7 +276,7 @@ class _ListPageState extends State<ListPage> {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(18.0),
                     ),
-                    onPressed: null,
+                    onPressed: _saveForm,
                   ),
                 ),
               ],

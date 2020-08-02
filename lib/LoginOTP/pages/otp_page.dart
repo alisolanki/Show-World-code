@@ -85,22 +85,25 @@ class _OtpPageState extends State<OtpPage> {
               backgroundColor: Colors.white,
               key: loginStore.otpScaffoldKey,
               appBar: AppBar(
-                leading: IconButton(
-                  icon: Container(
-                    padding: const EdgeInsets.all(10),
-                    decoration: BoxDecoration(
-                      borderRadius: const BorderRadius.all(Radius.circular(20)),
-                      color: MyColors.primaryColorLight.withAlpha(20),
-                    ),
-                    child: Icon(
-                      Icons.arrow_back_ios,
-                      color: MyColors.primaryColor,
-                      size: 16,
-                    ),
-                  ),
-                  onPressed: () =>
-                      {_timer.cancel(), Navigator.of(context).pop()},
-                ),
+                leading: _counter < 1
+                    ? IconButton(
+                        icon: Container(
+                          padding: const EdgeInsets.all(10),
+                          decoration: BoxDecoration(
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(20)),
+                            color: MyColors.primaryColorLight.withAlpha(20),
+                          ),
+                          child: Icon(
+                            Icons.arrow_back_ios,
+                            color: MyColors.primaryColor,
+                            size: 16,
+                          ),
+                        ),
+                        onPressed: () =>
+                            {_timer.cancel(), Navigator.of(context).pop()},
+                      )
+                    : Container(),
                 elevation: 0,
                 backgroundColor: Colors.white,
                 brightness: Brightness.light,

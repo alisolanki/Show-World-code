@@ -7,11 +7,12 @@ import 'package:provider/provider.dart';
 import '../providers/category.dart';
 
 class CategoryFields extends StatefulWidget {
+  CategoryFields({Key key}) : super(key: key);
   @override
-  _CategoryFieldsState createState() => _CategoryFieldsState();
+  CategoryFieldsState createState() => CategoryFieldsState();
 }
 
-class _CategoryFieldsState extends State<CategoryFields> {
+class CategoryFieldsState extends State<CategoryFields> {
   String _dropdownCategoryValue;
   String _dropdownSubcategoryValue;
   CategoryProvider _categoryprovider;
@@ -19,6 +20,16 @@ class _CategoryFieldsState extends State<CategoryFields> {
   List<DropdownMenuItem<String>> _categorydropdown = [];
   Map<String, List<DropdownMenuItem<String>>> _subcategorydropdown = {};
   bool _isInit = true;
+
+  String get selectedCategory {
+    return _dropdownCategoryValue == null ? "Unlisted" : _dropdownCategoryValue;
+  }
+
+  String get selectedSubCategory {
+    return _dropdownSubcategoryValue == null
+        ? "Unlisted"
+        : _dropdownSubcategoryValue;
+  }
 
   @override
   void didChangeDependencies() {
