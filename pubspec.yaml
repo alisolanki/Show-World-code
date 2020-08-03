@@ -37,6 +37,7 @@ dependencies:
   numeric_keyboard: ^1.0.0
 
   fluttertoast: ^7.0.1
+  json_serializable: ^3.3.0
   razorpay_flutter: ^1.2.2
 
   # The following adds the Cupertino Icons font to your application.

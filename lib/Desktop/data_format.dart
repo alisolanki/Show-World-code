@@ -22,6 +22,6 @@ class CategoryTemplate {
 
 class DurationTemplate {
   String months;
-  var price;
+  double price;
   DurationTemplate({this.months, this.price});
 }

@@ -29,6 +29,14 @@ class DurationFieldState extends State<DurationField> {
         DateTime.now().day);
   }
 
+  double get prices {
+    return _dropdownDurationValue == null
+        ? 0
+        : _listyourself
+            .firstWhere((e) => e.months == _dropdownDurationValue)
+            .price;
+  }
+
   @override
   void didChangeDependencies() {
     _pricesprovider = Provider.of<PricesProvider>(context);

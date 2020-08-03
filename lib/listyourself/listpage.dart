@@ -1,6 +1,8 @@
 import 'package:ShowWorld/models/listed_data.dart';
+import 'package:ShowWorld/providers/payment.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 
 import './category_dropdown.dart';
 import './duration_dropdown.dart';
@@ -30,6 +32,8 @@ class _ListPageState extends State<ListPage> {
   final _phonenumberfocusnode = FocusNode();
   final _emailfocusnode = FocusNode();
   final _form = GlobalKey<FormState>();
+  PaymentProvider payment;
+  bool _isInit = true;
   String _firstname, _lastname;
 
   var _listeddata = ListedDataModel(
@@ -40,7 +44,38 @@ class _ListPageState extends State<ListPage> {
     time: DateTime.now(),
     category: "",
     subcategory: "",
+    price: 0,
   );
+
+  void _saveForm() {
+    _form.currentState.save();
+    _listeddata = ListedDataModel(
+      fullname:
+          "${_firstname[0].toUpperCase()}${_firstname.substring(1)} ${_lastname[0].toUpperCase()}${_lastname.substring(1)}",
+      address: _listeddata.address,
+      mob: _listeddata.mob,
+      mail: _listeddata.mail,
+      time: durationKey.currentState.dropdownDurationvalue,
+      category: categoryKey.currentState.selectedCategory,
+      subcategory: categoryKey.currentState.selectedSubCategory,
+      price: durationKey.currentState.prices,
+    );
+    payment.makePaymentListYourself(_listeddata);
+    //Error handling: i.e. on no input by user, REMAINING
+    print("name: ${_listeddata.fullname}");
+    print(
+      "time: ${_listeddata.time.toIso8601String()} category:${_listeddata.category} subcategory:${_listeddata.subcategory} price: ${_listeddata.price}",
+    );
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    if (_isInit) {
+      payment = Provider.of<PaymentProvider>(context);
+    }
+    _isInit = false;
+  }
 
   @override
   void dispose() {
@@ -49,22 +84,6 @@ class _ListPageState extends State<ListPage> {
     _phonenumberfocusnode.dispose();
     _emailfocusnode.dispose();
     super.dispose();
-  }
-
-  void _saveForm() {
-    _form.currentState.save();
-    _listeddata = ListedDataModel(
-      fullname: "$_firstname $_lastname",
-      address: _listeddata.address,
-      mob: _listeddata.mob,
-      mail: _listeddata.mail,
-      time: durationKey.currentState.dropdownDurationvalue,
-      category: categoryKey.currentState.selectedCategory,
-      subcategory: categoryKey.currentState.selectedSubCategory,
-    );
-    print(
-      "time: ${_listeddata.time.toIso8601String()} category:${_listeddata.category} subcategory:${_listeddata.subcategory}",
-    );
   }
 
   @override
@@ -206,6 +225,7 @@ class _ListPageState extends State<ListPage> {
                             time: _listeddata.time,
                             category: _listeddata.category,
                             subcategory: _listeddata.subcategory,
+                            price: _listeddata.price,
                           ),
                         ),
                         TextFormField(
@@ -226,6 +246,7 @@ class _ListPageState extends State<ListPage> {
                             time: _listeddata.time,
                             category: _listeddata.category,
                             subcategory: _listeddata.subcategory,
+                            price: _listeddata.price,
                           ),
                         ),
                         TextFormField(
@@ -244,6 +265,7 @@ class _ListPageState extends State<ListPage> {
                             time: _listeddata.time,
                             category: _listeddata.category,
                             subcategory: _listeddata.subcategory,
+                            price: _listeddata.price,
                           ),
                         ),
                         DurationField(key: durationKey),

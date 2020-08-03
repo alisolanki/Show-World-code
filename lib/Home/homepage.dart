@@ -22,7 +22,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  Map<String, dynamic> _extracteddata = {};
+  Map<String, dynamic> _extracteddata = Map<String, dynamic>();
 
   @override
   void initState() {
@@ -41,8 +41,6 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    // print('uid: ' + _user.uid);
-    // _user.getIdToken().then((value) => print('Token: ' + value.token));
     return MultiProvider(
       providers: [
         ChangeNotifierProvider.value(value: DataProvider()),
