@@ -84,33 +84,50 @@ class PaymentProvider with ChangeNotifier {
   //ListYourself
   Razorpay _razorpayListYourself = Razorpay();
 
-  ListedDataModel listyourselfsuccess;
+  ListedDataModel _listyourselfsuccess;
 
   void _handlePaymentSuccessListYourself(PaymentSuccessResponse response) {
     print("Payment Success");
     _paymentmade = true;
-    var mobile = Mobile(listyourselfsuccess.mob);
-    var data = ListYourselfPatch(
-      address: listyourselfsuccess.address,
-      mail: listyourselfsuccess.mail,
-      listends: listyourselfsuccess.time.toIso8601String(),
-      mob: mobile,
-    );
+    Map<String, dynamic> _data = {
+      'address': _listyourselfsuccess.address,
+      'mail': _listyourselfsuccess.mail,
+      'listends': _listyourselfsuccess.time.toIso8601String(),
+    };
 
+    //Send Data
     try {
       http
           .patch(
-        '${auth.url}/${listyourselfsuccess.category}%20(Listed)/${listyourselfsuccess.subcategory}/${listyourselfsuccess.fullname}.json?auth=${auth.token}',
+        '${auth.url}/${_listyourselfsuccess.category}%20(Listed)/${_listyourselfsuccess.subcategory}/${_listyourselfsuccess.fullname}.json?auth=${auth.token}',
         headers: {"Accept": "application/json"},
-        body: jsonEncode(data),
+        body: jsonEncode(_data),
       )
           .then(
         (value) async {
           print(
-              "User Added to Directory in ${listyourselfsuccess.category} (Listed) Category");
+              "User details added to Directory in ${_listyourselfsuccess.category} (Listed) Category");
           await DataProvider().fetchData(force: true);
         },
       );
+      //Send Mobile
+      try {
+        http
+            .patch(
+          '${auth.url}/${_listyourselfsuccess.category}%20(Listed)/${_listyourselfsuccess.subcategory}/${_listyourselfsuccess.fullname}/mob.json?auth=${auth.token}',
+          headers: {"Accept": "application/json"},
+          body: jsonEncode({0: _listyourselfsuccess.mob}),
+        )
+            .then(
+          (value) async {
+            print(
+                "User Mobile added to Directory in ${_listyourselfsuccess.category} (Listed) Category");
+            await DataProvider().fetchData(force: true);
+          },
+        );
+      } catch (e) {
+        throw (e);
+      }
     } catch (e) {
       throw (e);
     }
@@ -143,8 +160,8 @@ class PaymentProvider with ChangeNotifier {
       }
     };
 
-    listyourselfsuccess = listedDataModel;
-    print("List Yourself Success: ${listyourselfsuccess.price}");
+    _listyourselfsuccess = listedDataModel;
+    print("List Yourself Success: ${_listyourselfsuccess.price}");
     try {
       _razorpayListYourself.open(options);
       notifyListeners();

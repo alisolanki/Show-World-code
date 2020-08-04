@@ -20,26 +20,3 @@ class ListedDataModel {
     @required this.price,
   });
 }
-
-class Mobile {
-  String mob;
-  Mobile(this.mob);
-
-  Map<int, dynamic> toJson() => {
-        0: mob,
-      };
-}
-
-class ListYourselfPatch {
-  String address;
-  String mail;
-  String listends;
-  Mobile mob;
-
-  ListYourselfPatch({this.address, this.mail, this.listends, Mobile mob});
-
-  Map toJson() {
-    Map<int, dynamic> mob = this.mob != null ? this.mob.toJson() : null;
-    return {'address': address, 'mail': mail, 'listends': listends, 'mob': mob};
-  }
-}
