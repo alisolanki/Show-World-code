@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:ShowWorld/models/listed_data.dart';
+import 'package:ShowWorld/providers/category.dart';
 import 'package:ShowWorld/providers/data.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -104,30 +105,31 @@ class PaymentProvider with ChangeNotifier {
         body: jsonEncode(_data),
       )
           .then(
+        (value) {
+          print(
+            "User details in ${_listyourselfsuccess.category} (Listed) Category",
+          );
+        },
+      );
+    } catch (e) {
+      throw (e);
+    }
+    //Send Mobile
+    try {
+      http
+          .put(
+        '${auth.url}/${_listyourselfsuccess.category}%20(Listed)/${_listyourselfsuccess.subcategory}/${_listyourselfsuccess.fullname}/mob.json?auth=${auth.token}',
+        headers: {"Accept": "application/json"},
+        body: jsonEncode([_listyourselfsuccess.mob]),
+      )
+          .then(
         (value) async {
           print(
-              "User details added to Directory in ${_listyourselfsuccess.category} (Listed) Category");
+            "${value.body}",
+          );
           await DataProvider().fetchData(force: true);
         },
       );
-      //Send Mobile
-      try {
-        http
-            .patch(
-          '${auth.url}/${_listyourselfsuccess.category}%20(Listed)/${_listyourselfsuccess.subcategory}/${_listyourselfsuccess.fullname}/mob.json?auth=${auth.token}',
-          headers: {"Accept": "application/json"},
-          body: jsonEncode({0: _listyourselfsuccess.mob}),
-        )
-            .then(
-          (value) async {
-            print(
-                "User Mobile added to Directory in ${_listyourselfsuccess.category} (Listed) Category");
-            await DataProvider().fetchData(force: true);
-          },
-        );
-      } catch (e) {
-        throw (e);
-      }
     } catch (e) {
       throw (e);
     }
