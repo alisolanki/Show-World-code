@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import './mydesktop.dart';
 
 class SubCategoryTile extends StatelessWidget {
-  final String subcategory;
-  SubCategoryTile({this.subcategory});
+  final String subcategory, category;
+  SubCategoryTile({this.subcategory, this.category});
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -32,7 +32,10 @@ class SubCategoryTile extends StatelessWidget {
             context,
             MaterialPageRoute(
               builder: (context) {
-                return MyDesktop(subcategory: subcategory);
+                return MyDesktop(
+                  subcategory: subcategory,
+                  category: category,
+                );
               },
             ),
           );

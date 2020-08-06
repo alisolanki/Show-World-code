@@ -12,6 +12,12 @@ class DataProvider with ChangeNotifier {
 
   List<DataTemplate> _data = [];
 
+  List<CategoryTemplate> _categorydata = [];
+
+  List<CategoryTemplate> get categorylist {
+    return [..._categorydata];
+  }
+
   List<DataTemplate> get datalist {
     print("New Data: $_data _subscribed = $_subscribed");
     return [..._data];
@@ -41,10 +47,7 @@ class DataProvider with ChangeNotifier {
 
   Future<bool> fetchData({bool force = false}) async {
     if (_data.length == 0 || force == true) {
-      _data.clear();
-      if (force == true) {
-        _subscribed = force;
-      }
+      _data = [];
       String urldata;
       await checkSubscription();
       _subscribed ? urldata = auth.urldata : urldata = auth.urldemo;
@@ -54,9 +57,16 @@ class DataProvider with ChangeNotifier {
         var _extracteddata = jsonDecode(_response.body) as Map<String, dynamic>;
         List<DataTemplate> _loadeddata = [];
         int itr = 0;
+        List<CategoryTemplate> _categoryloadeddata = [];
         _extracteddata.forEach((category, subcategory) {
+          var _newdata = CategoryTemplate(
+            id: itr,
+            category: category,
+            subcategory: [],
+          );
           Map<String, dynamic> _subcategorylist = subcategory;
           _subcategorylist.forEach((subcategoryname, names) {
+            _newdata.subcategory.add(subcategoryname);
             Map<String, dynamic> name = names;
             name.forEach((nametext, value) {
               _loadeddata.add(
@@ -73,9 +83,13 @@ class DataProvider with ChangeNotifier {
               itr++;
             });
           });
+          _categoryloadeddata.add(_newdata);
         });
         _loadeddata.forEach((element) {
           _data.add(element);
+        });
+        _categoryloadeddata.forEach((element) {
+          _categorydata.add(element);
         });
         print("Data: $_data");
         notifyListeners();

@@ -33,7 +33,10 @@ class CategoryTile extends StatelessWidget {
             context,
             MaterialPageRoute(
               builder: (context) {
-                return SubCategoryPage(subcategory: subcategory);
+                return SubCategoryPage(
+                  subcategory: subcategory,
+                  category: category,
+                );
               },
             ),
           );

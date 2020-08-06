@@ -7,8 +7,8 @@ import './datatiles.dart';
 import 'data_format.dart';
 
 class MyDesktop extends StatefulWidget {
-  final String subcategory;
-  MyDesktop({this.subcategory});
+  final String subcategory, category;
+  MyDesktop({this.subcategory, this.category});
 
   @override
   _MyDesktopState createState() => _MyDesktopState();
@@ -25,7 +25,9 @@ class _MyDesktopState extends State<MyDesktop> {
     if (_isInit) {
       _dataProvider = Provider.of<DataProvider>(context);
       _subcategorypeople = _dataProvider.datalist
-          .where((u) => u.subcategory == widget.subcategory)
+          .where((u) =>
+              u.category == widget.category &&
+              u.subcategory == widget.subcategory)
           .toList();
       _filteredpeople = _subcategorypeople;
     }

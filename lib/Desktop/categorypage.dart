@@ -1,13 +1,8 @@
-import 'dart:convert';
-
-import 'package:ShowWorld/widgets/round_button.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-
-import '../Desktop/data_format.dart';
-import '../providers/data.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../Desktop/data_format.dart';
+import '../providers/data.dart';
 import '../Desktop/categorytiles.dart';
 import 'datatiles.dart';
 import '../providers/category.dart';
@@ -21,7 +16,6 @@ class _CategoryPageState extends State<CategoryPage> {
   bool _pagecategory = true;
   DataProvider _dataProvider;
   List<DataTemplate> _filteredpeople;
-  CategoryProvider _categoryProvider;
   List<CategoryTemplate> _categorylist;
   bool _isLoadingCategory = true;
   bool _isLoadingData = true;
@@ -48,10 +42,9 @@ class _CategoryPageState extends State<CategoryPage> {
           });
     }
     setState(() {
-      _categoryProvider = Provider.of<CategoryProvider>(context);
-      _categorylist = _categoryProvider.categorylist;
       _dataProvider = Provider.of<DataProvider>(context, listen: true);
       _filteredpeople = _dataProvider.datalist;
+      _categorylist = _dataProvider.categorylist;
     });
     print("_filteredpeople = $_filteredpeople");
     _isInit = false;
@@ -170,7 +163,7 @@ class _CategoryPageState extends State<CategoryPage> {
                     onChanged: (text) {
                       setState(() {
                         _pagecategory
-                            ? _categorylist = _categoryProvider.categorylist
+                            ? _categorylist = _dataProvider.categorylist
                                 .where((u) => u.category
                                     .toLowerCase()
                                     .contains(text.toLowerCase()))

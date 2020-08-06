@@ -4,7 +4,8 @@ import '../Desktop/subcategorytiles.dart';
 
 class SubCategoryPage extends StatefulWidget {
   final List subcategory;
-  SubCategoryPage({this.subcategory});
+  final String category;
+  SubCategoryPage({this.subcategory, this.category});
 
   @override
   _SubCategoryPageState createState() => _SubCategoryPageState();
@@ -109,7 +110,9 @@ class _SubCategoryPageState extends State<SubCategoryPage> {
                     return Container(
                       key: ValueKey(_filteredsubcategory[index]),
                       child: SubCategoryTile(
-                          subcategory: _filteredsubcategory[index]),
+                        subcategory: _filteredsubcategory[index],
+                        category: widget.category,
+                      ),
                     );
                   },
                 ),
