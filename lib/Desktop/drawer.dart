@@ -22,15 +22,15 @@ class DrawerItems extends StatelessWidget {
         children: <Widget>[
           UserAccountsDrawerHeader(
             onDetailsPressed: () {
-              Navigator.pop(context);
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) {
-                    return AccountHomePage();
-                  },
-                ),
-              );
+//              Navigator.pop(context);
+//              Navigator.push(
+//                context,
+//                MaterialPageRoute(
+//                  builder: (context) {
+//                    return AccountHomePage();
+//                  },
+//                ),
+//              );
             },
             arrowColor: Color(0xff1b4f72),
             decoration: BoxDecoration(
@@ -53,27 +53,27 @@ class DrawerItems extends StatelessWidget {
                   fontFamily: "roboto"),
             ),
           ),
-          ListTile(
-            leading: Icon(Icons.account_circle, color: Color(0xff1b4f72)),
-            title: Text(
-              'My Profile',
-              style: drawerfonts,
-            ),
-            onTap: () {
-              // Update the state of the app
-              // ...
-              // Then close the drawer
-              Navigator.pop(context);
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) {
-                    return AccountHomePage();
-                  },
-                ),
-              );
-            },
-          ),
+//          ListTile(
+//            leading: Icon(Icons.account_circle, color: Color(0xff1b4f72)),
+//            title: Text(
+//              'My Profile',
+//              style: drawerfonts,
+//            ),
+//            onTap: () {
+//              // Update the state of the app
+//              // ...
+//              // Then close the drawer
+//              Navigator.pop(context);
+//              Navigator.push(
+//                context,
+//                MaterialPageRoute(
+//                  builder: (context) {
+//                    return AccountHomePage();
+//                  },
+//                ),
+//              );
+//            },
+//          ),
           ListTile(
             leading: Icon(Icons.home, color: Color(0xff1b4f72)),
             title: Text(
