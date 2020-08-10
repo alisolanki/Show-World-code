@@ -16,7 +16,8 @@ class DrawerItems extends StatelessWidget {
   Widget build(BuildContext context) {
     print(_user.toString());
     return Container(
-      color: Colors.blue[100],
+//      color: Colors.white,
+      color: Color(0xfff8f8ff),
       child: ListView(
         padding: EdgeInsets.zero,
         children: <Widget>[
