@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:ShowWorld/models/listed_data.dart';
-import 'package:ShowWorld/providers/category.dart';
 import 'package:ShowWorld/providers/data.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -10,12 +9,8 @@ import 'package:razorpay_flutter/razorpay_flutter.dart';
 import '../auth/auth-api.dart' as auth;
 
 class PaymentProvider with ChangeNotifier {
+  bool _notsubscribed = true;
   Razorpay _razorpaySubscription = Razorpay();
-  bool _paymentmade = false;
-
-  bool get paymentstatus {
-    _paymentmade;
-  }
 
   @override
   void dispose() {
@@ -24,31 +19,38 @@ class PaymentProvider with ChangeNotifier {
     _razorpayListYourself.clear();
   }
 
+  bool get subscriptionstatus {
+    return _notsubscribed;
+  }
+
   void _handlePaymentSuccess(PaymentSuccessResponse response) {
     print("Payment Success");
-    _paymentmade = true;
-
+    _notsubscribed = false;
+    notifyListeners();
     Map<String, String> data = {
       'mob': '${auth.user.phoneNumber}',
       'timestamp': '${DateTime.now().toIso8601String()}',
     };
-
     try {
-      http
-          .patch(
-        auth.urlallusers,
-        headers: {"Accept": "application/json"},
-        body: jsonEncode(data),
-      )
-          .then(
-        (value) async {
-          print("User Added to Subscription List");
-          await DataProvider().fetchData(force: true);
-        },
-      );
+      sendhttpRequest(data);
     } catch (e) {
       throw (e);
     }
+  }
+
+  void sendhttpRequest(Map<String, String> data) async {
+    await http
+        .patch(
+      auth.urlallusers,
+      headers: {"Accept": "application/json"},
+      body: jsonEncode(data),
+    )
+        .then(
+      (value) async {
+        print("User Added to Subscription List");
+        await DataProvider().fetchData(force: true);
+      },
+    );
   }
 
   void _handlePaymentError(PaymentFailureResponse response) {
@@ -67,7 +69,7 @@ class PaymentProvider with ChangeNotifier {
         Razorpay.EVENT_EXTERNAL_WALLET, _handleExternalWallet);
     var options = {
       'key': '${auth.razorpaykey}',
-      'amount': price * 1,
+      'amount': price * 100,
       'name': 'Show World Subscription',
       'description': 'Subscription',
       'prefill': {
@@ -89,7 +91,6 @@ class PaymentProvider with ChangeNotifier {
 
   void _handlePaymentSuccessListYourself(PaymentSuccessResponse response) {
     print("Payment Success");
-    _paymentmade = true;
     Map<String, dynamic> _data = {
       'address': _listyourselfsuccess.address,
       'mail': _listyourselfsuccess.mail,

@@ -22,7 +22,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  Map<String, dynamic> _extracteddata = Map<String, dynamic>();
+  Map<String, dynamic> _extracteddata;
 
   @override
   void initState() {
@@ -78,6 +78,7 @@ class _HomePageState extends State<HomePage> {
           drawer: Drawer(
             elevation: 5,
             child: DrawerItems(),
+            semanticLabel: "Drawer",
           ),
           body: Padding(
             padding: EdgeInsets.only(top: 8),
@@ -94,7 +95,7 @@ class _HomePageState extends State<HomePage> {
                   child: ListCard(),
                 ),
                 Expanded(
-                  child: BuyCard(_extracteddata),
+                  child: BuyCard(_extracteddata == null),
                 ),
                 Expanded(
                   flex: 2,

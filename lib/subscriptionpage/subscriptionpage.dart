@@ -1,4 +1,5 @@
 import 'package:ShowWorld/Desktop/data_format.dart';
+import 'package:ShowWorld/providers/payment.dart';
 import 'package:ShowWorld/providers/prices.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -11,12 +12,14 @@ class SubscriptionPage extends StatefulWidget {
 
 class _SubscriptionPageState extends State<SubscriptionPage> {
   PricesProvider _pricesProvider;
+  PaymentProvider _payment;
   List<DurationTemplate> _pricelist;
   bool _isInit = true;
 
   @override
   void didChangeDependencies() {
     _pricesProvider = Provider.of<PricesProvider>(context);
+    _payment = Provider.of<PaymentProvider>(context);
     if (_isInit) {
       setState(() {
         addPriceItems();
@@ -26,7 +29,6 @@ class _SubscriptionPageState extends State<SubscriptionPage> {
     setState(() {
       _isInit = false;
     });
-
     super.didChangeDependencies();
   }
 
@@ -56,6 +58,11 @@ class _SubscriptionPageState extends State<SubscriptionPage> {
           ),
           iconTheme: const IconThemeData(
             color: Color(0xff1b4f72),
+          ),
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back),
+            onPressed: () =>
+                Navigator.of(context).pop(_payment.subscriptionstatus),
           ),
         ),
       ),

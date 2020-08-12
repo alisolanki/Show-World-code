@@ -68,14 +68,15 @@ class _CouponsState extends State<Coupons> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Checkbox(
-                      tristate: false,
-                      activeColor: Colors.transparent,
-                      value: _tick,
-                      onChanged: (bool _changedTick) {
-                        setState(() {
-                          _tick = _changedTick;
-                        });
-                      }),
+                    tristate: false,
+                    activeColor: Colors.transparent,
+                    value: _tick,
+                    onChanged: (bool _changedTick) {
+                      setState(() {
+                        _tick = _changedTick;
+                      });
+                    },
+                  ),
                   Text(
                     'Enable Auto Debit',
                     style: TextStyle(

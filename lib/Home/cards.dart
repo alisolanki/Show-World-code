@@ -1,3 +1,4 @@
+import 'package:ShowWorld/providers/payment.dart';
 import 'package:flutter/cupertino.dart';
 import '../Desktop/categorypage.dart';
 import 'package:flutter/material.dart';
@@ -123,23 +124,34 @@ class ListCard extends StatelessWidget {
   }
 }
 
-class BuyCard extends StatelessWidget {
-  final Map<String, dynamic> _subscriptionData;
-  BuyCard(this._subscriptionData);
+class BuyCard extends StatefulWidget {
+  bool _notsubscribed;
+  BuyCard(this._notsubscribed);
 
+  @override
+  _BuyCardState createState() => _BuyCardState();
+}
+
+class _BuyCardState extends State<BuyCard> {
   @override
   Widget build(BuildContext context) {
     return FlatButton(
       highlightColor: Color(0xffd4e6f1),
       onPressed: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) {
-              return SubscriptionPage();
-            },
-          ),
-        );
+        widget._notsubscribed
+            ? Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) {
+                    return SubscriptionPage();
+                  },
+                ),
+              ).then(
+                (value) => setState(() {
+                  widget._notsubscribed = value;
+                }),
+              )
+            : null;
       },
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 15.0),
@@ -167,14 +179,14 @@ class BuyCard extends StatelessWidget {
               ),
             ),
             Text(
-              _subscriptionData.length == 0
+              widget._notsubscribed
                   ? "Buy Full Version"
-                  : "Subscription ends on: ${_subscriptionData['timestamp']}",
-              style: TextStyle(
+                  : "Full Version Bought",
+              style: const TextStyle(
                 fontFamily: "roboto",
                 fontWeight: FontWeight.w600,
                 color: Colors.blue,
-                fontSize: _subscriptionData.length == 0 ? 20 : 15,
+                fontSize: 20.0,
               ),
               textAlign: TextAlign.left,
             ),
