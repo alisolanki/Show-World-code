@@ -1,8 +1,8 @@
 import 'dart:convert';
 
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
 
@@ -14,7 +14,6 @@ import '../LoginOTP/stores/login_store.dart';
 import '../providers/category.dart';
 import '../providers/data.dart';
 import '../providers/prices.dart';
-import '../auth/auth-api.dart' as auth;
 
 class HomePage extends StatefulWidget {
   @override
@@ -22,21 +21,13 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  Map<String, dynamic> _extracteddata;
-
   @override
   void initState() {
-    setState(() {
-      getSubscriptionStatus();
-    });
+    Fluttertoast.showToast(
+      msg: "Welcome",
+      backgroundColor: Colors.cyan,
+    );
     super.initState();
-  }
-
-  void getSubscriptionStatus() async {
-    print(auth.urlallusers);
-    var _response = await http.get(auth.urlallusers);
-    _extracteddata = jsonDecode(_response.body);
-    print("extract: $_extracteddata");
   }
 
   @override
@@ -95,7 +86,7 @@ class _HomePageState extends State<HomePage> {
                   child: ListCard(),
                 ),
                 Expanded(
-                  child: BuyCard(_extracteddata == null),
+                  child: BuyCard(),
                 ),
                 Expanded(
                   flex: 2,

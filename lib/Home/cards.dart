@@ -124,35 +124,21 @@ class ListCard extends StatelessWidget {
   }
 }
 
-class BuyCard extends StatefulWidget {
-  bool _notsubscribed;
-  BuyCard(this._notsubscribed);
-
-  @override
-  _BuyCardState createState() => _BuyCardState();
-}
-
-class _BuyCardState extends State<BuyCard> {
+class BuyCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FlatButton(
       highlightColor: Color(0xffd4e6f1),
-      onPressed: widget._notsubscribed
-          ? () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) {
-                    return SubscriptionPage();
-                  },
-                ),
-              ).then(
-                (value) => setState(() {
-                  value == null ? null : widget._notsubscribed = value;
-                }),
-              );
-            }
-          : null,
+      onPressed: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) {
+              return SubscriptionPage();
+            },
+          ),
+        );
+      },
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 15.0),
         decoration: BoxDecoration(
@@ -179,9 +165,7 @@ class _BuyCardState extends State<BuyCard> {
               ),
             ),
             Text(
-              widget._notsubscribed
-                  ? "Buy Full Version"
-                  : "Full Version Bought",
+              "Buy Full Version",
               style: const TextStyle(
                 fontFamily: "roboto",
                 fontWeight: FontWeight.w600,

@@ -25,10 +25,9 @@ class _SubscriptionPageState extends State<SubscriptionPage> {
         addPriceItems();
       });
     }
+    _payment.httpsubscribed();
     _pricelist = _pricesProvider.subscriptionlist;
-    setState(() {
-      _isInit = false;
-    });
+    _isInit = false;
     super.didChangeDependencies();
   }
 
@@ -125,16 +124,28 @@ class _SubscriptionPageState extends State<SubscriptionPage> {
                 SliverList(
                   delegate: SliverChildListDelegate(
                     List.generate(
-                      _pricelist.length,
+                      _payment.subscriptionstatus ? _pricelist.length : 1,
                       (i) {
-                        return Coupons(
-                          "${_pricelist.elementAt(i).months} Months",
-                          _pricelist.elementAt(i).price,
-                        );
+                        return _payment.subscriptionstatus
+                            ? Coupons(
+                                "${_pricelist.elementAt(i).months} Months",
+                                _pricelist.elementAt(i).price,
+                              )
+                            : Center(
+                                child: Text(
+                                  "You have already subscribed",
+                                  style: TextStyle(
+                                    height: 5.0,
+                                    color: Colors.green,
+                                    fontSize: 20.0,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              );
                       },
                     ),
                   ),
-                ),
+                )
               ],
             ),
     );

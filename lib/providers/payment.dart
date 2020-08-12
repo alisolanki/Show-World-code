@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:ShowWorld/models/listed_data.dart';
 import 'package:ShowWorld/providers/data.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 import 'package:razorpay_flutter/razorpay_flutter.dart';
 
@@ -23,8 +24,14 @@ class PaymentProvider with ChangeNotifier {
     return _notsubscribed;
   }
 
+  void httpsubscribed() async {
+    var _extract = await http.get(auth.urlallusers);
+    _notsubscribed = jsonDecode(_extract.body) == null;
+    notifyListeners();
+  }
+
   void _handlePaymentSuccess(PaymentSuccessResponse response) {
-    print("Payment Success");
+    print("Payment Successful");
     _notsubscribed = false;
     notifyListeners();
     Map<String, String> data = {
@@ -33,6 +40,10 @@ class PaymentProvider with ChangeNotifier {
     };
     try {
       sendhttpRequest(data);
+      Fluttertoast.showToast(
+        msg: "Payment Successful",
+        backgroundColor: Colors.green,
+      );
     } catch (e) {
       throw (e);
     }
@@ -55,6 +66,10 @@ class PaymentProvider with ChangeNotifier {
 
   void _handlePaymentError(PaymentFailureResponse response) {
     print("Payment failed");
+    Fluttertoast.showToast(
+      msg: "Payment Failed",
+      backgroundColor: Colors.red,
+    );
   }
 
   void _handleExternalWallet(ExternalWalletResponse response) {
@@ -90,7 +105,7 @@ class PaymentProvider with ChangeNotifier {
   ListedDataModel _listyourselfsuccess;
 
   void _handlePaymentSuccessListYourself(PaymentSuccessResponse response) {
-    print("Payment Success");
+    print("Listed Successfully in ${_listyourselfsuccess.category}");
     Map<String, dynamic> _data = {
       'address': _listyourselfsuccess.address,
       'mail': _listyourselfsuccess.mail,
@@ -128,6 +143,11 @@ class PaymentProvider with ChangeNotifier {
           print(
             "${value.body}",
           );
+          Fluttertoast.showToast(
+            msg:
+                "Listed Successfully in ${_listyourselfsuccess.category} (Listed) category",
+            backgroundColor: Colors.green,
+          );
           await DataProvider().fetchData(force: true);
         },
       );
@@ -138,6 +158,10 @@ class PaymentProvider with ChangeNotifier {
 
   void _handlePaymentErrorListYourself(PaymentFailureResponse response) {
     print("Payment failed");
+    Fluttertoast.showToast(
+      msg: "Payment Failed",
+      backgroundColor: Colors.red,
+    );
   }
 
   void _handleExternalWalletListYourself(ExternalWalletResponse response) {
@@ -164,7 +188,6 @@ class PaymentProvider with ChangeNotifier {
     };
 
     _listyourselfsuccess = listedDataModel;
-    print("List Yourself Success: ${_listyourselfsuccess.price}");
     try {
       _razorpayListYourself.open(options);
       notifyListeners();

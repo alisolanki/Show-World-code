@@ -17,18 +17,7 @@ class DrawerItems extends StatefulWidget {
 }
 
 class _DrawerItemsState extends State<DrawerItems> {
-  PaymentProvider _payment;
   final _user = auth.user;
-  bool _notsubscribed = true;
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    _payment = Provider.of<PaymentProvider>(context);
-    setState(() {
-      _notsubscribed = _payment.subscriptionstatus;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -106,26 +95,24 @@ class _DrawerItemsState extends State<DrawerItems> {
               );
             },
           ),
-          _notsubscribed
-              ? ListTile(
-                  leading: Icon(Icons.shopping_cart, color: Color(0xff1b4f72)),
-                  title: Text(
-                    'Buy Full Version',
-                    style: drawerfonts,
-                  ),
-                  onTap: () {
-                    Navigator.pop(context);
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) {
-                          return SubscriptionPage();
-                        },
-                      ),
-                    ).then((value) => {});
+          ListTile(
+            leading: Icon(Icons.shopping_cart, color: Color(0xff1b4f72)),
+            title: Text(
+              'Buy Full Version',
+              style: drawerfonts,
+            ),
+            onTap: () {
+              Navigator.pop(context);
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) {
+                    return SubscriptionPage();
                   },
-                )
-              : Container(),
+                ),
+              ).then((value) => {});
+            },
+          ),
           ListTile(
             leading: Icon(Icons.info, color: Color(0xff1b4f72)),
             title: Text(
@@ -140,13 +127,22 @@ class _DrawerItemsState extends State<DrawerItems> {
                     return AboutDialog(
                       applicationName: 'Show World',
                       applicationVersion: '1.0.0',
-                      applicationIcon:
-                          Icon(Icons.camera, color: Color(0xff1b4f72)),
+                      applicationIcon: Image.asset(
+                        'assets/logo.png',
+                        height: 60.0,
+                      ),
                       children: <Widget>[
-                        Image.asset(
-                          'assets/logo.png',
+                        Divider(),
+                        Text(
+                          "For any problems contact ShowWorld at +91 98211-53135",
                         ),
+                        Divider(),
+                        Text(
+                          "Developed by Team Eureka (Contact: +91 88502-83085)",
+                        ),
+                        Divider(),
                       ],
+                      applicationLegalese: "© ShowWorld 2020",
                     );
                   },
                 ),
