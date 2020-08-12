@@ -30,7 +30,7 @@ class PricesProvider with ChangeNotifier {
         final _extractedsubscription =
             jsonDecode(_response1.body) as Map<String, dynamic>;
         List<DurationTemplate> _loadeddata = [];
-        //ListYourself
+        // ListYourself
         _extractedlistyourself.forEach((key, value) {
           _loadeddata.add(
             DurationTemplate(

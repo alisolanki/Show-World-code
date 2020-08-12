@@ -137,9 +137,9 @@ class _BuyCardState extends State<BuyCard> {
   Widget build(BuildContext context) {
     return FlatButton(
       highlightColor: Color(0xffd4e6f1),
-      onPressed: () {
-        widget._notsubscribed
-            ? Navigator.push(
+      onPressed: widget._notsubscribed
+          ? () {
+              Navigator.push(
                 context,
                 MaterialPageRoute(
                   builder: (context) {
@@ -148,11 +148,11 @@ class _BuyCardState extends State<BuyCard> {
                 ),
               ).then(
                 (value) => setState(() {
-                  widget._notsubscribed = value;
+                  value == null ? null : widget._notsubscribed = value;
                 }),
-              )
-            : null;
-      },
+              );
+            }
+          : null,
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 15.0),
         decoration: BoxDecoration(

@@ -48,6 +48,14 @@ class _ListPageState extends State<ListPage> {
   );
 
   void _saveForm() {
+    var validated = (_form.currentState.validate()) &&
+        (durationKey.currentState.dropdownDurationvalue !=
+            DateTime(DateTime.now().year, DateTime.now().month,
+                DateTime.now().day)) &&
+        (categoryKey.currentState.selectedSubCategory != "Unlisted");
+    if (!validated) {
+      return;
+    }
     _form.currentState.save();
     _listeddata = ListedDataModel(
       fullname:
@@ -186,6 +194,7 @@ class _ListPageState extends State<ListPage> {
                     child: Column(
                       children: <Widget>[
                         TextFormField(
+                          key: ValueKey("firstname"),
                           decoration: InputDecoration(
                               labelText: "First Name",
                               focusedBorder: focusedTextFieldDecoration,
@@ -194,8 +203,18 @@ class _ListPageState extends State<ListPage> {
                           onFieldSubmitted: (_) => FocusScope.of(context)
                               .requestFocus(_lastnamefocusnode),
                           onSaved: (newValue) => _firstname = newValue,
+                          validator: (value) {
+                            if (value.trim().isEmpty) {
+                              return "Please fill your first name";
+                            }
+                            if (value.trim().length < 2) {
+                              return "Please enter a first name with atleast 3 characters";
+                            }
+                            return null;
+                          },
                         ),
                         TextFormField(
+                          key: ValueKey("lastname"),
                           decoration: InputDecoration(
                               labelText: "Last Name",
                               focusedBorder: focusedTextFieldDecoration,
@@ -205,8 +224,18 @@ class _ListPageState extends State<ListPage> {
                           onFieldSubmitted: (_) => FocusScope.of(context)
                               .requestFocus(_addressfocusnode),
                           onSaved: (newValue) => _lastname = newValue,
+                          validator: (value) {
+                            if (value.trim().isEmpty) {
+                              return "Please fill your last name";
+                            }
+                            if (value.trim().length < 3) {
+                              return "Please enter a last name with atleast 3 characters";
+                            }
+                            return null;
+                          },
                         ),
                         TextFormField(
+                          key: ValueKey("address"),
                           decoration: InputDecoration(
                               labelText: "Address",
                               focusedBorder: focusedTextFieldDecoration,
@@ -227,8 +256,18 @@ class _ListPageState extends State<ListPage> {
                             subcategory: _listeddata.subcategory,
                             price: _listeddata.price,
                           ),
+                          validator: (value) {
+                            if (value.trim().isEmpty) {
+                              return "Please fill your first name";
+                            }
+                            if (value.trim().length < 3) {
+                              return "Please enter a name with atleast 3 characters";
+                            }
+                            return null;
+                          },
                         ),
                         TextFormField(
+                          key: ValueKey("phonenumber"),
                           decoration: InputDecoration(
                               labelText: "Phone Number",
                               focusedBorder: focusedTextFieldDecoration,
@@ -248,8 +287,19 @@ class _ListPageState extends State<ListPage> {
                             subcategory: _listeddata.subcategory,
                             price: _listeddata.price,
                           ),
+                          validator: (value) {
+                            if (value.trim().isEmpty) {
+                              return "Enter a phone number";
+                            }
+                            if (value.trim().length == 10 ||
+                                value.trim().length == 13) {
+                              return null;
+                            }
+                            return "Your phone number must be 10 digit long";
+                          },
                         ),
                         TextFormField(
+                          key: ValueKey("emailid"),
                           decoration: InputDecoration(
                               labelText: "Email id",
                               focusedBorder: focusedTextFieldDecoration,
@@ -267,6 +317,14 @@ class _ListPageState extends State<ListPage> {
                             subcategory: _listeddata.subcategory,
                             price: _listeddata.price,
                           ),
+                          onFieldSubmitted: (_) =>
+                              FocusScope.of(context).unfocus(),
+                          validator: (value) {
+                            if (value.trim().isEmpty) {
+                              return "Enter a valid email";
+                            }
+                            return null;
+                          },
                         ),
                         DurationField(key: durationKey),
                         CategoryFields(key: categoryKey),
