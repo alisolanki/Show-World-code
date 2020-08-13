@@ -1,7 +1,5 @@
 import 'package:ShowWorld/listyourself/listpage.dart';
-import 'package:ShowWorld/providers/payment.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 import './categorypage.dart';
 import '../LoginOTP/stores/login_store.dart';

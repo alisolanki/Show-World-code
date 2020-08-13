@@ -1,4 +1,5 @@
 import 'package:ShowWorld/models/listed_data.dart';
+import 'package:ShowWorld/providers/data.dart';
 import 'package:ShowWorld/providers/payment.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -32,7 +33,8 @@ class _ListPageState extends State<ListPage> {
   final _phonenumberfocusnode = FocusNode();
   final _emailfocusnode = FocusNode();
   final _form = GlobalKey<FormState>();
-  PaymentProvider payment;
+  PaymentProvider _payment;
+  DataProvider _dataProvider;
   bool _isInit = true;
   String _firstname, _lastname;
 
@@ -68,19 +70,20 @@ class _ListPageState extends State<ListPage> {
       subcategory: categoryKey.currentState.selectedSubCategory,
       price: durationKey.currentState.prices,
     );
-    payment.makePaymentListYourself(_listeddata);
+    _payment.makePaymentListYourself(_listeddata);
     //Error handling: i.e. on no input by user, REMAINING
     print("name: ${_listeddata.fullname}");
     print(
       "time: ${_listeddata.time.toIso8601String()} category:${_listeddata.category} subcategory:${_listeddata.subcategory} price: ${_listeddata.price}",
     );
+    _dataProvider.fetchData(force: true);
   }
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
     if (_isInit) {
-      payment = Provider.of<PaymentProvider>(context);
+      _payment = Provider.of<PaymentProvider>(context);
     }
     _isInit = false;
   }

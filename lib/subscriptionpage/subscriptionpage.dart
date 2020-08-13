@@ -14,19 +14,21 @@ class _SubscriptionPageState extends State<SubscriptionPage> {
   PricesProvider _pricesProvider;
   PaymentProvider _payment;
   List<DurationTemplate> _pricelist;
-  bool _isInit = true;
+  var _isInit = true;
+  var _loading = true;
 
   @override
   void didChangeDependencies() {
     _pricesProvider = Provider.of<PricesProvider>(context);
     _payment = Provider.of<PaymentProvider>(context);
     if (_isInit) {
-      setState(() {
-        addPriceItems();
-      });
+      addPriceItems();
     }
-    _payment.httpsubscribed();
-    _pricelist = _pricesProvider.subscriptionlist;
+    setState(() {
+      _payment.httpsubscribed();
+      _pricelist = _pricesProvider.subscriptionlist;
+      _loading = false;
+    });
     _isInit = false;
     super.didChangeDependencies();
   }
@@ -65,7 +67,7 @@ class _SubscriptionPageState extends State<SubscriptionPage> {
           ),
         ),
       ),
-      body: _pricelist.length == 0
+      body: (_pricelist.length == 0) || _loading
           ? Center(child: CircularProgressIndicator())
           : CustomScrollView(
               slivers: <Widget>[
