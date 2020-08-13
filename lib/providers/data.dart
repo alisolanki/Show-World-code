@@ -37,17 +37,17 @@ class DataProvider with ChangeNotifier {
       } else {
         print("You User id is subscribed");
         _subscribed = true;
-        notifyListeners();
       }
     } catch (error) {
       print("Not Subscribed");
       throw (error);
     }
+    notifyListeners();
   }
 
-  Future<bool> fetchData({bool force = false}) async {
+  Future<List<DataTemplate>> fetchData({bool force = false}) async {
     if (_data.length == 0 || force == true) {
-      _data = [];
+      _data.clear();
       String urldata;
       await checkSubscription();
       _subscribed ? urldata = auth.urldata : urldata = auth.urldemo;
@@ -91,16 +91,16 @@ class DataProvider with ChangeNotifier {
         _categoryloadeddata.forEach((element) {
           _categorydata.add(element);
         });
-        print("Data: $_data");
         notifyListeners();
-        return false;
+        print("Data: $_data");
+        return _data;
       } catch (error) {
         print("Error has occured during fetching data/demo");
         throw (error);
       }
     } else {
       print("All people data has already been fetched");
-      return false;
+      return _data;
     }
   }
 

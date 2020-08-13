@@ -134,14 +134,29 @@ class _SubscriptionPageState extends State<SubscriptionPage> {
                                 _pricelist.elementAt(i).price,
                               )
                             : Center(
-                                child: Text(
-                                  "You have already subscribed",
-                                  style: TextStyle(
-                                    height: 5.0,
-                                    color: Colors.green,
-                                    fontSize: 20.0,
-                                    fontWeight: FontWeight.bold,
-                                  ),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      "You have already subscribed",
+                                      style: TextStyle(
+                                        height: 5.0,
+                                        color: Colors.green,
+                                        fontSize: 20.0,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    Text(
+                                      "Restart the app if you do not see the full access",
+                                      style: TextStyle(
+                                        height: 5.0,
+                                        color: Colors.amber,
+                                        fontSize: 20.0,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  ],
                                 ),
                               );
                       },

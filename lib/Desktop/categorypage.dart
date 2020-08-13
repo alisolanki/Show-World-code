@@ -23,32 +23,35 @@ class _CategoryPageState extends State<CategoryPage> {
 
   @override
   void didChangeDependencies() {
+    super.didChangeDependencies();
     print("_isInit = $_isInit");
-    print("Is loading Category: $_isLoadingCategory");
+    _dataProvider = Provider.of<DataProvider>(context);
     if (_isInit) {
-      Provider.of<CategoryProvider>(context)
-          .fetchCategoryData()
-          .then((check) => {
-                setState(() {
-                  _isLoadingCategory = check;
-                }),
-                print("Is loading Category: $_isLoadingCategory"),
-              });
-      Provider.of<DataProvider>(context).fetchData().then((check) => {
-            setState(() {
-              _isLoadingData = check;
-            }),
-            print("Is loading Data: $_isLoadingData"),
-          });
+      fetchData();
     }
     setState(() {
-      _dataProvider = Provider.of<DataProvider>(context, listen: true);
-      _filteredpeople = _dataProvider.datalist;
       _categorylist = _dataProvider.categorylist;
     });
     print("_filteredpeople = $_filteredpeople");
     _isInit = false;
-    super.didChangeDependencies();
+  }
+
+  void fetchData() {
+    Provider.of<CategoryProvider>(context).fetchCategoryData().then((check) => {
+          setState(() {
+            _isLoadingCategory = check;
+          }),
+          print("Is loading Category: $_isLoadingCategory"),
+        });
+    Provider.of<DataProvider>(context).fetchData().then(
+          (check) => {
+            setState(() {
+              _isLoadingData = false;
+              _filteredpeople = check;
+            }),
+            print("Check: $check"),
+          },
+        );
   }
 
   void _togglePage(bool _switchme) {
@@ -61,17 +64,6 @@ class _CategoryPageState extends State<CategoryPage> {
 
   @override
   Widget build(BuildContext context) {
-    // Provider.of<DataProvider>(context).subcription
-    //     ? Scaffold.of(context).showSnackBar(
-    //         SnackBar(
-    //           content: Text("Subscribed"),
-    //         ),
-    //       )
-    //     : Scaffold.of(context).showSnackBar(
-    //         SnackBar(
-    //           content: Text("Subscribe to get the full version"),
-    //         ),
-    //       );
     return Scaffold(
       backgroundColor: Color(0xffd4e6f1),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
@@ -87,26 +79,6 @@ class _CategoryPageState extends State<CategoryPage> {
           Navigator.pop(context);
         },
       ),
-//      appBar: PreferredSize(
-//        preferredSize: Size(double.infinity, 60),
-//        child: AppBar(
-//          backgroundColor: Colors.white,
-//          elevation: 2,
-//          titleSpacing: 1,
-//          centerTitle: true,
-//          title: Text(
-//            'SHOW WORLD',
-//            style: TextStyle(
-//              fontFamily: "roboto",
-//              fontWeight: FontWeight.w600,
-//              letterSpacing: 2,
-//              fontSize: 25,
-//              color: Colors.purple[800],
-//            ),
-//          ),
-//          iconTheme: IconThemeData(color: Colors.purple[800]),
-//        ),
-//      ),
       body: SafeArea(
         child: Container(
           margin: EdgeInsets.only(top: 20),

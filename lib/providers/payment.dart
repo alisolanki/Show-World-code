@@ -31,7 +31,7 @@ class PaymentProvider with ChangeNotifier {
   }
 
   void _handlePaymentSuccess(PaymentSuccessResponse response) {
-    print("Payment Successful");
+    print("Payment Successful Restart app to see changes");
     _notsubscribed = false;
     notifyListeners();
     Map<String, String> data = {
@@ -50,18 +50,23 @@ class PaymentProvider with ChangeNotifier {
   }
 
   void sendhttpRequest(Map<String, String> data) async {
-    await http
-        .patch(
-      auth.urlallusers,
-      headers: {"Accept": "application/json"},
-      body: jsonEncode(data),
-    )
-        .then(
-      (value) async {
-        print("User Added to Subscription List");
-        await DataProvider().fetchData(force: true);
-      },
-    );
+    try {
+      await http
+          .patch(
+        auth.urlallusers,
+        headers: {"Accept": "application/json"},
+        body: jsonEncode(data),
+      )
+          .then(
+        (value) async {
+          print("User Added to Subscription List");
+          await DataProvider().fetchData(force: true);
+          notifyListeners();
+        },
+      );
+    } catch (e) {
+      throw (e);
+    }
   }
 
   void _handlePaymentError(PaymentFailureResponse response) {
@@ -149,6 +154,7 @@ class PaymentProvider with ChangeNotifier {
             backgroundColor: Colors.green,
           );
           await DataProvider().fetchData(force: true);
+          notifyListeners();
         },
       );
     } catch (e) {

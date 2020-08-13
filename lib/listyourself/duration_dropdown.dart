@@ -52,7 +52,7 @@ class DurationFieldState extends State<DurationField> {
         DropdownMenuItem<String>(
           key: ValueKey("Duration"),
           child: Text(
-            "${e.months} months",
+            "${e.months} months Rs.${e.price}",
             style: TextStyle(
               color: Color(0xff1b4f72),
             ),
