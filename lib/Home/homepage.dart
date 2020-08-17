@@ -13,6 +13,8 @@ import '../providers/data.dart';
 import '../providers/prices.dart';
 
 class HomePage extends StatefulWidget {
+  final Map<String, List<String>> _advertisements;
+  HomePage(this._advertisements);
   @override
   _HomePageState createState() => _HomePageState();
 }
@@ -24,6 +26,7 @@ class _HomePageState extends State<HomePage> {
       msg: "Welcome",
       backgroundColor: Colors.cyan,
     );
+    print("Ads: ${widget._advertisements.toString()}");
     super.initState();
   }
 
@@ -74,7 +77,7 @@ class _HomePageState extends State<HomePage> {
               children: <Widget>[
                 Expanded(
                   flex: 2,
-                  child: AdvertisementCardTop(),
+                  child: AdvertisementCardTop(widget._advertisements['top']),
                 ),
                 Expanded(
                   child: DirectoryCard(),
@@ -87,7 +90,8 @@ class _HomePageState extends State<HomePage> {
                 ),
                 Expanded(
                   flex: 2,
-                  child: AdvertisementCardBottom(),
+                  child:
+                      AdvertisementCardBottom(widget._advertisements['bottom']),
                 ),
               ],
             ),

@@ -1,10 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
+import 'package:provider/provider.dart';
 
 import '../../Home/homepage.dart';
 import '../pages/login_page.dart';
 import '../pages/otp_page.dart';
+import '../../providers/advertisement.dart';
 import '../../auth/auth-api.dart' as auth;
 
 part 'login_store.g.dart';
@@ -135,13 +137,26 @@ abstract class LoginStoreBase with Store {
       BuildContext context, AuthResult result) async {
     isLoginLoading = true;
     isOtpLoading = true;
-
     firebaseUser = result.user;
-    auth.geturls().then(
-          (_) => Navigator.of(context).pushAndRemoveUntil(
-              MaterialPageRoute(builder: (_) => HomePage()),
-              (Route<dynamic> route) => false),
+    Provider.of<LoginStore>(context, listen: false)
+        .isAlreadyAuthenticated()
+        .then((result) {
+      if (result) {
+        auth.geturls().then(
+          (_) {
+            AdvertisementFetcher().fetchAdvertisements().then(
+                  (fetchedData) => Navigator.of(context).pushAndRemoveUntil(
+                      MaterialPageRoute(builder: (_) => HomePage(fetchedData)),
+                      (Route<dynamic> route) => false),
+                );
+          },
         );
+      } else {
+        Navigator.of(context).pushAndRemoveUntil(
+            MaterialPageRoute(builder: (_) => const LoginPage()),
+            (Route<dynamic> route) => false);
+      }
+    });
 
     isLoginLoading = false;
     isOtpLoading = false;

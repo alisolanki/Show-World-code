@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import '../../providers/advertisement.dart';
 import '../../Home/homepage.dart';
 import '../pages/login_page.dart';
 import '../stores/login_store.dart';
@@ -14,17 +16,21 @@ class SplashPage extends StatefulWidget {
 
 class _SplashPageState extends State<SplashPage> {
   @override
-  void initState() {
-    super.initState();
+  void didChangeDependencies() {
+    super.didChangeDependencies();
     Provider.of<LoginStore>(context, listen: false)
         .isAlreadyAuthenticated()
         .then((result) {
       if (result) {
         auth.geturls().then(
-              (_) => Navigator.of(context).pushAndRemoveUntil(
-                  MaterialPageRoute(builder: (_) => HomePage()),
-                  (Route<dynamic> route) => false),
-            );
+          (_) {
+            AdvertisementFetcher().fetchAdvertisements().then(
+                  (fetchedData) => Navigator.of(context).pushAndRemoveUntil(
+                      MaterialPageRoute(builder: (_) => HomePage(fetchedData)),
+                      (Route<dynamic> route) => false),
+                );
+          },
+        );
       } else {
         Navigator.of(context).pushAndRemoveUntil(
             MaterialPageRoute(builder: (_) => const LoginPage()),
