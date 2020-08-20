@@ -312,7 +312,7 @@ class _ListPageState extends State<ListPage> {
                           focusNode: _emailfocusnode,
                           onSaved: (newValue) => _listeddata = ListedDataModel(
                             fullname: _listeddata.fullname,
-                            address: newValue,
+                            address: _listeddata.address,
                             mob: _listeddata.mob,
                             mail: newValue,
                             time: _listeddata.time,

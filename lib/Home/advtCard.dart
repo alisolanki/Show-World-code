@@ -11,7 +11,7 @@ class AdvertisementCardTop extends StatelessWidget {
       child: Container(
 //        width: _width * 0.9,
         decoration: BoxDecoration(
-            color: Colors.transparent,
+          color: Colors.transparent,
 //            boxShadow: [
 //              BoxShadow(
 //                  color: Colors.white,
@@ -24,7 +24,8 @@ class AdvertisementCardTop extends StatelessWidget {
 //                  spreadRadius: 0.5,
 //                  offset: Offset(1, 1))
 //            ],
-            borderRadius: BorderRadius.circular(10)),
+          borderRadius: BorderRadius.circular(10),
+        ),
         child: CarouselSlider.builder(
           itemCount: _urls.length,
           itemBuilder: (context, index) {

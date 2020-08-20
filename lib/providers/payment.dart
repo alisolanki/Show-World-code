@@ -121,7 +121,7 @@ class PaymentProvider with ChangeNotifier {
     try {
       http
           .patch(
-        '${auth.url}/${_listyourselfsuccess.category}%20(Listed)/${_listyourselfsuccess.subcategory}/${_listyourselfsuccess.fullname}.json?auth=${auth.token}',
+        '${auth.url}/data/${_listyourselfsuccess.category}%20(Listed)/${_listyourselfsuccess.subcategory}/${_listyourselfsuccess.fullname}.json?auth=${auth.token}',
         headers: {"Accept": "application/json"},
         body: jsonEncode(_data),
       )
@@ -139,7 +139,7 @@ class PaymentProvider with ChangeNotifier {
     try {
       http
           .put(
-        '${auth.url}/${_listyourselfsuccess.category}%20(Listed)/${_listyourselfsuccess.subcategory}/${_listyourselfsuccess.fullname}/mob.json?auth=${auth.token}',
+        '${auth.url}/data/${_listyourselfsuccess.category}%20(Listed)/${_listyourselfsuccess.subcategory}/${_listyourselfsuccess.fullname}/mob.json?auth=${auth.token}',
         headers: {"Accept": "application/json"},
         body: jsonEncode([_listyourselfsuccess.mob]),
       )
