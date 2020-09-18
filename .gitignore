@@ -37,6 +37,7 @@
 **/android/gradlew.bat
 **/android/local.properties
 **/android/**/GeneratedPluginRegistrant.java
+**/android/app/Users/
 
 # iOS/XCode related
 **/ios/**/*.mode1v3
@@ -68,7 +69,6 @@
 # Authentication and APIs
 **/android/app/google-services.json
 **/lib/auth
-**/android/app/Users
 **/android/key.properties
 **/android/app/proguard-rules.pro
 

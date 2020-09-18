@@ -33,6 +33,7 @@ dependencies:
 
   firebase_core: ^0.4.5
   firebase_auth: ^0.16.1
+  firebase_messaging: ^6.0.12
 
   numeric_keyboard: ^1.0.0
 
