@@ -165,7 +165,7 @@ Widget detailsCard(
                   ),
                 ],
               )
-            : Expanded(
+            : Container(
                 child: Padding(
                   padding: const EdgeInsets.symmetric(
                     vertical: 10.0,

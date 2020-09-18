@@ -68,7 +68,9 @@
 # Authentication and APIs
 **/android/app/google-services.json
 **/lib/auth
+**/android/app/Users
 **/android/key.properties
+**/android/app/proguard-rules.pro
 
 # Exceptions to above rules.
 !**/ios/**/default.mode1v3
