@@ -7,7 +7,7 @@
          <animated-rotate android:pivotX="@android:integer/config_longAnimTime">
         <bitmap
             android:gravity="center"
-            android:src="@mipmap/ic_launcher" />
+            android:src="@drawable/logo" />
          </animated-rotate>
     </item>
 </layer-list>

@@ -120,6 +120,18 @@ class _SubscriptionPageState extends State<SubscriptionPage> {
                           ],
                         ),
                       ),
+                      Padding(
+                        padding: EdgeInsets.all(5.0),
+                        child: Text(
+                          "If you face any problems, contact: +91 98211 53135",
+                          style: TextStyle(
+                            color: Colors.grey[700],
+                            fontSize: 12,
+                            fontWeight: FontWeight.w300,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
                     ],
                   ),
                 ),
@@ -130,7 +142,7 @@ class _SubscriptionPageState extends State<SubscriptionPage> {
                       (i) {
                         return _payment.subscriptionstatus
                             ? Coupons(
-                                "${_pricelist.elementAt(i).months} Months",
+                                int.parse(_pricelist.elementAt(i).months),
                                 _pricelist.elementAt(i).price,
                               )
                             : Center(

@@ -124,15 +124,15 @@ class _DrawerItemsState extends State<DrawerItems> {
                   builder: (context) {
                     return AboutDialog(
                       applicationName: 'Show World',
-                      applicationVersion: '1.0.0',
+                      applicationVersion: '5.0.0',
                       applicationIcon: Image.asset(
-                        'assets/logo.png',
+                        'assets/logofilled.png',
                         height: 60.0,
                       ),
                       children: <Widget>[
                         Divider(),
                         Text(
-                          "For any problems contact ShowWorld at +91 98211-53135",
+                          "For any problems, contact SHOW WORLD at +91 98211-53135",
                         ),
                         Divider(),
                         Text(

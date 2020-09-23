@@ -30,13 +30,18 @@ class PaymentProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  int _duration;
   void _handlePaymentSuccess(PaymentSuccessResponse response) {
     print("Payment Successful Restart app to see changes");
     _notsubscribed = false;
     notifyListeners();
     Map<String, String> data = {
       'mob': '${auth.user.phoneNumber}',
-      'timestamp': '${DateTime.now().toIso8601String()}',
+      'timestamp': DateTime(
+              DateTime.now().year,
+              DateTime.now().month + (_duration == null ? '0' : _duration),
+              DateTime.now().day)
+          .toIso8601String(),
     };
     try {
       sendhttpRequest(data);
@@ -81,21 +86,24 @@ class PaymentProvider with ChangeNotifier {
     print("Choosing Wallet");
   }
 
-  void makePayment(double price) {
+  void makePayment(double price, int duration) {
     _razorpaySubscription.on(
         Razorpay.EVENT_PAYMENT_SUCCESS, _handlePaymentSuccess);
     _razorpaySubscription.on(Razorpay.EVENT_PAYMENT_ERROR, _handlePaymentError);
     _razorpaySubscription.on(
         Razorpay.EVENT_EXTERNAL_WALLET, _handleExternalWallet);
+
     var options = {
       'key': '${auth.razorpaykey}',
       'amount': price * 100,
-      'name': 'Show World Subscription',
-      'description': 'Subscription',
+      'name': 'Show World Film Directory',
+      'description': 'Subscription for $duration Months',
       'prefill': {
         'contact': '${auth.user.phoneNumber}',
       }
     };
+    _duration = duration;
+
     try {
       _razorpaySubscription.open(options);
       notifyListeners();

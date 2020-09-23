@@ -167,7 +167,7 @@ class _ListPageState extends State<ListPage> {
                 Column(
                   children: <Widget>[
                     Text(
-                      "*Your data will be recorded in a separate category. ",
+                      "* Your data will be recorded in a separate category. ",
                       style: TextStyle(
                         fontFamily: 'roboto',
                         color: Colors.black87,
@@ -178,6 +178,17 @@ class _ListPageState extends State<ListPage> {
                       "Eg. Artist (Listed)",
                       style: TextStyle(
                           color: Colors.black, fontWeight: FontWeight.bold),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.all(5.0),
+                      child: Text(
+                        "If you face any problems, contact: +91 98211 53135",
+                        style: TextStyle(
+                          fontFamily: 'roboto',
+                          color: Colors.black87,
+                          fontSize: 12,
+                        ),
+                      ),
                     ),
                   ],
                 ),

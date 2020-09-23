@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 import '../providers/payment.dart';
 
 class Coupons extends StatefulWidget {
-  final String _duration;
+  final int _duration;
   final double _price;
   Coupons(this._duration, this._price);
   @override
@@ -37,7 +37,7 @@ class _CouponsState extends State<Coupons> {
                 height: 10.0,
               ),
               Text(
-                '${widget._duration}',
+                '${widget._duration} Months',
                 style: TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
@@ -56,7 +56,7 @@ class _CouponsState extends State<Coupons> {
               ),
               RaisedButton(
                 onPressed: () {
-                  _payment.makePayment(widget._price);
+                  _payment.makePayment(widget._price, widget._duration);
                 },
                 color: Colors.blueGrey.shade400,
                 child: Text(

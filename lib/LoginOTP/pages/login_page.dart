@@ -59,22 +59,37 @@ class _LoginPageState extends State<LoginPage> {
                                           constraints: const BoxConstraints(
                                               maxHeight: 200),
                                           margin: const EdgeInsets.all(20.0),
-                                          child:
-                                              Image.asset('assets/logo.png')),
+                                          child: Image.asset(
+                                              'assets/logofilled.png')),
                                     ),
                                   ],
                                 ),
                               ),
                               Container(
                                 margin: const EdgeInsets.all(10),
-                                child: Text(
-                                  'Show World Film Directory',
-                                  style: TextStyle(
-                                    color: MyColors.primaryColor,
-                                    fontSize: 50,
-                                    fontWeight: FontWeight.w800,
+                                child: FittedBox(
+                                  fit: BoxFit.cover,
+                                  child: Column(
+                                    children: [
+                                      Text(
+                                        'SHOW WORLD',
+                                        style: TextStyle(
+                                          color: MyColors.primaryColor,
+                                          fontSize: 50,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                        textAlign: TextAlign.center,
+                                      ),
+                                      Text(
+                                        'Film Directory',
+                                        style: TextStyle(
+                                          color: MyColors.primaryColor,
+                                          fontSize: 30,
+                                        ),
+                                        textAlign: TextAlign.center,
+                                      ),
+                                    ],
                                   ),
-                                  textAlign: TextAlign.center,
                                 ),
                               ),
                             ],
@@ -99,7 +114,7 @@ class _LoginPageState extends State<LoginPage> {
                                             color: MyColors.primaryColor),
                                       ),
                                       TextSpan(
-                                        text: 'One Time Password ',
+                                        text: 'One Time Password (OTP) ',
                                         style: TextStyle(
                                             color: MyColors.primaryColor,
                                             fontWeight: FontWeight.bold),
