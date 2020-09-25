@@ -1,3 +1,4 @@
+import 'package:ShowWorld/Free_resources/free_resources_page.dart';
 import 'package:ShowWorld/listyourself/listpage.dart';
 import 'package:flutter/material.dart';
 
@@ -106,6 +107,24 @@ class _DrawerItemsState extends State<DrawerItems> {
                 MaterialPageRoute(
                   builder: (context) {
                     return SubscriptionPage();
+                  },
+                ),
+              ).then((value) => {});
+            },
+          ),
+          ListTile(
+            leading: Icon(Icons.star, color: Color(0xff1b4f72)),
+            title: Text(
+              'Free Resources',
+              style: drawerfonts,
+            ),
+            onTap: () {
+              Navigator.pop(context);
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) {
+                    return FreeResourcesPage();
                   },
                 ),
               ).then((value) => {});

@@ -1,3 +1,4 @@
+import 'package:ShowWorld/Free_resources/free_resources_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -181,50 +182,58 @@ class BuyCard extends StatelessWidget {
   }
 }
 
-class UnListCard extends StatelessWidget {
+class Resources extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 15.0),
-      decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.all(Radius.circular(5)),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.indigo[800],
-              blurRadius: 2,
-              offset: Offset(1, 3),
-              spreadRadius: 1,
-            ),
-          ]),
-      child: FlatButton(
-        highlightColor: Color(0xffd4e6f1),
+    return FlatButton(
+      highlightColor: Color(0xffd4e6f1),
+      onPressed: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) {
+              return FreeResourcesPage();
+            },
+          ),
+        );
+      },
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 15.0),
+        decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.all(Radius.circular(5)),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.blue[100],
+                blurRadius: 2,
+                offset: Offset(1, 3),
+                spreadRadius: 1,
+              ),
+            ]),
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
             Padding(
-              padding: const EdgeInsets.only(
-                top: 8.0,
-                bottom: 8.0,
-                right: 20.0,
+              padding: const EdgeInsets.symmetric(
+                vertical: 8.0,
+                horizontal: 20.0,
               ),
               child: Icon(
-                Icons.input,
-                color: Colors.indigo[800],
+                Icons.star,
+                color: Colors.cyan,
               ),
             ),
             Text(
-              "Remove Yourself",
-              style: TextStyle(
+              "Free Resources",
+              style: const TextStyle(
                 fontFamily: "roboto",
-                color: Colors.indigo[800],
-                fontSize: 20,
+                fontWeight: FontWeight.w600,
+                color: Colors.cyan,
+                fontSize: 20.0,
               ),
               textAlign: TextAlign.left,
             ),
           ],
         ),
-        onPressed: () {},
       ),
     );
   }

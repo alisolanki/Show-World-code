@@ -89,6 +89,9 @@ class _HomePageState extends State<HomePage> {
                   child: BuyCard(),
                 ),
                 Expanded(
+                  child: Resources(),
+                ),
+                Expanded(
                   flex: 2,
                   child:
                       AdvertisementCardBottom(widget._advertisements['bottom']),
