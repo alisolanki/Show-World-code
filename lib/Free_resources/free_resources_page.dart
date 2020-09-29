@@ -40,17 +40,29 @@ class _FreeResourcesPageState extends State<FreeResourcesPage> {
 
   @override
   void initState() {
-    FirebaseAdMob.instance.initialize(appId: auth.adMobId).then(
-          (_) => _bannerAd = _createBannerAd()
-            ..load()
-            ..show(),
-        );
+    try {
+      FirebaseAdMob.instance.initialize(appId: auth.adMobId).then((_) {
+        _bannerAd = _createBannerAd()
+          ..load()
+          ..show();
+      });
+    } catch (e) {
+      throw (e);
+    }
     super.initState();
   }
 
   @override
   void dispose() {
-    _bannerAd.dispose();
+    try {
+      Future.delayed(Duration(milliseconds: 500), () {
+        if (_bannerAd != null) _bannerAd.dispose();
+        _bannerAd = null;
+      });
+    } catch (e) {
+      throw (e);
+    }
+    print("Banner ad is disposed");
     super.dispose();
   }
 
@@ -104,62 +116,62 @@ class _FreeResourcesPageState extends State<FreeResourcesPage> {
       ),
     );
   }
-}
 
-Widget buttonTemplate(BuildContext cont, String _title, IconData _icondata) {
-  void _navigateFilmBudget(BuildContext ctx) {
-    Navigator.push(
-      ctx,
-      MaterialPageRoute(
-        builder: (ctx) {
-          return FilmBudgetPage();
-        },
+  Widget buttonTemplate(BuildContext cont, String _title, IconData _icondata) {
+    void _navigateFilmBudget(BuildContext ctx) {
+      Navigator.push(
+        ctx,
+        MaterialPageRoute(
+          builder: (ctx) {
+            return FilmBudgetPage();
+          },
+        ),
+      );
+    }
+
+    return FlatButton(
+      highlightColor: Color(0xffd4e6f1),
+      onPressed: () {
+        _navigateFilmBudget(cont);
+      },
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 15.0),
+        decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.all(Radius.circular(5)),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.indigo[100],
+                blurRadius: 2,
+                offset: Offset(1, 3),
+                spreadRadius: 1,
+              ),
+            ]),
+        child: Row(
+          children: <Widget>[
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                vertical: 8.0,
+                horizontal: 20.0,
+              ),
+              child: Icon(
+                _icondata,
+                color: Colors.indigo,
+              ),
+            ),
+            Text(
+              _title,
+              style: TextStyle(
+                fontFamily: "roboto",
+                fontWeight: FontWeight.w600,
+                color: Colors.indigo,
+                fontSize: 20,
+              ),
+              textAlign: TextAlign.left,
+            ),
+          ],
+        ),
       ),
     );
   }
-
-  return FlatButton(
-    highlightColor: Color(0xffd4e6f1),
-    onPressed: () {
-      _navigateFilmBudget(cont);
-    },
-    child: Container(
-      padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 15.0),
-      decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.all(Radius.circular(5)),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.indigo[100],
-              blurRadius: 2,
-              offset: Offset(1, 3),
-              spreadRadius: 1,
-            ),
-          ]),
-      child: Row(
-        children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.symmetric(
-              vertical: 8.0,
-              horizontal: 20.0,
-            ),
-            child: Icon(
-              _icondata,
-              color: Colors.indigo,
-            ),
-          ),
-          Text(
-            _title,
-            style: TextStyle(
-              fontFamily: "roboto",
-              fontWeight: FontWeight.w600,
-              color: Colors.indigo,
-              fontSize: 20,
-            ),
-            textAlign: TextAlign.left,
-          ),
-        ],
-      ),
-    ),
-  );
 }

@@ -1,7 +1,9 @@
 import 'package:ShowWorld/Free_resources/filmbudget/budget_model.dart';
 import 'package:ShowWorld/Free_resources/filmbudget/budget_tile.dart';
+import 'package:firebase_admob/firebase_admob.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:ShowWorld/auth/auth-api.dart' as auth;
 
 class FilmBudgetPage extends StatefulWidget {
   @override
@@ -11,12 +13,58 @@ class FilmBudgetPage extends StatefulWidget {
 class _FilmBudgetPageState extends State<FilmBudgetPage> {
   var totalAmount = 0.0;
 
+  static const MobileAdTargetingInfo _targetingInfo = MobileAdTargetingInfo(
+    nonPersonalizedAds: true,
+    keywords: <String>[
+      'Film',
+      'Bollywood',
+      'Films',
+      'Utility',
+      'Software',
+      'Classes',
+      'Donate',
+      'insurance',
+      'Game',
+      'education'
+    ],
+  );
+
+  InterstitialAd _interstitialAd;
+
+  InterstitialAd _createInterstitialAd() {
+    return InterstitialAd(
+      adUnitId: auth.adInterstitialId,
+      targetingInfo: _targetingInfo,
+      listener: (MobileAdEvent _event) {
+        print("InterstitialAd event is $_event");
+      },
+    );
+  }
+
   @override
   void initState() {
     super.initState();
-    setState(() {
-      calculateTotalAmount();
-    });
+    try {
+      FirebaseAdMob.instance
+          .initialize(appId: auth.adMobId)
+          .then((_) => _interstitialAd = _createInterstitialAd()..load());
+      setState(() {
+        calculateTotalAmount();
+      });
+    } catch (e) {
+      throw (e);
+    }
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    try {
+      _interstitialAd..show();
+      _interstitialAd.dispose();
+    } catch (e) {
+      throw (e);
+    }
   }
 
   Future<void> disposeData(BuildContext ctx) async {
@@ -75,6 +123,11 @@ class _FilmBudgetPageState extends State<FilmBudgetPage> {
               onPressed: () => calculateTotalAmount(),
             ),
           ],
+          // leading: IconButton(
+          //   icon: Icon(Icons.arrow_back),
+          //   onPressed: () =>
+
+          // ),
         ),
       ),
       body: SingleChildScrollView(
@@ -94,6 +147,9 @@ class _FilmBudgetPageState extends State<FilmBudgetPage> {
                 .entries
                 .map((e) => BudgetTile(e.key, e.value))
                 .toList(),
+            const SizedBox(
+              height: 70.0,
+            )
           ],
         ),
       ),

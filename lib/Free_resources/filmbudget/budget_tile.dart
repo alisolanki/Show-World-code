@@ -14,22 +14,23 @@ class BudgetTile extends StatefulWidget {
 class _BudgetTileState extends State<BudgetTile> {
   var _showdetails = false;
   var _subtotal = 0.0;
-  Map<String, double> _initialValue;
+  // Map<String, double> _initialValue = {};
 
   @override
-  void initState() {
-    super.initState();
+  void didChangeDependencies() {
+    super.didChangeDependencies();
     BudgetModel().budgetModel.entries.map((map) {
       map.value.forEach((_value) {
-        _readData(key: "${map.key}_$_value").then(
-          (v) => setState(() {
-            _initialValue.update(
-              "${map.key}_$_value",
-              (_) => v,
-              ifAbsent: () => v,
-            );
-          }),
-        );
+        _readData(key: "${map.key}_$_value");
+        // .then(
+        //   (v) => setState(() {
+        //     // _initialValue.update(
+        //     //   "${map.key}_$_value",
+        //     //   (_) => v == null ? 0.0 : v,
+        //     //   ifAbsent: () => v == null ? 0.0 : v,
+        //     // );
+        //   }),
+        // );
       });
     });
     setState(() {
