@@ -1,13 +1,18 @@
+import 'dart:convert';
+
+import 'package:ShowWorld/DynamicLink/services/dynamic_link_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../Home/homepage.dart';
 import '../pages/login_page.dart';
 import '../pages/otp_page.dart';
 import '../../providers/advertisement.dart';
 import '../../auth/auth-api.dart' as auth;
+import 'package:http/http.dart' as http;
 
 part 'login_store.g.dart';
 
@@ -28,11 +33,11 @@ abstract class LoginStoreBase with Store {
   GlobalKey<ScaffoldState> otpScaffoldKey = GlobalKey<ScaffoldState>();
 
   @observable
-  FirebaseUser firebaseUser;
+  User firebaseUser;
 
   @action
   Future<bool> isAlreadyAuthenticated() async {
-    firebaseUser = await _auth.currentUser();
+    firebaseUser = _auth.currentUser;
     if (firebaseUser != null) {
       return true;
     } else {
@@ -52,8 +57,8 @@ abstract class LoginStoreBase with Store {
     await _auth.verifyPhoneNumber(
         phoneNumber: phoneNumber.trim(),
         timeout: const Duration(seconds: 60),
-        verificationCompleted: (AuthCredential auth) async {
-          await _auth.signInWithCredential(auth).then((AuthResult value) {
+        verificationCompleted: (PhoneAuthCredential auth) async {
+          await _auth.signInWithCredential(auth).then((UserCredential value) {
             if (value != null && value.user != null) {
               print('Authentication successful');
               onAuthenticationSuccessful(context, value);
@@ -82,7 +87,7 @@ abstract class LoginStoreBase with Store {
             );
           });
         },
-        verificationFailed: (AuthException authException) {
+        verificationFailed: (FirebaseAuthException authException) {
           print('Error message: ' + authException.message);
           loginScaffoldKey.currentState.showSnackBar(
             SnackBar(
@@ -110,7 +115,7 @@ abstract class LoginStoreBase with Store {
   @action
   Future<void> validateOtpAndLogin(BuildContext context, String smsCode) async {
     isOtpLoading = true;
-    final AuthCredential _authCredential = PhoneAuthProvider.getCredential(
+    final AuthCredential _authCredential = PhoneAuthProvider.credential(
         verificationId: actualCode, smsCode: smsCode);
 
     await _auth.signInWithCredential(_authCredential).catchError((error) {
@@ -125,7 +130,7 @@ abstract class LoginStoreBase with Store {
           ),
         ),
       );
-    }).then((AuthResult authResult) {
+    }).then((UserCredential authResult) {
       if (authResult != null && authResult.user != null) {
         print('Authentication successful');
         onAuthenticationSuccessful(context, authResult);
@@ -134,7 +139,7 @@ abstract class LoginStoreBase with Store {
   }
 
   Future<void> onAuthenticationSuccessful(
-      BuildContext context, AuthResult result) async {
+      BuildContext context, UserCredential result) async {
     isLoginLoading = true;
     isOtpLoading = true;
     firebaseUser = result.user;
@@ -144,11 +149,40 @@ abstract class LoginStoreBase with Store {
       if (result) {
         auth.geturls().then(
           (_) {
-            AdvertisementFetcher().fetchAdvertisements().then(
-                  (fetchedData) => Navigator.of(context).pushAndRemoveUntil(
-                      MaterialPageRoute(builder: (_) => HomePage(fetchedData)),
-                      (Route<dynamic> route) => false),
-                );
+            AdvertisementFetcher().fetchAdvertisements().then((fetchedData) {
+              SharedPreferences.getInstance().then(
+                (prefs) {
+                  String affiliateName = prefs.getString('affiliateName');
+                  if (affiliateName != "none") {
+                    print("affiliate: $affiliateName");
+                    http
+                        .patch(
+                      '${auth.url}/affiliate/$affiliateName.json?auth=${auth.token}',
+                      headers: {"Accept": "application/json"},
+                      body: jsonEncode(
+                        {
+                          '${firebaseUser.phoneNumber.substring(1)}':
+                              '${DateTime.now().toIso8601String()}'
+                        },
+                      ),
+                    )
+                        .then((_response) {
+                      print('${_response.body}');
+                      Navigator.of(context).pushAndRemoveUntil(
+                          MaterialPageRoute(
+                              builder: (_) => HomePage(fetchedData)),
+                          (Route<dynamic> route) => false);
+                    });
+                  } else {
+                    print("affiliate: $affiliateName");
+                    Navigator.of(context).pushAndRemoveUntil(
+                        MaterialPageRoute(
+                            builder: (_) => HomePage(fetchedData)),
+                        (Route<dynamic> route) => false);
+                  }
+                },
+              );
+            });
           },
         );
       } else {

@@ -2,6 +2,7 @@ import 'package:ShowWorld/Free_resources/filmbudget/film_budget_page.dart';
 import 'package:firebase_admob/firebase_admob.dart';
 import 'package:flutter/material.dart';
 import '../auth/auth-api.dart' as auth;
+import './agreement/agreement_page.dart';
 
 class FreeResourcesPage extends StatefulWidget {
   @override
@@ -10,6 +11,7 @@ class FreeResourcesPage extends StatefulWidget {
 
 class _FreeResourcesPageState extends State<FreeResourcesPage> {
   static const MobileAdTargetingInfo _targetingInfo = MobileAdTargetingInfo(
+    testDevices: <String>['14626143C74B271FBB9333BEC108627F'],
     nonPersonalizedAds: true,
     keywords: <String>[
       'Film',
@@ -105,6 +107,14 @@ class _FreeResourcesPageState extends State<FreeResourcesPage> {
               ),
             ),
             Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: buttonTemplate(
+                context,
+                "Agreement",
+                Icons.assignment,
+              ),
+            ),
+            Padding(
               padding: const EdgeInsets.all(10.0),
               child: Text(
                 "More Features coming out soon. Stay Tuned.",
@@ -129,10 +139,23 @@ class _FreeResourcesPageState extends State<FreeResourcesPage> {
       );
     }
 
+    void _navigateAgreement(BuildContext ctx) {
+      Navigator.push(
+        ctx,
+        MaterialPageRoute(
+          builder: (ctx) {
+            return AgreementPage();
+          },
+        ),
+      );
+    }
+
     return FlatButton(
       highlightColor: Color(0xffd4e6f1),
       onPressed: () {
-        _navigateFilmBudget(cont);
+        _title == "Agreement"
+            ? _navigateAgreement(cont)
+            : _navigateFilmBudget(cont);
       },
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 15.0),

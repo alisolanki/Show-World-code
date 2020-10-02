@@ -33,7 +33,7 @@ class _FilmBudgetPageState extends State<FilmBudgetPage> {
 
   InterstitialAd _createInterstitialAd() {
     return InterstitialAd(
-      adUnitId: auth.adInterstitialId,
+      adUnitId: auth.adInterstitialId1,
       targetingInfo: _targetingInfo,
       listener: (MobileAdEvent _event) {
         print("InterstitialAd event is $_event");

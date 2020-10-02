@@ -43,6 +43,9 @@ class _SplashPageState extends State<SplashPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: MyColors.primaryColor,
+      body: Center(
+        child: CircularProgressIndicator(),
+      ),
     );
   }
 }
