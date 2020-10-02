@@ -1,6 +1,6 @@
-import 'package:ShowWorld/DynamicLink/services/dynamic_link_service.dart';
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/services.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -43,6 +43,10 @@ class _MyAppState extends State<MyApp> {
         print("_name = ${_deeplink.queryParameters['name']}");
         SharedPreferences prefs = await SharedPreferences.getInstance();
         prefs.setString('affiliateName', _name);
+        Fluttertoast.showToast(
+          msg: "Invited by: $_name",
+          backgroundColor: Colors.purple,
+        );
       }
     }
   }

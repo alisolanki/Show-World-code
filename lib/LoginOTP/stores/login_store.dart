@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:ShowWorld/DynamicLink/services/dynamic_link_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
@@ -161,7 +160,7 @@ abstract class LoginStoreBase with Store {
                       headers: {"Accept": "application/json"},
                       body: jsonEncode(
                         {
-                          '${firebaseUser.phoneNumber.substring(1)}':
+                          '${int.parse(firebaseUser.phoneNumber.substring(1)) * 373}':
                               '${DateTime.now().toIso8601String()}'
                         },
                       ),

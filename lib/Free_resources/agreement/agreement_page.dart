@@ -9,7 +9,6 @@ class AgreementPage extends StatefulWidget {
 
 class _AgreementPageState extends State<AgreementPage> {
   static const MobileAdTargetingInfo _targetingInfo = MobileAdTargetingInfo(
-    testDevices: <String>['14626143C74B271FBB9333BEC108627F'],
     nonPersonalizedAds: true,
     keywords: <String>[
       'Film',

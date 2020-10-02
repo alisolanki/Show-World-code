@@ -11,7 +11,6 @@ class FreeResourcesPage extends StatefulWidget {
 
 class _FreeResourcesPageState extends State<FreeResourcesPage> {
   static const MobileAdTargetingInfo _targetingInfo = MobileAdTargetingInfo(
-    testDevices: <String>['14626143C74B271FBB9333BEC108627F'],
     nonPersonalizedAds: true,
     keywords: <String>[
       'Film',
