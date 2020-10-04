@@ -26,15 +26,15 @@ class _MyAppState extends State<MyApp> {
   String _name = "none";
 
   @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    handleDynamicLink();
+  void initState() {
+    super.initState();
+    _handleDynamicLink();
   }
 
-  Future handleDynamicLink() async {
+  Future _handleDynamicLink() async {
+    //Started the app through Dynamic Link
     final PendingDynamicLinkData _data =
         await FirebaseDynamicLinks.instance.getInitialLink();
-
     final Uri _deeplink = _data?.link;
     if (_deeplink != null) {
       print('_handleDeepLink | _deeplink: $_deeplink');
@@ -49,6 +49,30 @@ class _MyAppState extends State<MyApp> {
         );
       }
     }
+    //If app is in the background
+    FirebaseDynamicLinks.instance.onLink(
+      onSuccess: (PendingDynamicLinkData _dynamicLink) async {
+        final Uri _dynamicdeeplink = _dynamicLink?.link;
+
+        if (_dynamicdeeplink != null) {
+          print('_handleDynamicLink | _dynamicdeeplink: $_dynamicdeeplink');
+          if (_deeplink.pathSegments.contains('post')) {
+            _name = _deeplink.queryParameters['name'];
+            print("_name = ${_deeplink.queryParameters['name']}");
+            SharedPreferences prefs = await SharedPreferences.getInstance();
+            prefs.setString('affiliateName', _name);
+            Fluttertoast.showToast(
+              msg: "Invited by: $_name",
+              backgroundColor: Colors.purple,
+            );
+          }
+        }
+      },
+      onError: (OnLinkErrorException e) async {
+        print('onLinkError: ${e.message}');
+        throw (e.message);
+      },
+    );
   }
 
   @override
