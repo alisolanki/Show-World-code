@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:ShowWorld/Free_resources/agreement/agreement_pdf.dart';
 import 'package:ShowWorld/Free_resources/agreement/model/agreement_model.dart';
 import 'package:ShowWorld/Free_resources/agreement/pdf_view_page.dart';
@@ -41,16 +39,22 @@ class _AgreementPageState extends State<AgreementPage> {
   static const MobileAdTargetingInfo _targetingInfo = MobileAdTargetingInfo(
     nonPersonalizedAds: true,
     keywords: <String>[
-      'Film',
-      'Bollywood',
-      'Films',
-      'Utility',
-      'Software',
-      'Classes',
-      'Donate',
+      'film',
+      'bollywood',
+      'films',
+      'game',
+      'education',
       'insurance',
-      'Game',
-      'education'
+      'loans',
+      'mortgage',
+      'attorney',
+      'credit',
+      'electricity',
+      'classes',
+      'donate',
+      'utility',
+      'software',
+      'india'
     ],
   );
 
@@ -104,22 +108,25 @@ class _AgreementPageState extends State<AgreementPage> {
   }
 
   Future<void> _dialogBox(BuildContext ctx) async {
-    showDialog(
+    await showDialog(
       context: ctx,
       builder: (BuildContext context) {
         return AlertDialog(
           title: Text("Watch Ad"),
-          content: Text("Watch this one Ad to be able to share the pdf:"),
+          content: Text("Watch this Ad to be able to share the pdf:"),
           actions: [
             Center(
               child: FlatButton(
                 child: Text("Ok"),
-                onPressed: () {
-                  setState(() {
-                    //Show Rewarded Ad
-                    RewardedVideoAd.instance.show();
+                onPressed: () async {
+                  try {
+                    RewardedVideoAd.instance
+                        .show()
+                        .then((_) => Navigator.pop(context));
+                  } catch (e) {
                     Navigator.pop(context);
-                  });
+                    throw (e);
+                  }
                 },
               ),
             ),
@@ -142,6 +149,7 @@ class _AgreementPageState extends State<AgreementPage> {
 
   @override
   Widget build(BuildContext context) {
+    var _width = MediaQuery.of(context).size.width;
     return Scaffold(
       backgroundColor: Color(0xffd4e6f1),
       appBar: PreferredSize(
@@ -163,27 +171,23 @@ class _AgreementPageState extends State<AgreementPage> {
           ),
           actions: [
             IconButton(
-              icon: Icon(Icons.picture_as_pdf),
-              onPressed: () => Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) {
-                    return PdfViewPage(_path);
-                  },
-                ),
-              ),
-            ),
-            IconButton(
               icon: Icon(Icons.save),
               onPressed: () async {
                 if (_formkey.currentState.validate()) {
                   await _saveForm(context);
                   if (_rewarded) {
-                    generateDocument(_agreementModel);
+                    await generateDocument(_agreementModel);
                     Fluttertoast.showToast(
-                      msg:
-                          "Details have been saved. Click to view or share agreement_by_showworld_film_directory.pdf",
+                      msg: "Saved as agreement_by_showworld_film_directory.pdf",
                       backgroundColor: Colors.green,
+                    );
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) {
+                          return PdfViewPage(_path);
+                        },
+                      ),
                     );
                   }
                 }
@@ -199,221 +203,329 @@ class _AgreementPageState extends State<AgreementPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
+              Card(
+                shadowColor: Colors.blue[300],
+                elevation: 1,
+                color: Color(0xdd1a5276),
+                margin: const EdgeInsets.symmetric(
+                  vertical: 10.0,
+                  horizontal: 8.0,
+                ),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(40.0),
+                ),
+                child: Container(
+                  margin: const EdgeInsets.symmetric(
+                    horizontal: 10.0,
+                    vertical: 10.0,
+                  ),
+                  padding: const EdgeInsets.all(10.0),
+                  child: RichText(
+                    textAlign: TextAlign.center,
+                    text: TextSpan(
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontFamily: "roboto",
+                        fontSize: _width * 0.04,
+                        fontWeight: FontWeight.bold,
+                      ),
+                      children: [
+                        WidgetSpan(
+                          child: Icon(
+                            Icons.assignment,
+                            size: _width * 0.045,
+                            color: Colors.white,
+                          ),
+                        ),
+                        TextSpan(
+                          text: "  Artiste/Technician Agreement",
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
               Text(
                 "Fill out the form to generate a pdf Agreement",
                 style: TextStyle(
-                  fontSize: 28.0,
+                  fontFamily: 'roboto',
+                  color: Colors.black87,
+                  fontSize: 15,
                 ),
-                textAlign: TextAlign.center,
-              ),
-              TextFormField(
-                decoration:
-                    InputDecoration(labelText: "Artist's/Technician's Name"),
-                style: TextStyle(fontSize: 18.0),
-                onSaved: (v) => _agreementModel.artistName = v,
-                validator: (v) {
-                  if (v.length == 0) {
-                    return "Enter a name";
-                  } else {
-                    return null;
-                  }
-                },
-              ),
-              TextFormField(
-                decoration: InputDecoration(labelText: "Producer's name"),
-                style: TextStyle(fontSize: 18.0),
-                onSaved: (v) => _agreementModel.producerName = v,
-                validator: (v) {
-                  if (v.length == 0) {
-                    return "Enter a name";
-                  } else {
-                    return null;
-                  }
-                },
-              ),
-              TextFormField(
-                decoration: InputDecoration(labelText: "Director's name"),
-                style: TextStyle(fontSize: 12.0),
-                onSaved: (v) => _agreementModel.directorName = v,
-                validator: (v) {
-                  if (v.length == 0) {
-                    return "Enter a name";
-                  } else {
-                    return null;
-                  }
-                },
-              ),
-              TextFormField(
-                decoration: InputDecoration(labelText: "Production title"),
-                style: TextStyle(fontSize: 12.0),
-                onSaved: (v) => _agreementModel.productionTitle = v,
-                validator: (v) {
-                  if (v.length == 0) {
-                    return "Enter the production title";
-                  } else {
-                    return null;
-                  }
-                },
-              ),
-              TextFormField(
-                decoration: InputDecoration(labelText: "Artist working as"),
-                style: TextStyle(fontSize: 12.0),
-                onSaved: (v) => _agreementModel.artistWorkingName = v,
-                validator: (v) {
-                  if (v.length == 0) {
-                    return "Enter the artist's on-screen name";
-                  } else {
-                    return null;
-                  }
-                },
-              ),
-              TextFormField(
-                decoration:
-                    InputDecoration(labelText: "Artiste/Techn. Pan No."),
-                style: TextStyle(fontSize: 12.0),
-                onSaved: (v) => _agreementModel.panNumber = v,
-                validator: (v) {
-                  if (v.length == 0) {
-                    return "Enter the PAN number";
-                  } else {
-                    return null;
-                  }
-                },
-              ),
-              TextFormField(
-                decoration: InputDecoration(labelText: "Place"),
-                style: TextStyle(fontSize: 12.0),
-                onSaved: (v) => _agreementModel.place = v,
-                validator: (v) {
-                  if (v.length == 0) {
-                    return "Enter the place name";
-                  } else {
-                    return null;
-                  }
-                },
-              ),
-              TextFormField(
-                decoration: InputDecoration(labelText: "Day"),
-                style: TextStyle(fontSize: 12.0),
-                onSaved: (v) => _agreementModel.day = v,
-                keyboardType: TextInputType.number,
-                validator: (v) {
-                  if (v.length == 0) {
-                    return "Enter the day";
-                  } else {
-                    return null;
-                  }
-                },
-              ),
-              TextFormField(
-                decoration: InputDecoration(labelText: "Month"),
-                style: TextStyle(fontSize: 12.0),
-                onSaved: (v) => _agreementModel.month = v,
-                validator: (v) {
-                  if (v.length == 0) {
-                    return "Enter the month name";
-                  } else {
-                    return null;
-                  }
-                },
-              ),
-              TextFormField(
-                decoration:
-                    InputDecoration(labelText: "Artist's association name"),
-                style: TextStyle(fontSize: 12.0),
-                onSaved: (v) => _agreementModel.artistAssociaName = v,
-                validator: (v) {
-                  if (v.length == 0) {
-                    return "Enter the artist association's name";
-                  } else {
-                    return null;
-                  }
-                },
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Text(
-                  "Remuneration",
-                  style: TextStyle(
-                    fontSize: 24.0,
+                child: Container(
+                  margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 30.0,
+                    vertical: 20.0,
                   ),
-                  textAlign: TextAlign.center,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20.0),
+                    color: Colors.white,
+                  ),
+                  child: Column(
+                    children: <Widget>[
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          "Details",
+                          style: TextStyle(
+                            fontSize: 24.0,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                      TextFormField(
+                        decoration: InputDecoration(
+                            labelText: "Artist's/Technician's Name"),
+                        onSaved: (v) => _agreementModel.artistName = v,
+                        validator: (v) {
+                          if (v.length == 0) {
+                            return "Enter a name";
+                          } else {
+                            return null;
+                          }
+                        },
+                      ),
+                      TextFormField(
+                        decoration:
+                            InputDecoration(labelText: "Producer's name"),
+                        onSaved: (v) => _agreementModel.producerName = v,
+                        validator: (v) {
+                          if (v.length == 0) {
+                            return "Enter a name";
+                          } else {
+                            return null;
+                          }
+                        },
+                      ),
+                      TextFormField(
+                        decoration:
+                            InputDecoration(labelText: "Director's name"),
+                        onSaved: (v) => _agreementModel.directorName = v,
+                        validator: (v) {
+                          if (v.length == 0) {
+                            return "Enter a name";
+                          } else {
+                            return null;
+                          }
+                        },
+                      ),
+                      TextFormField(
+                        decoration:
+                            InputDecoration(labelText: "Production title"),
+                        onSaved: (v) => _agreementModel.productionTitle = v,
+                        validator: (v) {
+                          if (v.length == 0) {
+                            return "Enter the production title";
+                          } else {
+                            return null;
+                          }
+                        },
+                      ),
+                      TextFormField(
+                        decoration:
+                            InputDecoration(labelText: "Artist working as"),
+                        onSaved: (v) => _agreementModel.artistWorkingName = v,
+                        validator: (v) {
+                          if (v.length == 0) {
+                            return "Enter the artist's on-screen name";
+                          } else {
+                            return null;
+                          }
+                        },
+                      ),
+                      TextFormField(
+                        decoration: InputDecoration(
+                            labelText: "Artiste/Techn. Pan No."),
+                        onSaved: (v) => _agreementModel.panNumber = v,
+                        validator: (v) {
+                          if (v.length == 0) {
+                            return "Enter the PAN number";
+                          } else {
+                            return null;
+                          }
+                        },
+                      ),
+                      TextFormField(
+                        decoration: InputDecoration(labelText: "Place"),
+                        onSaved: (v) => _agreementModel.place = v,
+                        validator: (v) {
+                          if (v.length == 0) {
+                            return "Enter the place name";
+                          } else {
+                            return null;
+                          }
+                        },
+                      ),
+                      TextFormField(
+                        decoration: InputDecoration(labelText: "Day"),
+                        onSaved: (v) => _agreementModel.day = v,
+                        keyboardType: TextInputType.number,
+                        validator: (v) {
+                          if (v.length == 0) {
+                            return "Enter the day";
+                          } else {
+                            return null;
+                          }
+                        },
+                      ),
+                      TextFormField(
+                        decoration: InputDecoration(labelText: "Month"),
+                        onSaved: (v) => _agreementModel.month = v,
+                        validator: (v) {
+                          if (v.length == 0) {
+                            return "Enter the month name";
+                          } else {
+                            return null;
+                          }
+                        },
+                      ),
+                      TextFormField(
+                        decoration: InputDecoration(
+                            labelText: "Artist's association name"),
+                        onSaved: (v) => _agreementModel.artistAssociaName = v,
+                        validator: (v) {
+                          if (v.length == 0) {
+                            return "Enter the artist association's name";
+                          } else {
+                            return null;
+                          }
+                        },
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 12.0),
+                        child: Text(
+                          "Remuneration",
+                          style: TextStyle(
+                            fontSize: 24.0,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                      TextFormField(
+                        decoration:
+                            InputDecoration(labelText: "Total fee payment"),
+                        onSaved: (v) => _agreementModel.totalFee = v,
+                        keyboardType: TextInputType.number,
+                        validator: (v) {
+                          if (v.length == 0) {
+                            return "Enter a number";
+                          } else if (v.contains(new RegExp(r'[0-9]'))) {
+                            return null;
+                          } else {
+                            return "Enter a number";
+                          }
+                        },
+                      ),
+                      TextFormField(
+                        decoration: InputDecoration(labelText: "Signing fee"),
+                        onSaved: (v) => _agreementModel.signingFee = v,
+                        keyboardType: TextInputType.number,
+                        validator: (v) {
+                          if (v.length == 0) {
+                            return "Enter a number";
+                          } else if (v.contains(new RegExp(r'[0-9]'))) {
+                            return null;
+                          } else {
+                            return "Enter a number";
+                          }
+                        },
+                      ),
+                      TextFormField(
+                        decoration:
+                            InputDecoration(labelText: "During shooting fee"),
+                        onSaved: (v) => _agreementModel.shootingFee = v,
+                        keyboardType: TextInputType.number,
+                        validator: (v) {
+                          if (v.length == 0) {
+                            return "Enter a number";
+                          } else if (v.contains(new RegExp(r'[0-9]'))) {
+                            return null;
+                          } else {
+                            return "Enter a number";
+                          }
+                        },
+                      ),
+                      TextFormField(
+                        decoration:
+                            InputDecoration(labelText: "Post production fee"),
+                        onSaved: (v) => _agreementModel.postProductionFee = v,
+                        keyboardType: TextInputType.number,
+                        validator: (v) {
+                          if (v.length == 0) {
+                            return "Enter a number";
+                          } else if (v.contains(new RegExp(r'[0-9]'))) {
+                            return null;
+                          } else {
+                            return "Enter a number";
+                          }
+                        },
+                      ),
+                      TextFormField(
+                        decoration: InputDecoration(labelText: "Per day fee"),
+                        onSaved: (v) => _agreementModel.perdayFee = v,
+                        keyboardType: TextInputType.number,
+                        validator: (v) {
+                          if (v.length == 0) {
+                            return "Enter a number";
+                          } else if (v.contains(new RegExp(r'[0-9]'))) {
+                            return null;
+                          } else {
+                            return "Enter a number";
+                          }
+                        },
+                      ),
+                    ],
+                  ),
                 ),
               ),
-              TextFormField(
-                decoration: InputDecoration(labelText: "Total fee payment"),
-                style: TextStyle(fontSize: 18.0),
-                onSaved: (v) => _agreementModel.totalFee = v,
-                keyboardType: TextInputType.number,
-                validator: (v) {
-                  if (v.length == 0) {
-                    return "Enter a number";
-                  } else if (v.contains(new RegExp(r'[0-9]'))) {
-                    return null;
-                  } else {
-                    return "Enter a number";
-                  }
-                },
-              ),
-              TextFormField(
-                decoration: InputDecoration(labelText: "Signing fee"),
-                style: TextStyle(fontSize: 12.0),
-                onSaved: (v) => _agreementModel.signingFee = v,
-                keyboardType: TextInputType.number,
-                validator: (v) {
-                  if (v.length == 0) {
-                    return "Enter a number";
-                  } else if (v.contains(new RegExp(r'[0-9]'))) {
-                    return null;
-                  } else {
-                    return "Enter a number";
-                  }
-                },
-              ),
-              TextFormField(
-                decoration: InputDecoration(labelText: "During shooting fee"),
-                style: TextStyle(fontSize: 12.0),
-                onSaved: (v) => _agreementModel.shootingFee = v,
-                keyboardType: TextInputType.number,
-                validator: (v) {
-                  if (v.length == 0) {
-                    return "Enter a number";
-                  } else if (v.contains(new RegExp(r'[0-9]'))) {
-                    return null;
-                  } else {
-                    return "Enter a number";
-                  }
-                },
-              ),
-              TextFormField(
-                decoration: InputDecoration(labelText: "Post production fee"),
-                style: TextStyle(fontSize: 12.0),
-                onSaved: (v) => _agreementModel.postProductionFee = v,
-                keyboardType: TextInputType.number,
-                validator: (v) {
-                  if (v.length == 0) {
-                    return "Enter a number";
-                  } else if (v.contains(new RegExp(r'[0-9]'))) {
-                    return null;
-                  } else {
-                    return "Enter a number";
-                  }
-                },
-              ),
-              TextFormField(
-                decoration: InputDecoration(labelText: "Per day fee"),
-                style: TextStyle(fontSize: 12.0),
-                onSaved: (v) => _agreementModel.perdayFee = v,
-                keyboardType: TextInputType.number,
-                validator: (v) {
-                  if (v.length == 0) {
-                    return "Enter a number";
-                  } else if (v.contains(new RegExp(r'[0-9]'))) {
-                    return null;
-                  } else {
-                    return "Enter a number";
-                  }
-                },
+              Padding(
+                padding: EdgeInsets.symmetric(
+                  vertical: 8.0,
+                  horizontal: _width * 0.3,
+                ),
+                child: RaisedButton(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      "Save",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontFamily: 'roboto',
+                        fontSize: _width * 0.05,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                  color: Color(0xdd1a5276),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(18.0),
+                  ),
+                  onPressed: () async {
+                    if (_formkey.currentState.validate()) {
+                      await _saveForm(context);
+                      if (_rewarded) {
+                        await generateDocument(_agreementModel);
+                        Fluttertoast.showToast(
+                          msg:
+                              "Details have been saved. Click to view or share: agreement_by_showworld_film_directory.pdf",
+                          backgroundColor: Colors.green,
+                        );
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return PdfViewPage(_path);
+                            },
+                          ),
+                        );
+                      }
+                    }
+                  },
+                ),
               ),
               SizedBox(
                 height: 70.0,

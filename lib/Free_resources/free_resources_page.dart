@@ -1,4 +1,5 @@
 import 'package:ShowWorld/Free_resources/filmbudget/film_budget_page.dart';
+import 'package:ShowWorld/Free_resources/filmrevenue/film_revenue_page.dart';
 import 'package:firebase_admob/firebase_admob.dart';
 import 'package:flutter/material.dart';
 import '../auth/auth-api.dart' as auth;
@@ -13,16 +14,22 @@ class _FreeResourcesPageState extends State<FreeResourcesPage> {
   static const MobileAdTargetingInfo _targetingInfo = MobileAdTargetingInfo(
     nonPersonalizedAds: true,
     keywords: <String>[
-      'Film',
-      'Bollywood',
-      'Films',
-      'Utility',
-      'Software',
-      'Classes',
-      'Donate',
+      'film',
+      'bollywood',
+      'films',
+      'game',
+      'education',
       'insurance',
-      'Game',
-      'education'
+      'loans',
+      'mortgage',
+      'attorney',
+      'credit',
+      'electricity',
+      'classes',
+      'donate',
+      'utility',
+      'software',
+      'india'
     ],
   );
 
@@ -114,6 +121,14 @@ class _FreeResourcesPageState extends State<FreeResourcesPage> {
               ),
             ),
             Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: buttonTemplate(
+                context,
+                "Film Revenue",
+                Icons.monetization_on,
+              ),
+            ),
+            Padding(
               padding: const EdgeInsets.all(10.0),
               child: Text(
                 "More Features coming out soon. Stay Tuned.",
@@ -149,12 +164,41 @@ class _FreeResourcesPageState extends State<FreeResourcesPage> {
       );
     }
 
+    void _navigateFilmRevenue(BuildContext ctx) {
+      Navigator.push(
+        ctx,
+        MaterialPageRoute(
+          builder: (ctx) {
+            return FilmRevenuePage();
+          },
+        ),
+      );
+    }
+
     return FlatButton(
       highlightColor: Color(0xffd4e6f1),
       onPressed: () {
-        _title == "Agreement"
-            ? _navigateAgreement(cont)
-            : _navigateFilmBudget(cont);
+        switch (_title) {
+          case "Agreement":
+            {
+              _navigateAgreement(cont);
+              break;
+            }
+          case "Film Budget":
+            {
+              _navigateFilmBudget(cont);
+              break;
+            }
+          case "Film Revenue":
+            {
+              _navigateFilmRevenue(cont);
+              break;
+            }
+          default:
+            {
+              break;
+            }
+        }
       },
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 15.0),

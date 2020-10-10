@@ -16,16 +16,22 @@ class _FilmBudgetPageState extends State<FilmBudgetPage> {
   static const MobileAdTargetingInfo _targetingInfo = MobileAdTargetingInfo(
     nonPersonalizedAds: true,
     keywords: <String>[
-      'Film',
-      'Bollywood',
-      'Films',
-      'Utility',
-      'Software',
-      'Classes',
-      'Donate',
+      'film',
+      'bollywood',
+      'films',
+      'game',
+      'education',
       'insurance',
-      'Game',
-      'education'
+      'loans',
+      'mortgage',
+      'attorney',
+      'credit',
+      'electricity',
+      'classes',
+      'donate',
+      'utility',
+      'software',
+      'india'
     ],
   );
 
