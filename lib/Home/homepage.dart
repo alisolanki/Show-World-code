@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import '../providers/payment.dart';
 import '../Desktop/drawer.dart';
@@ -44,7 +43,7 @@ class _HomePageState extends State<HomePage> {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         home: Scaffold(
-          backgroundColor: Color(0xffd4e6f1),
+          backgroundColor: const Color(0xffd4e6f1),
           appBar: PreferredSize(
             preferredSize: Size(double.infinity, 60),
             child: AppBar(
@@ -59,7 +58,7 @@ class _HomePageState extends State<HomePage> {
                   fontWeight: FontWeight.w600,
                   letterSpacing: 1.5,
                   fontSize: 25,
-                  color: Color(0xff1b4f72),
+                  color: const Color(0xff1b4f72),
                 ),
               ),
               iconTheme: const IconThemeData(

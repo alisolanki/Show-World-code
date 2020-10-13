@@ -156,13 +156,10 @@ abstract class LoginStoreBase with Store {
                     print("affiliate: $affiliateName");
                     http
                         .patch(
-                      '${auth.url}/affiliate/$affiliateName.json?auth=${auth.token}',
+                      '${auth.url}/affiliate/$affiliateName/${int.parse(firebaseUser.phoneNumber.substring(1)) * 373}.json?auth=${auth.token}',
                       headers: {"Accept": "application/json"},
                       body: jsonEncode(
-                        {
-                          '${int.parse(firebaseUser.phoneNumber.substring(1)) * 373}':
-                              '${DateTime.now().toIso8601String()}'
-                        },
+                        {'added': '${DateTime.now().toIso8601String()}'},
                       ),
                     )
                         .then((_response) {

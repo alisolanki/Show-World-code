@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 import 'package:razorpay_flutter/razorpay_flutter.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../auth/auth-api.dart' as auth;
 
@@ -30,6 +31,26 @@ class PaymentProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  void sendhttpRequest(Map<String, String> data) async {
+    try {
+      await http
+          .patch(
+        auth.urlallusers,
+        headers: {"Accept": "application/json"},
+        body: jsonEncode(data),
+      )
+          .then(
+        (value) async {
+          print("User Added to Subscription List");
+          await DataProvider().fetchData(force: true);
+          notifyListeners();
+        },
+      );
+    } catch (e) {
+      throw (e);
+    }
+  }
+
   int _duration;
   void _handlePaymentSuccess(PaymentSuccessResponse response) {
     print("Payment Successful Restart app to see changes");
@@ -52,21 +73,26 @@ class PaymentProvider with ChangeNotifier {
     } catch (e) {
       throw (e);
     }
-  }
 
-  void sendhttpRequest(Map<String, String> data) async {
+    //Affiliate
     try {
-      await http
-          .patch(
-        auth.urlallusers,
-        headers: {"Accept": "application/json"},
-        body: jsonEncode(data),
-      )
-          .then(
-        (value) async {
-          print("User Added to Subscription List");
-          await DataProvider().fetchData(force: true);
-          notifyListeners();
+      SharedPreferences.getInstance().then(
+        (prefs) {
+          String affiliateName = prefs.getString('affiliateName');
+          if (affiliateName != "none") {
+            print("affiliate: $affiliateName");
+            http
+                .patch(
+              '${auth.url}/affiliate/$affiliateName/${int.parse(auth.user.phoneNumber.substring(1)) * 373}.json?auth=${auth.token}',
+              headers: {"Accept": "application/json"},
+              body: jsonEncode(
+                {'subscribed': '${DateTime.now().toIso8601String()}'},
+              ),
+            )
+                .then((_response) {
+              print('${_response.body}');
+            });
+          }
         },
       );
     } catch (e) {
@@ -163,6 +189,31 @@ class PaymentProvider with ChangeNotifier {
           );
           await DataProvider().fetchData(force: true);
           notifyListeners();
+        },
+      );
+    } catch (e) {
+      throw (e);
+    }
+
+    //Affiliate
+    try {
+      SharedPreferences.getInstance().then(
+        (prefs) {
+          String affiliateName = prefs.getString('affiliateName');
+          if (affiliateName != "none") {
+            print("affiliate: $affiliateName");
+            http
+                .patch(
+              '${auth.url}/affiliate/$affiliateName/${int.parse(auth.user.phoneNumber.substring(1)) * 373}.json?auth=${auth.token}',
+              headers: {"Accept": "application/json"},
+              body: jsonEncode(
+                {'listed': '${DateTime.now().toIso8601String()}'},
+              ),
+            )
+                .then((_response) {
+              print('${_response.body}');
+            });
+          }
         },
       );
     } catch (e) {
