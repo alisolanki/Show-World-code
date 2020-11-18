@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../subscriptionpage/subscriptionpage.dart';
 
@@ -80,6 +81,14 @@ class _DataTileState extends State<DataTile> {
   }
 }
 
+launchURL(String url) async {
+  if (await canLaunch(url)) {
+    await launch(url);
+  } else {
+    throw 'Could not launch $url';
+  }
+}
+
 Widget detailsCard(
     {@required BuildContext context,
     String address,
@@ -111,9 +120,14 @@ Widget detailsCard(
                         ),
                         Expanded(
                           flex: 3,
-                          child: Text(
-                            "$address",
-                            textAlign: TextAlign.left,
+                          child: InkWell(
+                            child: Text(
+                              "$address",
+                              textAlign: TextAlign.left,
+                              style: TextStyle(color: Colors.blue[900]),
+                            ),
+                            onTap: () =>
+                                launchURL("http://maps.google.com/?q=$address"),
                           ),
                         ),
                       ],
@@ -133,9 +147,14 @@ Widget detailsCard(
                         ),
                         Expanded(
                           flex: 3,
-                          child: Text(
-                            "${phonenumber.map((e) => e.toString())}",
-                            textAlign: TextAlign.left,
+                          child: InkWell(
+                            child: Text(
+                              "${phonenumber.map((e) => e.toString())}",
+                              textAlign: TextAlign.left,
+                              style: TextStyle(color: Colors.blue[900]),
+                            ),
+                            onTap: () => launchURL(
+                                "tel:${phonenumber.map((e) => e.toString().replaceAll(new RegExp(r'[^0-9]'), ''))}"),
                           ),
                         ),
                       ],
@@ -155,9 +174,13 @@ Widget detailsCard(
                         ),
                         Expanded(
                           flex: 3,
-                          child: Text(
-                            "$email",
-                            textAlign: TextAlign.left,
+                          child: InkWell(
+                            child: Text(
+                              "$email",
+                              textAlign: TextAlign.left,
+                              style: TextStyle(color: Colors.blue[900]),
+                            ),
+                            onTap: () => launchURL("mailto:$email"),
                           ),
                         ),
                       ],
