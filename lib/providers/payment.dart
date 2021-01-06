@@ -149,6 +149,7 @@ class PaymentProvider with ChangeNotifier {
       'address': _listyourselfsuccess.address,
       'mail': _listyourselfsuccess.mail,
       'listends': _listyourselfsuccess.time.toIso8601String(),
+      'mob': [_listyourselfsuccess.mob],
     };
 
     //Send Data
@@ -169,13 +170,15 @@ class PaymentProvider with ChangeNotifier {
     } catch (e) {
       throw (e);
     }
-    //Send Mobile
+    //Send Demo
     try {
       http
           .put(
-        '${auth.url}/data/${_listyourselfsuccess.category}%20(Listed)/${_listyourselfsuccess.subcategory}/${_listyourselfsuccess.fullname}/mob.json?auth=${auth.token}',
+        '${auth.url}/demo/${_listyourselfsuccess.category}%20(Listed)/${_listyourselfsuccess.subcategory}.json?auth=${auth.token}',
         headers: {"Accept": "application/json"},
-        body: jsonEncode([_listyourselfsuccess.mob]),
+        body: jsonEncode({
+          _listyourselfsuccess.fullname: "demo",
+        }),
       )
           .then(
         (value) async {

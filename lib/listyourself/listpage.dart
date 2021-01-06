@@ -71,7 +71,6 @@ class _ListPageState extends State<ListPage> {
       price: durationKey.currentState.prices,
     );
     _payment.makePaymentListYourself(_listeddata);
-    //Error handling: i.e. on no input by user, REMAINING
     print("name: ${_listeddata.fullname}");
     print(
       "time: ${_listeddata.time.toIso8601String()} category:${_listeddata.category} subcategory:${_listeddata.subcategory} price: ${_listeddata.price}",
