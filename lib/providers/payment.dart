@@ -173,7 +173,7 @@ class PaymentProvider with ChangeNotifier {
     //Send Demo
     try {
       http
-          .put(
+          .patch(
         '${auth.url}/demo/${_listyourselfsuccess.category}%20(Listed)/${_listyourselfsuccess.subcategory}.json?auth=${auth.token}',
         headers: {"Accept": "application/json"},
         body: jsonEncode({

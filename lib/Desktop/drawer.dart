@@ -49,6 +49,17 @@ class _DrawerItemsState extends State<DrawerItems> {
             ),
           ),
           ListTile(
+            leading: Icon(Icons.share, color: Color(0xff1b4f72)),
+            title: Text(
+              'Share',
+              style: drawerfonts,
+            ),
+            onTap: () {
+              Share.share(
+                  'Download *Show World Film Directory* which contains the Contact Numbers, Addresses, Emails and all the details of the entire *Indian Film, TV, Music and OTT Industry*. https://cutt.ly/jjOXOFY');
+            },
+          ),
+          ListTile(
             leading: Icon(Icons.home, color: Color(0xff1b4f72)),
             title: Text(
               'Home',
