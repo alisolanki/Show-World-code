@@ -1,6 +1,7 @@
 import 'package:ShowWorld/Free_resources/free_resources_page.dart';
 import 'package:ShowWorld/listyourself/listpage.dart';
 import 'package:flutter/material.dart';
+import 'package:share/share.dart';
 
 import './categorypage.dart';
 import '../LoginOTP/stores/login_store.dart';
