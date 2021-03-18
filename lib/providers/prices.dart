@@ -23,8 +23,8 @@ class PricesProvider with ChangeNotifier {
     final _urlsubscription = auth.urlsubscription;
     if (_subscriptiondata.length == 0 || _listyourselfdata.length == 0) {
       try {
-        final _response = await http.get(_urllistyourself);
-        final _response1 = await http.get(_urlsubscription);
+        final _response = await http.get("$_urllistyourself?auth=${auth.token}");
+        final _response1 = await http.get("$_urlsubscription?auth=${auth.token}");
         final _extractedlistyourself =
             jsonDecode(_response.body) as Map<String, dynamic>;
         final _extractedsubscription =
@@ -32,10 +32,11 @@ class PricesProvider with ChangeNotifier {
         List<DurationTemplate> _loadeddata = [];
         // ListYourself
         _extractedlistyourself.forEach((key, value) {
+          print("key: $key, price: $value");
           _loadeddata.add(
             DurationTemplate(
-              months: key,
-              price: value,
+              months: key.toString(),
+              price: double.parse(value.toString()),
             ),
           );
         });
@@ -44,10 +45,11 @@ class PricesProvider with ChangeNotifier {
         //Subscription
         _loadeddata = [];
         _extractedsubscription.forEach((key, value) {
+          print("key: $key, price: $value");
           _loadeddata.add(
             DurationTemplate(
-              months: key,
-              price: value,
+              months: key.toString(),
+              price: double.parse(value.toString()),
             ),
           );
         });

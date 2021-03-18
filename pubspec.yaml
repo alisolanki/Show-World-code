@@ -32,11 +32,11 @@ dependencies:
   mobx: ^1.1.1
   flutter_mobx: ^1.1.0+1
 
-  firebase_core: ^0.5.3
-  firebase_auth: ^0.18.4
-  firebase_messaging: ^7.0.3
+  firebase_core: ^0.5.2
+  firebase_auth: ^0.18.4+1
+  # firebase_messaging: ^6.0.12
   firebase_admob: ^0.10.0+1
-  firebase_dynamic_links: ^0.6.3
+  firebase_dynamic_links: ^0.6.2
 
   numeric_keyboard: ^1.0.0
 
@@ -60,6 +60,15 @@ dev_dependencies:
     sdk: flutter
   build_runner: ^1.10.0
   mobx_codegen: ^1.1.0+1
+  flutter_launcher_icons: "^0.7.0"
+
+flutter_icons:
+  ios: true
+  android: true
+  image_path_ios: "assets/logo_ios.jpg"
+  image_path_android: "assets/logofilled.png"
+  # adaptive_icon_background: "assets/launcher/background.png"
+  # adaptive_icon_foreground: "assets/launcher/foreground.png"
 
 
 # For information on the generic Dart part of this file, see the
@@ -76,7 +85,7 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
    - assets/
-  #  - images/a_dot_ham.jpeg
+   - assets/logo_ios.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
